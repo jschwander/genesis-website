@@ -166,3 +166,43 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// Video Modal Functionality
+const videoModal = document.getElementById('videoModal');
+const videoFrame = document.getElementById('videoFrame');
+const closeModal = document.querySelector('.close-modal');
+const watchButton = document.querySelector('.btn.primary');
+
+// Replace this URL with your YouTube video URL
+const videoUrl = 'https://www.youtube.com/embed/tDu47czfwiI';
+
+watchButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    videoFrame.src = videoUrl;
+    videoModal.style.display = 'flex';
+    setTimeout(() => {
+        videoModal.classList.add('show');
+    }, 10);
+});
+
+closeModal.addEventListener('click', () => {
+    videoModal.classList.remove('show');
+    setTimeout(() => {
+        videoModal.style.display = 'none';
+        videoFrame.src = '';
+    }, 300);
+});
+
+// Close modal when clicking outside the video
+videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+        closeModal.click();
+    }
+});
+
+// Close modal with escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && videoModal.classList.contains('show')) {
+        closeModal.click();
+    }
+});
