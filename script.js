@@ -229,3 +229,69 @@ problemCards.forEach(card => {
     document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
   });
 });
+
+// Scroll Animation Handler
+function handleScrollAnimations() {
+    const elements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in');
+    const windowHeight = window.innerHeight;
+
+    elements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        const elementVisible = 150; // Adjust this value to change when the animation triggers
+
+        if (rect.top < windowHeight - elementVisible) {
+            element.classList.add('visible');
+        }
+    });
+}
+
+// Scroll Progress Handler
+function updateScrollProgress() {
+    const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (window.scrollY / windowHeight) * 100;
+    document.querySelector('.scroll-progress-bar').style.height = `${progress}%`;
+}
+
+// Smooth Scroll Handler
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Scroll Indicator Handler
+document.querySelector('.scroll-indicator').addEventListener('click', () => {
+    document.querySelector('#problem').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+});
+
+// Initialize
+window.addEventListener('scroll', () => {
+    handleScrollAnimations();
+    updateScrollProgress();
+});
+
+// Initial check for elements in view
+handleScrollAnimations();
+updateScrollProgress();
+
+// Add hover effects to cards and interactive elements
+document.querySelectorAll('.problem-card, .role-card, .solution-point').forEach(card => {
+    card.classList.add('hover-lift', 'hover-glow');
+});
+
+// Optional: Parallax effect for hero section
+window.addEventListener('scroll', () => {
+    const hero = document.querySelector('.hero');
+    const scrolled = window.pageYOffset;
+    hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
+});
