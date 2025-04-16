@@ -206,3 +206,26 @@ document.addEventListener('keydown', (e) => {
         closeModal.click();
     }
 });
+
+// Interactive Problem Chart Highlight
+const problemCards = document.querySelectorAll('.problem-card');
+problemCards.forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    const series = card.getAttribute('data-series');
+    document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
+    const line = document.getElementById('line-' + series);
+    if (line) line.classList.add('highlight');
+  });
+  card.addEventListener('mouseleave', () => {
+    document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
+  });
+  card.addEventListener('focus', () => {
+    const series = card.getAttribute('data-series');
+    document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
+    const line = document.getElementById('line-' + series);
+    if (line) line.classList.add('highlight');
+  });
+  card.addEventListener('blur', () => {
+    document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
+  });
+});

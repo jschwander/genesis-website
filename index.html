@@ -12,22 +12,25 @@
         <nav>
             <div class="logo">
                 <img src="images/GenesisLogo.png" alt="Genesis Logo" class="logo-image">
-                
             </div>
             <ul class="nav-links">
-                <li><a href="#problem">The Problem</a></li>
-                <li><a href="#philosophy">The Philosophy</a></li>
-                <li><a href="#solution">The Solution</a></li>
-                <li><a href="#who-we-help">Who We Help</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#problem" class="nav-link" data-section="problem">The Problem</a></li>
+                <li><a href="#philosophy" class="nav-link" data-section="philosophy">The Philosophy</a></li>
+                <li><a href="#solution" class="nav-link" data-section="solution">The Solution</a></li>
+                <li><a href="#who-we-help" class="nav-link" data-section="who-we-help">Who We Help</a></li>
+                <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
             </ul>
+            <div class="nav-progress"></div>
         </nav>
         <div class="hero-content">
             <h1>Construction Is<br>Overpriced by Design</h1>
-            <p class="subheadline">Owners are now paying nearly double what material and labor costs justify. Why? Because for over fifty years, construction has relied on CM and other delivery methods that inflate budgets, extend timelines, and reward inefficiency—all reinforced by cost-plus and billable-hour compensation. As long as these incentives remain, so will the problem.
-
-                But change is possible. The same proven management principles, integrated processes, and aligned incentives that transformed manufacturing and retail are now available to construction. 
-                </p>
+            <p class="subheadline">Owners now pay nearly twice what labor and materials alone would justify.
+                For over 50 years, the industry has relied on methods like CM that inflate budgets, extend timelines, and reward inefficiency—all reinforced by cost-plus and billable-hour contracts.
+                
+                As long as those incentives remain, the waste will too.
+                But change is possible.
+                
+                Proven systems from manufacturing—aligned incentives, structured data, and integrated tools—are now available to construction.</p>
             <div class="cta-buttons">
                 <a href="#" class="btn primary">Watch Here</a>
                 <a href="#solution" class="btn secondary">Prove It</a>
@@ -36,73 +39,158 @@
     </header>
 
     <section id="problem" class="section scroll-animation">
-        <h2>The Industry is Stuck in a Time Warp</h2>
-        <div class="problem-flex-container">
-            
-            <div class="problem-text">
-                <p class="section-intro-problem custom-text">
-                    For over 60 years, construction has operated under outdated models. Cost-plus and billable-hour contracts reward builders for maximizing time and expense—not delivering results.
+        <h2>Broken System. Outdated Approach.</h2>
+        <div class="problem-interactive-layout">
+          
+          <div class="problem-graph">
+            <svg style="width:95%;max-width:900px;height:auto;display:block;margin:0 auto;" viewBox="400 0 2900 2585" xmlns="http://www.w3.org/2000/svg">
+              <!-- Chart Title (centered) -->
+              <text x="1850" y="70" text-anchor="middle" font-size="84" font-weight="bold" fill="#595959">
+                Construction Escalation vs. National Inflation
+              </text>
+              <!-- Y-Axis Labels (unchanged) -->
+              <text x="520" y="2421" font-size="41" fill="#595959" text-anchor="end">0%</text>
+              <text x="520" y="2190" font-size="41" fill="#595959" text-anchor="end">400%</text>
+              <text x="520" y="1959" font-size="41" fill="#595959" text-anchor="end">800%</text>
+              <text x="520" y="1728" font-size="41" fill="#595959" text-anchor="end">1200%</text>
+              <text x="520" y="1497" font-size="41" fill="#595959" text-anchor="end">1600%</text>
+              <text x="520" y="1266" font-size="41" fill="#595959" text-anchor="end">2000%</text>
+              <text x="520" y="1035" font-size="41" fill="#595959" text-anchor="end">2400%</text>
+              <text x="520" y="804" font-size="41" fill="#595959" text-anchor="end">2800%</text>
+              <text x="520" y="573" font-size="41" fill="#595959" text-anchor="end">3200%</text>
+              <text x="520" y="343" font-size="41" fill="#595959" text-anchor="end">3600%</text>
+              <text x="520" y="112" font-size="41" fill="#595959" text-anchor="end">4000%</text>
+              <!-- X-Axis Labels (scaled and shifted x by -195) -->
+              <text x="644.41" y="2486" font-size="41" fill="#595959">1967</text>
+              <text x="818.87" y="2486" font-size="41" fill="#595959">1971</text>
+              <text x="991.9" y="2486" font-size="41" fill="#595959">1975</text>
+              <text x="1166.36" y="2486" font-size="41" fill="#595959">1979</text>
+              <text x="1339.39" y="2486" font-size="41" fill="#595959">1983</text>
+              <text x="1513.85" y="2486" font-size="41" fill="#595959">1987</text>
+              <text x="1686.88" y="2486" font-size="41" fill="#595959">1991</text>
+              <text x="1861.21" y="2486" font-size="41" fill="#595959">1995</text>
+              <text x="2035.67" y="2486" font-size="41" fill="#595959">1999</text>
+              <text x="2210" y="2486" font-size="41" fill="#595959">2003</text>
+              <text x="2384.46" y="2486" font-size="41" fill="#595959">2007</text>
+              <text x="2557.49" y="2486" font-size="41" fill="#595959">2011</text>
+              <text x="2731.95" y="2486" font-size="41" fill="#595959">2015</text>
+              <text x="2905" y="2486" font-size="41" fill="#595959">2019</text>
+              <text x="3079.31" y="2486" font-size="41" fill="#595959">2023</text>
+              <text x="3253.62" y="2486" font-size="41" fill="#595959"></text>
+              <!-- Main Axes Lines (shifted x by -195) -->
+              <line x1="644.41" y1="112" x2="644.41" y2="2421" stroke="#595959" stroke-width="4"/>
+              <line x1="644.41" y1="2421" x2="3253.62" y2="2421" stroke="#595959" stroke-width="4"/>
+              <!-- Grid Lines (horizontal, shifted x by -195) -->
+              <line x1="644.41" y1="2190.57" x2="3253.62" y2="2190.57" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="644.41" y1="1959.56" x2="3253.62" y2="1959.56" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="644.41" y1="1728.56" x2="3253.62" y2="1728.56" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="644.41" y1="1497.55" x2="3253.62" y2="1497.55" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="644.41" y1="1266.54" x2="3253.62" y2="1266.54" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="644.41" y1="1035.53" x2="3253.62" y2="1035.53" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="644.41" y1="804.53" x2="3253.62" y2="804.53" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="644.41" y1="573.52" x2="3253.62" y2="573.52" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="644.41" y1="343.51" x2="3253.62" y2="343.51" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="644.41" y1="112.5" x2="3253.62" y2="112.5" stroke="#D9D9D9" stroke-width="3.4"/>
+              <!-- Grid Lines (vertical, shifted x by -195) -->
+              <line x1="818.87" y1="112" x2="818.87" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="991.9" y1="112" x2="991.9" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="1166.36" y1="112" x2="1166.36" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="1339.39" y1="112" x2="1339.39" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="1513.85" y1="112" x2="1513.85" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="1686.88" y1="112" x2="1686.88" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="1861.21" y1="112" x2="1861.21" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="2035.67" y1="112" x2="2035.67" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="2210" y1="112" x2="2210" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="2384.46" y1="112" x2="2384.46" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="2557.49" y1="112" x2="2557.49" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="2731.95" y1="112" x2="2731.95" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="2905" y1="112" x2="2905" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="3079.31" y1="112" x2="3079.31" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <line x1="3253.62" y1="112" x2="3253.62" y2="2421" stroke="#D9D9D9" stroke-width="3.4"/>
+              <!-- Data Lines (all path d x values shifted by -195) -->
+              <path id="line-inflation" d="M667.29 2421 650 2419.08 754.55146 2415.08 797.453 2412.08 840.35432 2409.08 884.68575 2407.08 927.58718 2402.08 974.38731 2394.08 1019.01601 2386.08 1064.81614 2381.08 1110.61628 2374.08 1156.41641 2366.08 1202.21655 2353.08 1232.18719 2336.08 1274.08719 2322.08 1274.0829 2312.08 1362.1959 2307.08 1405.2272 2299.08 1447.1272 2293.08 1492.4572 2289.08 1536.4572 2283.07 1581.686 2274.07 1625.586 2265.07 1669.586 2253.07 1714.8172 2244.07 1758.7172 2237.07 1802.6315 2230.07 1847.9615 2223.07 1891.8615 2216.07 1935.7615 2210.07 1980.092 2205.07 2024.992 2199.07 2070.3215 2193.07 2114.2215 2183.07 2158.1215 2175.07 2203.3515 2170.07 2247.2515 2163.07 2291.1658 2155.07 2336.4958 2144.07 2380.3958 2133.07 2424.2958 2123.07 2469.726 2110.07 2513.626 2111.07 2557.526 2105.07 2602.8558 2093.07 2646.7558 2085.07 2691.6558 2079.07 2736.9999 2073.07 2780.9999 2073.07 2826.2301 2067.07 2870.1301 2059.07 2914.0301 2049.07 2959.3601 2041.07 3003.2601 2036.07 3047.1601 2015.07 3092.4901 1978.06 3136.4044 1958.06 3180.3044 1943.06 3185 1928" stroke="#7F7F7F" stroke-width="10.3125" fill="none"/>
+              <path id="line-materialwages" d="M669.995 2421 650 2418.58 753.83646 2414.58 797.16789 2410.58 840.06932 2407.58 883.97075 2404.58 927.00218 2399.58 969.90231 2390.58 1012.90244 2381.58 1057.20256 2375.58 1101.90817 2368.58 1146.90817 2359.58 1191.90817 2344.58 1237.00817 2325.58 1281.90817 2309.58 1326.90817 2298.58 1371.9222 2292.58 1416.8222 2284.58 1462.8222 2276.57 1506.9222 2272.57 1550.8222 2265.57 1598.3222 2256.57 1642.2222 2245.57 1686.1222 2232.57 1731.3222 2221.57 1775.2222 2213.57 1820.4365 2206.57 1865.3365 2198.57 1910.2365 2190.57 1955.4365 2183.57 1999.3365 2178.57 2043.2365 2171.57 2089.4365 2164.57 2133.3365 2153.57 2177.2365 2144.57 2222.4365 2139.57 2266.3408 2131.57 2310.2408 2121.57 2356.5808 2109.57 2400.4808 2097.57 2444.3808 2086.57 2490.3808 2070.57 2535.4808 2072.57 2582.2408 2066.57 2626.1408 2052.57 2672.1408 2043.57 2716.3851 2036.57 2760.2851 2029.57 2806.4851 2029.57 2850.5151 2023.57 2894.4151 2013.57 2940.5451 2002.57 2984.5451 1993.57 3028.6751 1987.57 3072.6751 1964.56 3116.7751 1922.56 3160.7194 1899.56 3185 1851.5" stroke="#156082" stroke-width="11.4583" fill="none"/>
+              <path id="line-owner" d="M667.29 2421 650 2416.08 754.55146 2401.08 797.453 2386.08 840.35432 2359.08 884.68575 2344.08 927.58718 2331.08 974.38731 2291.08 1015.82004 2288.07 1057.72147 2290.08 1101.9229 2287.07 1145.95433 2271.07 1188.85446 2246.07 1232.78719 2221.07 1274.08719 2185.07 1315.9829 2145.07 1362.1959 2114.07 1405.2272 2092.07 1447.1272 2081.07 1492.4572 2069.07 1536.4572 2053.07 1581.686 2038.07 1625.586 2032.07 1669.586 2025.07 1714.8172 2031.07 1758.7172 2042.07 1802.6315 2034.07 1847.9615 2016.07 1891.8615 1995.07 1935.7615 1980.06 1980.092 1947.06 2024.992 1909.06 2070.3215 1879.06 2114.2215 1845.06 2158.1215 1838.06 2203.3515 1824.06 2247.2515 1815.06 2291.1658 1784.06 2336.4958 1707.06 2380.3958 1579.05 2424.2958 1449.05 2469.726 1353.04 2513.626 1426.05 2557.526 1490.05 2602.8558 1492.05 2646.7558 1460.05 2691.6558 1423.05 2736.9999 1387.05 2780.9999 1286.04 2826.2301 1247.04 2870.1301 1166.04 2914.0301 986.032 2959.3601 927.03 3003.2601 863.028 3047.1601 682.022 3092.4901 615.02 3136.4044 549.018 3180.3044 464.015 3185 388" stroke="#FF0000" stroke-width="10.3125" stroke-dasharray="30.9375 41.25" fill="none"/>
+              <path id="line-indirect" d="M667.29 2421 650 2418.08 754.55146 2410.08 797.453 2402.08 840.35432 2391.08 884.68575 2385.08 927.58718 2377.08 974.38731 2357.08 1019.01601 2351.08 1064.81614 2347.08 1110.61628 2341.08 1156.41641 2330.08 1202.21655 2312.08 1232.18719 2291.08 1274.08719 2268.07 1315.9829 2248.07 1362.1959 2234.07 1405.2272 2221.07 1447.1272 2212.07 1492.4572 2205.07 1536.4572 2195.07 1581.686 2184.07 1625.586 2175.07 1669.586 2164.07 1714.8172 2159.07 1758.7172 2157.07 1802.6315 2149.07 1847.9615 2138.07 1891.8615 2126.07 1935.7615 2116.07 1980.092 2102.07 2024.992 2085.07 2070.3215 2071.07 2114.2215 2052.07 2158.1215 2043.07 2203.3515 2035.07 2247.2515 2027.07 2291.1658 2010.07 2336.4958 1976.06 2380.3958 1926.06 2424.2958 1876.06 2469.726 1834.06 2513.626 1859.06 2557.526 1876.06 2602.8558 1868.06 2646.7558 1851.06 2691.6558 1834.06 2736.9999 1817.06 2780.9999 1784.06 2826.2301 1767.06 2870.1301 1734.06 2914.0301 1667.05 2959.3601 1642.05 3003.2601 1616.05 3047.1601 1541.05 3092.4901 1491.05 3136.4044 1454.05 3185 1410.05" stroke="#C00000" stroke-width="13.75" fill="none"/>
+              <!-- End-of-curve circles and labels (improved) -->
+              <!-- Indirect Labor, OH & Profit (dashed red) -->
+              <circle cx="3185" cy="388" r="18" fill="#fff" stroke="#FF0000" stroke-width="6"/>
+              <text x="2800" y="300" font-size="60" fill="#FF0000" font-weight="bold" alignment-baseline="middle">(2025, 3522.5%)</text>
 
-                    The consequences are clear: U.S. construction productivity has stagnated since the 1940s, while costs have surged. Builders make more money by doing things the long way.
-                    
-                    Today's planning, design, and cost management processes remain fragmented, inefficient, and archaic—especially when compared to industries like manufacturing and retail. And while new technologies and "lean" initiatives promise progress, they often just add more layers of complexity and cost.
-                    
-                    The result? Buildings now cost nearly twice what material and labor inflation alone can explain.
-                </p>
+              <!-- Owner Pays (solid red) -->
+              <circle cx="3185" cy="1410.05" r="18" fill="#fff" stroke="#C00000" stroke-width="6"/>
+              <text x="2800" y="1350.05" font-size="60" fill="#C00000" font-weight="bold" alignment-baseline="middle">(2025, 1823.1%)</text>
+
+              <!-- Construction Materials and Wages (blue) -->
+              <circle cx="3185" cy="1851.5" r="18" fill="#fff" stroke="#156082" stroke-width="6"/>
+              <text x="2830" y="1800" font-size="60" fill="#156082" font-weight="bold" alignment-baseline="middle">(2025, 986.1%)</text>
+
+              <!-- National Inflation (gray) -->
+              <circle cx="3185" cy="1928" r="18" fill="#fff" stroke="#7F7F7F" stroke-width="6"/>
+              <text x="2830" y="2130" font-size="60" fill="#7F7F7F" font-weight="bold" alignment-baseline="middle">(2025, 853.6%)</text>
+            </svg>
+          </div>
+          <div class="problem-cards">
+            <div class="problem-card" data-series="owner">
+              <img src="images/indirect.png" alt="Indirect Labor OH & Profit">
             </div>
-            <div class="problem-image">
-                <img src="images/escalationgraph.jpg" alt="Escalating Construction Costs">
+            <div class="problem-card" data-series="indirect">
+              <img src="images/owner.png" alt="Owner Pays (Construction Analytics)">
             </div>
+            <div class="problem-card" data-series="materialwages">
+              <img src="images/materialwages.png" alt="Construction Materials & Wages">
+            </div>
+            <div class="problem-card" data-series="inflation">
+              <img src="images/inflation.png" alt="National Inflation">
+            </div>
+          </div>
         </div>
+        <div class="graph-footer">
+          Construction Escalation vs. National Inflation: Based on Construction Escalation Year 2000 = 100%
+        </div>
+        <!-- End interactive chart/cards -->
 
-        <div class="problem-flex-container">
-            
-           
+        <div class="problem-description">
+            <p>For over fifty years, Construction Management (CM) and other delivery methods have failed to deliver value. Instead, they've created a system that rewards inefficiency rather than value. The core issue? Cost-plus and billable-hour contracts that incentivize waste and inflate budgets.</p>
             <div class="problem-quote">
                 <blockquote>
-                    "Since the 1940s, the rest of the economy has seen productivity grow by more than 8 times. But construction productivity has hardly improved. We build like we did 80 years ago. The result? Construction costs increasing by 5.38% annually—far outpacing both the 2.4% national inflation rate and 3.5% building materials costs."
-                    <cite>— McKinsey Global Institute</cite>
+                    "The contractor has no real incentive to complete the job quickly or cheaply – the longer he takes and more he spends, the larger his profit — not necessarily a good deal for the owner."
+                            <cite>— Building Advisor</cite>
                 </blockquote>
             </div>
-            <div class="problem-image">
-                <img src="images/MckinseyInstituteimage.png" alt="McKinsey Institute report cover on construction productivity">
-            </div>
+            <p>This isn't just about rising costs—it's about a fundamental misalignment of interests. When contractors and consultants make more money from longer timelines and higher costs, the result is predictable: projects that cost more and take longer than necessary.</p>
         </div>
 
-        <div class="problem-flex-container">
-            <div class="problem-quote">
-                <blockquote class="kpmg-quote">
-                    "Between 1997 and 2021, construction productivity actually fell by 7 percent, whereas in the manufacturing sector it rose by 126 percent."
-                    <cite>— KPMG</cite>
-                </blockquote>
-            </div>
-            <div class="problem-image">
-                <img src="images/kpmg.png" alt="KPMG construction survey showing VR technology use in construction">
-            </div>
-        </div>
+        
+
+        
 
         <div class="problem-points">
             <div class="point">
                 <i class="fas fa-chart-line"></i>
-                <h3>Cost-Plus Contracting</h3>
-                <p>Owners regularly pay 2x what they should.</p>
+                <h3>Cost-Plus and Billable-Hour Contracting</h3>
+                <p>Owners now pay more than 10 times the overhead and indirect costs than when CM began</p>
             </div>
             <div class="point">
                 <i class="fas fa-unlink"></i>
-                <h3>Siloed Planning</h3>
-                <p>Architects, builders, and owners operate on different islands.</p>
+                <h3>Disconnected Siloed Planning</h3>
+                <p>Despite modern data/tech advancements - Owner, Architect, Builder, and Trade transactions are disconnected, manual and archaic.</p>
             </div>
             <div class="point">
                 <i class="fas fa-file-excel"></i>
-                <h3>Outdated Tools</h3>
-                <p>Spreadsheets and gut instinct drive million-dollar decisions.</p>
+                <h3>Tech Bloat Without Integration</h3>
+                <p>Spreadsheets and gut instinct still drive the pre-design, and then give way to myriads of disconnected data resources, tools and processes.  </p>
             </div>
         </div>
     </section>
 
     <section id="philosophy" class="section scroll-animation">
-        <h2>This Isn't New. It's Proven.</h2>
-        <p class="section-intro">In the 1980s, Toyota forced a change in American manufacturing. The foundation? A systems-based philosophy created by W. Edwards Deming. Genesis applies that same philosophy to construction—finally.</p>
+        <h2>Proven System. Ready Now.</h2>
+        <p class="section-intro">In the 1980s, Toyota forced a shift in American manufacturing by proving that even simple products like cars benefit from a systems-based approach to improving value and reducing waste. If cars require a system, how much more do buildings—the world’s largest, most complex products?
+
+            Now, after decades of research and development, Genesis and its technology partner Building CATALYST bring that same proven management philosophy to construction planning, design, and delivery. All it takes is a few bold innovators—owners, consultants, designers, and builders—willing to lead the change.
+            
+            </p>
         
         <div class="slider-container">
             <div class="slider-track">
@@ -197,8 +285,8 @@
 
     <section id="solution" class="section scroll-animation">
         <div class="solution-header">
-            <h2>Smarter Planning. Real Value. Zero Guesswork.</h2>
-            <p class="solution-intro">Genesis is your consulting partner. Catalyst is the structured data engine. Together, they replace reactive planning with proactive certainty.</p>
+            <h2>Win Together. Move Faster.</h2>
+            <p class="solution-intro">Genesis guides you to more certain outcomes while cutting layers of waste in time and cost. Paired with Building Catalyst—the structured data engine—you can replace reactive planning with proactive precision.</p>
         </div>
 
         <div class="deming-genesis-layout">
@@ -210,24 +298,27 @@
                 <div class="solution-point">
                     <i class="fas fa-check-circle"></i>
                     <div class="point-content">
-                        <h3>Early-stage cost modeling from real historical data</h3>
-                        <p>Get accurate projections before designs are finalized, reducing uncertainty and improving decision-making.</p>
+                        <h3> Early-stage modeling from historical data
+                            Accurate projections before design begins</h3>
+                        <p>Catalyst delivers real-time forecasts early in planning—reducing uncertainty, improving speed, and replacing weeks of effort with minutes.</p>
                     </div>
                 </div>
                 
                 <div class="solution-point">
                     <i class="fas fa-check-circle"></i>
                     <div class="point-content">
-                        <h3>A living, learning system instead of static spreadsheets</h3>
-                        <p>Our system continually learns from each project, becoming more accurate and insightful over time.</p>
+                        <h3>A living, learning system—not spreadsheets
+                            Shift from gut feel to data-driven insight</h3>
+                        <p>Our system learns from each project, growing more accurate over time. Shift incentives from billable hours to value-added outcomes.</p>
                     </div>
                 </div>
                 
                 <div class="solution-point">
                     <i class="fas fa-check-circle"></i>
                     <div class="point-content">
-                        <h3>Transparent forecasting—change is encouraged, not penalized</h3>
-                        <p>Make informed adjustments throughout the project lifecycle without fear of penalties or unexpected costs.</p>
+                        <h3> Transparent forecasting—change encouraged
+                            Plan with confidence, adapt with ease</h3>
+                        <p>Adjust without fear of penalties or surprises. Structured data and tools like Revit and Catalyst enable seamless, flexible updates.</p>
                     </div>
                 </div>
             </div>
@@ -247,7 +338,8 @@
 
     <section id="who-we-help" class="section scroll-animation">
         <h2>One System. Value for Everyone.</h2>
-        <p class="section-intro">In just a few weeks, we'll help you use your own data to identify and eliminate the highest-impact sources of waste. Then, we'll apply our Win-Win Roadmap and contracting strategy to drive measurable improvements in both process and project value.</p>
+        <p class="section-intro">Do any of these sound familiar?
+            Explore the scenarios below. If your challenge isn’t listed, let us know—we’ll apply our system-based lens to help you solve it.</p>
         <div class="roles-grid">
             <div class="role-card">
                 <h3>Owner / Developer</h3>

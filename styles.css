@@ -241,14 +241,34 @@ nav {
     width: 100%;
     padding: 80px 0 60px;
     margin: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .section h2 {
     text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 30px;
+    margin-bottom: 1.5rem;
+    position: relative;
     padding: 0 20px;
     color: var(--primary-color);
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #156082;
 }
 
 /* Problem Section */
@@ -269,21 +289,23 @@ nav {
     justify-content: space-between;
     gap: 40px;
     margin-bottom: 60px;
+    
     padding: 0 20px;
+    padding-top: 20px;
     max-width: 1150px;
     margin: 0 auto;
 }
 
 .problem-image {
-    flex: 0 0 30%;
-    max-width: 30%;
+    flex: 0 0 45%;
+    max-width: 45%;
     margin-bottom: 20px;
 }
 
 .problem-text {
-    flex: 1;
-    padding-left: 0px;
-    margin-top: 0;
+    flex: 0 0 50%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .problem-image img {
@@ -300,7 +322,9 @@ nav {
 }
 
 .problem-quote {
-    flex: 0 0 65%;
+    flex: 0 0 50%;
+max-width: 750px;
+margin: 0 auto 25px
 }
 
 blockquote {
@@ -383,23 +407,23 @@ cite {
 
 /*Problem Section*/
 .section-intro-problem {
+    max-width: 1150px;
     font-size: 1.2rem;
     line-height: 1.6;
     margin: 0 0 40px;
-    max-width: 100%;
-    text-align: center;
-    color: #555;
-    padding: 0 0px;
-}
-/* Philosophy Section */
-.section-intro {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin: 0 0 40px;
-    max-width: 100%;
     text-align: center;
     color: #555;
     padding: 0 20px;
+}
+/* Philosophy Section */
+.section-intro {
+    max-width: 1150px;
+    margin: 0 auto 3rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+    padding: 0 20px;
+    text-align: center;
 }
 
 /* Timeline Section */
@@ -1595,4 +1619,186 @@ footer {
     .solution-points {
         flex: 0 0 100%;
     }
+}
+
+.problem-interactive-layout {
+    display: flex;
+    max-width: 820px;
+    margin: 0px auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px 15px;
+    align-items: flex-start;
+    gap: 0px;
+    position: relative;
+}
+
+.problem-cards {
+    flex: 0 0 120px;
+    max-width: 120px;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.problem-graph {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.problem-graph svg {
+    width: 95%;
+    max-width: 430px;
+    height: auto;
+    display: block;
+}
+
+.problem-card {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+
+.problem-card:hover,
+.problem-card.active {
+    box-shadow: 0 4px 16px rgba(52,152,219,0.2);
+}
+
+.problem-card img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    display: block;
+    margin: 0;
+}
+
+.problem-graph svg .highlight {
+    stroke-width: 20px !important;
+    filter: drop-shadow(0 0 8px #e74c3c);
+}
+
+@media (max-width: 900px) {
+    .problem-interactive-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .problem-cards {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+    }
+    .problem-card {
+        width: 80px;
+        height: 80px;
+    }
+    .problem-card img {
+        width: 64px;
+        height: 64px;
+    }
+    .problem-graph svg {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 100vw;
+    }
+}
+
+.problem-description {
+    max-width: 1150px;
+    margin: 30px auto;
+    padding: 0 20px;
+    text-align: left;
+    color: #333;
+}
+
+.problem-description p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.problem-description p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+    .problem-description {
+        padding: 0 15px;
+        font-size: 1rem;
+    }
+}
+
+/* Navigation Progress */
+.nav-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #156082 var(--scroll), transparent 0);
+    z-index: 1000;
+}
+
+/* Section Transitions */
+.section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced Visual Hierarchy */
+h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: #156082;
+}
+
+.section-intro {
+    max-width: 1150px;
+    margin: 0 auto 3rem;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #555;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.graph-footer {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin-top: -25px;
+    font-style: italic;
+    max-width: 700px;
+    margin: -25px auto 0;
+    padding: 0;
+    position: relative;
+    left: -50px;
 } 
