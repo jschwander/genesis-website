@@ -1775,7 +1775,7 @@ footer {
 /* Enhanced Visual Hierarchy */
 h2 {
     text-align: center;
-    padding: 40px 0 20px 0;  /* top right bottom left */
+    padding: 60px 0 20px 0;  /* top right bottom left */
     margin: 0;
     font-weight: 700;
     font-size: 3rem;
