@@ -50,6 +50,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize the timeline slider
     initSimpleSlider();
+    calculateWasteArea();
+
+    // Add event listeners for line hover
+    const lines = document.querySelectorAll('.data-line');
+    lines.forEach(line => {
+        line.addEventListener('mouseenter', () => handleLineHover(line.id));
+        line.addEventListener('mouseleave', () => handleLineLeave(line.id));
+    });
 });
 
 // Simple Card Slider for Timeline
@@ -215,20 +223,63 @@ problemCards.forEach(card => {
   card.addEventListener('mouseenter', () => {
     const series = card.getAttribute('data-series');
     document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
+    document.querySelectorAll('.endpoint-marker.visible').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.endpoint-text.visible').forEach(el => el.classList.remove('visible'));
+    
     const line = document.getElementById('line-' + series);
+    const circle = document.getElementById('circle-' + series);
+    const text = document.getElementById('text-' + series);
+
     if (line) line.classList.add('highlight');
+    if (line && circle) {
+        const pathData = line.getAttribute('d');
+        const pathSegments = pathData.split(/[\s,]+/); // Split by spaces or commas
+        // Get the last two numbers which should be the final x, y coordinates
+        const lastX = parseFloat(pathSegments[pathSegments.length - 2]);
+        const lastY = parseFloat(pathSegments[pathSegments.length - 1]);
+
+        if (!isNaN(lastX) && !isNaN(lastY)) {
+            circle.setAttribute('cx', lastX);
+            circle.setAttribute('cy', lastY);
+            circle.classList.add('visible');
+            if (text) text.classList.add('visible');
+        }
+    }
   });
   card.addEventListener('mouseleave', () => {
     document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
+    document.querySelectorAll('.endpoint-marker.visible').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.endpoint-text.visible').forEach(el => el.classList.remove('visible'));
   });
   card.addEventListener('focus', () => {
     const series = card.getAttribute('data-series');
     document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
+    document.querySelectorAll('.endpoint-marker.visible').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.endpoint-text.visible').forEach(el => el.classList.remove('visible'));
+
     const line = document.getElementById('line-' + series);
+    const circle = document.getElementById('circle-' + series);
+    const text = document.getElementById('text-' + series);
+
     if (line) line.classList.add('highlight');
+    if (line && circle) {
+        const pathData = line.getAttribute('d');
+        const pathSegments = pathData.split(/[\s,]+/);
+        const lastX = parseFloat(pathSegments[pathSegments.length - 2]);
+        const lastY = parseFloat(pathSegments[pathSegments.length - 1]);
+        
+        if (!isNaN(lastX) && !isNaN(lastY)) {
+            circle.setAttribute('cx', lastX);
+            circle.setAttribute('cy', lastY);
+            circle.classList.add('visible');
+            if (text) text.classList.add('visible');
+        }
+    }
   });
   card.addEventListener('blur', () => {
     document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
+    document.querySelectorAll('.endpoint-marker.visible').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.endpoint-text.visible').forEach(el => el.classList.remove('visible'));
   });
 });
 
@@ -297,3 +348,69 @@ window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
 });
+
+function calculateWasteArea() {
+    const wasteArea = document.querySelector('#waste-area');
+    if (!wasteArea) {
+        console.error('Waste area element not found');
+        return;
+    }
+
+    // Set the fill color to a brighter yellow with 20% opacity
+    wasteArea.setAttribute('fill', 'rgba(255, 255, 0, 0.2)');
+    // Force the color using style as well to ensure it overrides any existing styles
+    wasteArea.style.fill = 'rgba(255, 255, 0, 0.2)';
+    wasteArea.style.opacity = '1';
+    
+    // Make sure the waste area is rendered below the lines
+    const svg = wasteArea.closest('svg');
+    if (svg) {
+        // Move the waste-area element before the lines in the SVG
+        // This ensures it's rendered behind the lines
+        const ownerLine = document.querySelector('#line-owner');
+        if (ownerLine && ownerLine.parentNode) {
+            ownerLine.parentNode.insertBefore(wasteArea, ownerLine);
+        }
+    }
+}
+
+// Ensure the function is called after DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize the timeline slider
+    initSimpleSlider();
+    
+    // Calculate waste area with a small delay to ensure SVG is loaded
+    setTimeout(calculateWasteArea, 100);
+});
+
+function handleLineHover(lineId) {
+    // Show the corresponding circle and text
+    const circleId = lineId.replace('line', 'circle');
+    const textId = lineId.replace('line', 'text');
+    
+    document.getElementById(circleId).classList.add('visible');
+    document.getElementById(textId).classList.add('visible');
+    
+    // Dim other lines
+    const allLines = document.querySelectorAll('.data-line');
+    allLines.forEach(line => {
+        if (line.id !== lineId) {
+            line.style.opacity = '0.2';
+        }
+    });
+}
+
+function handleLineLeave(lineId) {
+    // Hide the corresponding circle and text
+    const circleId = lineId.replace('line', 'circle');
+    const textId = lineId.replace('line', 'text');
+    
+    document.getElementById(circleId).classList.remove('visible');
+    document.getElementById(textId).classList.remove('visible');
+    
+    // Restore other lines
+    const allLines = document.querySelectorAll('.data-line');
+    allLines.forEach(line => {
+        line.style.opacity = '1';
+    });
+}

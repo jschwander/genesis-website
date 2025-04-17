@@ -141,6 +141,7 @@ nav {
     padding: 0;
     align-items: flex-start;
     gap: 0px;
+    position: relative;
 }
 
 .problem-graph {
@@ -150,9 +151,17 @@ nav {
 }
 
 .problem-graph svg {
-    width: 100%;
+    width: 95%;
+    max-width: 900px;
     height: auto;
-    max-height: 500px;
+    display: block;
+    margin: 0 auto;
+    overflow: visible;
+}
+
+.problem-graph svg .highlight {
+    stroke-width: 20px !important;
+    filter: drop-shadow(0 0 8px #e74c3c);
 }
 
 .problem-cards {
@@ -211,9 +220,7 @@ nav {
 /* Tooltip styles */
 .problem-card .tooltip {
     position: absolute;
-    left: -340px;
-    top: 50%;
-    transform: translateY(-50%);
+    
     width: 280px;
     padding: 16px 20px;
     border-radius: 12px;
@@ -228,23 +235,32 @@ nav {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     border-left: 4px solid;
     pointer-events: none;
+    transform: none;  /* Remove transform to use absolute positioning */
 }
 
 /* Color-specific tooltip styles */
 .problem-card[data-series="indirect"] .tooltip {
     border-color: #ff0000;
+    right: -350px;  /* Position from the right edge of the chart */
+    top: 20px;      /* Position from the top of the chart */
 }
 
 .problem-card[data-series="owner"] .tooltip {
     border-color: #c00000;
+    right: -350px;  /* Position from the right edge of the chart */
+    top: -85px;      /* Position from the top of the chart */
 }
 
 .problem-card[data-series="materialwages"] .tooltip {
     border-color: #156082;
+    right: -350px;  /* Position from the right edge of the chart */
+    top: -190px;      /* Position from the top of the chart */
 }
 
 .problem-card[data-series="inflation"] .tooltip {
     border-color: #7f7f7f;
+    right: -350px;  /* Position from the right edge of the chart */
+    top: -295px;      /* Position from the top of the chart */
 }
 
 .tooltip-title {
@@ -263,20 +279,20 @@ nav {
 .problem-card:hover .tooltip {
     opacity: 1;
     visibility: visible;
-    transform: translateY(-50%) translateX(10px);
 }
 
+/* Mobile responsive adjustments */
 @media (max-width: 900px) {
     .problem-card .tooltip {
-        left: 50%;
-        top: -80px;
-        transform: translateX(-50%) translateY(0);
-        width: 240px;
+        right: auto;
+        left: -300px;
+        top: 50%;
+        transform: translateY(-50%);
     }
-    
-    .problem-card:hover .tooltip {
-        transform: translateX(-50%) translateY(-10px);
-    }
+}
+
+.problem-interactive-layout {
+    position: relative;
 }
 
 @media (max-width: 1200px) {
@@ -1946,4 +1962,67 @@ h2::after {
     25% { transform: rotate(-3deg); }
     75% { transform: rotate(3deg); }
     100% { transform: rotate(0deg); }
+}
+
+/* Waste area and explanation styles */
+#waste-area {
+    fill: rgba(255, 0, 0, 0.1);
+    stroke: none;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#waste-explanation {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.problem-card:hover ~ #waste-area,
+.problem-card:hover ~ #waste-explanation {
+    opacity: 0.2;
+}
+
+#waste-explanation rect {
+    fill: white;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+#waste-explanation text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Endpoint marker styles */
+.endpoint-marker {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    stroke-width: 15;
+    fill: none;
+}
+
+.endpoint-marker.visible {
+    opacity: 1;
+}
+
+.endpoint-text {
+    transition: opacity 0.3s ease;
+}
+
+.endpoint-text.visible {
+    opacity: 1 !important;
+}
+
+#circle-inflation {
+    stroke: #7f7f7f;
+}
+
+#circle-materialwages {
+    stroke: #156082;
+}
+
+#circle-indirect {
+    stroke: #ff0000;
+}
+
+#circle-owner {
+    stroke: #c00000;
 } 
