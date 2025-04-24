@@ -7,7 +7,7 @@
 
 :root {
     --primary-color: #2c3e50;
-    --secondary-color: #3498db;
+    --secondary-color: #156082;
     --accent-color: #e74c3c;
     --text-color: #333;
     --light-bg: #f5f6fa;
@@ -84,12 +84,12 @@ nav {
 
 /* Hero Section */
 .hero {
-    min-height: calc(100vh - 80px); /* Subtract nav height */
+    min-height: 100vh;
     background: var(--background-dark);
-    padding: 0 20px;
+    padding: 80px 20px 0;
     position: relative;
     overflow: hidden;
-    margin-top: 80px; /* Account for fixed nav */
+    margin: 0;
     display: flex;
     align-items: center;
 }
@@ -101,6 +101,7 @@ nav {
     align-items: center;
     gap: 60px;
     width: 100%;
+    padding-bottom: 40px;
 }
 
 .hero-text {
@@ -148,6 +149,8 @@ nav {
     flex: 1;
     min-width: 0;
     margin-right: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .problem-graph svg {
@@ -174,6 +177,8 @@ nav {
     margin-top: 15px;
     height: 420px;
     justify-content: space-between;
+    position: relative;
+    z-index: 2;
 }
 
 .problem-card {
@@ -189,18 +194,22 @@ nav {
     cursor: pointer;
     transition: box-shadow 0.2s;
     position: relative;
+}
+
+/* Remove default animation and only apply it to non-owner cards */
+.problem-card:not([data-series="owner"]) {
     animation: wiggle 2s ease-in-out infinite;
 }
 
-.problem-card:nth-child(2) {
+.problem-card:nth-child(2):not([data-series="owner"]) {
     animation-delay: 0.4s;
 }
 
-.problem-card:nth-child(3) {
+.problem-card:nth-child(3):not([data-series="owner"]) {
     animation-delay: 0.8s;
 }
 
-.problem-card:nth-child(4) {
+.problem-card:nth-child(4):not([data-series="owner"]) {
     animation-delay: 1.2s;
 }
 
@@ -220,8 +229,7 @@ nav {
 /* Tooltip styles */
 .problem-card .tooltip {
     position: absolute;
-    
-    width: 280px;
+    width: 295px;
     padding: 16px 20px;
     border-radius: 12px;
     font-size: 14px;
@@ -240,26 +248,26 @@ nav {
 
 /* Color-specific tooltip styles */
 .problem-card[data-series="indirect"] .tooltip {
-    border-color: #ff0000;
-    right: -350px;  /* Position from the right edge of the chart */
+    border-color: #ed3d00;
+    right: -370px;  /* Position from the right edge of the chart */
     top: 20px;      /* Position from the top of the chart */
 }
 
 .problem-card[data-series="owner"] .tooltip {
     border-color: #c00000;
-    right: -350px;  /* Position from the right edge of the chart */
+    right: -370px;  /* Position from the right edge of the chart */
     top: -85px;      /* Position from the top of the chart */
 }
 
 .problem-card[data-series="materialwages"] .tooltip {
     border-color: #156082;
-    right: -350px;  /* Position from the right edge of the chart */
+    right: -370px;  /* Position from the right edge of the chart */
     top: -190px;      /* Position from the top of the chart */
 }
 
 .problem-card[data-series="inflation"] .tooltip {
     border-color: #7f7f7f;
-    right: -350px;  /* Position from the right edge of the chart */
+    right: -370px;  /* Position from the right edge of the chart */
     top: -295px;      /* Position from the top of the chart */
 }
 
@@ -399,7 +407,7 @@ margin: 0 auto 25px
 
 blockquote {
     background: #f8f9fa;
-    border-left: 4px solid #3498db;
+    border-left: 4px solid #156082;
     padding: 25px 30px;
     font-style: italic;
     font-size: 1.1rem;
@@ -413,7 +421,7 @@ blockquote {
 blockquote::before {
     content: '"';
     font-size: 4rem;
-    color: #3498db;
+    color: #156082;
     opacity: 0.2;
     position: absolute;
     top: -20px;
@@ -438,7 +446,7 @@ cite {
 .kpmg-quote {
     background: #f8f9fa;
     border-left: none;
-    border-right: 4px solid #3498db;
+    border-right: 4px solid #156082;
     border-radius: 8px 0 0 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     padding-right: 30px;
@@ -464,7 +472,7 @@ cite {
     }
     
     .kpmg-quote {
-        border-left: 4px solid #3498db;
+        border-left: 4px solid #156082;
         border-right: none;
         border-radius: 0 8px 8px 0;
     }
@@ -548,7 +556,7 @@ cite {
 .timeline-progress-line {
     position: absolute;
     height: 4px;
-    background-color: #3498db;
+    background-color: #156082;
     top: 50%;
     transform: translateY(-50%);
     left: 0;
@@ -562,7 +570,7 @@ cite {
     height: 16px;
     border-radius: 50%;
     background-color: #fff;
-    border: 3px solid #3498db;
+    border: 3px solid #156082;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
@@ -570,7 +578,7 @@ cite {
 }
 
 .timeline-dot.active {
-    background-color: #3498db;
+    background-color: #156082;
     transform: scale(1.2);
 }
 
@@ -700,7 +708,7 @@ cite {
 .read-more {
     display: inline-block;
     padding: 8px 20px;
-    background-color: #3498db;
+    background-color: #156082;
     color: white;
     text-decoration: none;
     border-radius: 4px;
@@ -708,7 +716,7 @@ cite {
 }
 
 .read-more:hover {
-    background-color: #2980b9;
+    background-color: #0d4d6d;
 }
 
 /* Slider Controls */
@@ -723,8 +731,8 @@ cite {
     width: 40px;
     height: 40px;
     background-color: #fff;
-    border: 2px solid #3498db;
-    color: #3498db;
+    border: 2px solid #156082;
+    color: #156082;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -734,7 +742,7 @@ cite {
 }
 
 .timeline-control:hover {
-    background-color: #3498db;
+    background-color: #156082;
     color: white;
 }
 
@@ -1106,7 +1114,7 @@ footer {
     z-index: 100;
     width: 50px;
     height: 50px;
-    background-color: rgba(52, 152, 219, 0.8);
+    background-color: rgba(21, 96, 130, 0.8);
     color: white;
     border: none;
     border-radius: 50%;
@@ -1127,7 +1135,7 @@ footer {
 
 .timeline-prev:hover,
 .timeline-next:hover {
-    background-color: rgba(52, 152, 219, 1);
+    background-color: rgba(21, 96, 130, 1);
 }
 
 .timeline-dots {
@@ -1150,7 +1158,7 @@ footer {
 }
 
 .timeline-dot.active {
-    background-color: rgba(52, 152, 219, 1);
+    background-color: rgba(21, 96, 130, 1);
 }
 
 /* Card slider styles */
@@ -1243,7 +1251,7 @@ footer {
     transform: translateY(-50%);
     width: 50px;
     height: 50px;
-    background-color: rgba(52, 152, 219, 0.8);
+    background-color: rgba(21, 96, 130, 0.8);
     color: white;
     border: none;
     border-radius: 50%;
@@ -1266,7 +1274,7 @@ footer {
 
 .slider-prev:hover,
 .slider-next:hover {
-    background-color: rgba(52, 152, 219, 1);
+    background-color: rgba(21, 96, 130, 1);
 }
 
 .slider-nav {
@@ -1293,7 +1301,7 @@ footer {
 }
 
 .slider-dot.active {
-    background-color: #3498db;
+    background-color: #156082;
 }
 
 /* Remove old horizontal scroll and timeline styles */
@@ -1342,9 +1350,9 @@ footer {
 
 .point i {
     font-size: 2.5rem;
-    color: #3498db;
+    color: #156082;
     margin-bottom: 20px;
-    background: rgba(52, 152, 219, 0.1);
+    background: rgba(21, 96, 130, 0.1);
     width: 80px;
     height: 80px;
     display: flex;
@@ -1355,7 +1363,7 @@ footer {
 }
 
 .point:hover i {
-    background: #3498db;
+    background: #156082;
     color: white;
     transform: scale(1.1);
 }
@@ -1376,7 +1384,7 @@ footer {
     transform: translateX(-50%);
     width: 50px;
     height: 3px;
-    background-color: #3498db;
+    background-color: #156082;
     transition: width 0.3s ease;
 }
 
@@ -1485,7 +1493,7 @@ footer {
 }
 
 .solution-benefit .check-icon {
-    color: #3498db;
+    color: #156082;
     font-size: 1.5rem;
     flex-shrink: 0;
     margin-top: 5px;
@@ -1515,7 +1523,7 @@ footer {
 .solution-cta .btn {
     font-size: 1.2rem;
     padding: 15px 30px;
-    background-color: #3498db;
+    background-color: #156082;
     color: white;
     border: none;
     border-radius: 8px;
@@ -1526,7 +1534,7 @@ footer {
 }
 
 .solution-cta .btn:hover {
-    background-color: #2980b9;
+    background-color: #0d4d6d;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -1663,7 +1671,7 @@ footer {
 }
 
 .solution-point i {
-    color: #3498db;
+    color: #156082;
     font-size: 24px;
     flex-shrink: 0;
 }
@@ -1891,7 +1899,7 @@ h2::after {
 }
 
 .hover-glow:hover {
-    box-shadow: 0 0 20px rgba(52, 152, 219, 0.3);
+    box-shadow: 0 0 20px rgba(21, 96, 130, 0.3);
 }
 
 /* Scroll Progress Indicator */
@@ -1908,7 +1916,7 @@ h2::after {
 
 .scroll-progress-bar {
     width: 100%;
-    background: #3498db;
+    background: #156082;
     height: 0%;
     transition: height 0.1s ease;
 }
@@ -1964,65 +1972,496 @@ h2::after {
     100% { transform: rotate(0deg); }
 }
 
-/* Waste area and explanation styles */
+/* Waste area styles */
 #waste-area {
-    fill: rgba(255, 0, 0, 0.1);
-    stroke: none;
+    opacity: 1 !important; /* Show by default */
+    transition: opacity 0.3s ease-in-out;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    fill: rgba(173, 216, 230, 0.3); /* Light blue with 30% opacity */
+    stroke: rgba(173, 216, 230, 0.5); /* Light blue with 50% opacity */
+    stroke-width: 2;
+}
+
+/* Override any hover or show states to keep waste area visible */
+.problem-interactive-layout.show-waste-area .problem-graph #waste-area,
+.problem-card[data-series="owner"]:hover ~ .problem-graph #waste-area {
+    opacity: 1 !important;
+    fill: rgba(173, 216, 230, 0.3);
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Ensure the waste area stays visible when the owner card is hovered */
+.problem-card[data-series="owner"]:hover ~ .problem-graph #waste-area {
+    opacity: 1 !important;
+    transition: opacity 0.3s ease-in-out;
 }
 
 #waste-explanation {
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease-in-out;
 }
 
-.problem-card:hover ~ #waste-area,
-.problem-card:hover ~ #waste-explanation {
-    opacity: 0.2;
+/* Hide waste explanation when any problem card is hovered */
+.problem-card:hover ~ .problem-graph #waste-explanation {
+    opacity: 0;
+}
+
+/* Also hide waste explanation when any endpoint marker is visible */
+.endpoint-marker.visible ~ #waste-explanation {
+    opacity: 0;
 }
 
 #waste-explanation rect {
     fill: white;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.25));
+    rx: 20;
+    ry: 20;
+    stroke: rgba(231, 76, 60, 0.2);
+    stroke-width: 2;
 }
 
-#waste-explanation text {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+#waste-explanation path {
+    stroke: #333333;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#waste-explanation text[font-weight="bold"] {
+    fill: #2c3e50;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+#waste-explanation text:not([font-weight="bold"]) {
+    fill: #666;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: -0.2px;
+}
+
+/* Add hover effect */
+#waste-explanation:hover {
+    transform: translateY(-5px);
+}
+
+/* Style the title text specifically */
+#waste-explanation text[font-weight="bold"] {
+    fill: #333;
+    font-size: 76px;
+}
+
+/* Style the body text */
+#waste-explanation text:not([font-weight="bold"]) {
+    fill: #666;
+    font-size: 66px;
+    line-height: 1.5;
+}
+
+/* Add a subtle border */
+#waste-explanation rect {
+    stroke: rgba(0, 0, 0, 0.08);
+    stroke-width: 1;
+}
+
+/* Enhance the pointer line */
+#waste-explanation path {
+    stroke: rgba(51, 51, 51, 0.95);
+    stroke-width: 5;
+    stroke-dasharray: none;
+    animation: none;
+}
+
+/* Remove the dash animation since we're not using it anymore */
+@keyframes dash {
+    to {
+        stroke-dashoffset: 1000;
+    }
+}
+
+/* Make sure the card stays on top */
+#waste-explanation {
+    z-index: 5;
 }
 
 /* Endpoint marker styles */
 .endpoint-marker {
     opacity: 0;
     transition: opacity 0.3s ease;
-    stroke-width: 15;
-    fill: none;
+    stroke-width: 4;
+    r: 30;
 }
 
 .endpoint-marker.visible {
     opacity: 1;
 }
 
+#circle-inflation {
+    stroke: #7f7f7f;
+    fill: #7f7f7f;
+}
+
+#circle-materialwages {
+    stroke: #156082;
+    fill: #156082;
+}
+
+#circle-indirect {
+    stroke: #ed3d00;
+    fill: #ed3d00;
+}
+
+#circle-owner {
+    stroke: #c00000;
+    fill: #c00000;
+}
+
 .endpoint-text {
     transition: opacity 0.3s ease;
+    font-size: 84px !important;
+    font-weight: bold;
+    fill: #333;
+    opacity: 0;
 }
 
 .endpoint-text.visible {
     opacity: 1 !important;
 }
 
-#circle-inflation {
-    stroke: #7f7f7f;
+/* Position the text slightly closer to circles */
+#text-inflation, #text-materialwages, #text-indirect, #text-owner {
+    transform: translateX(25px);
 }
 
-#circle-materialwages {
-    stroke: #156082;
+/* Color-specific text styles */
+#text-inflation {
+    fill: #7f7f7f;
 }
 
-#circle-indirect {
-    stroke: #ff0000;
+#text-materialwages {
+    fill: #156082;
 }
 
-#circle-owner {
-    stroke: #c00000;
-} 
+#text-indirect {
+    fill: #ed3d00;
+}
+
+#text-owner {
+    fill: #c00000;
+}
+
+/* About Page Styles */
+.story-content {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.story-text {
+    flex: 1;
+}
+
+.story-text p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.story-image {
+    flex: 1;
+}
+
+.story-image img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mission-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.mission-point {
+    text-align: center;
+    padding: 30px;
+    background: var(--background-light);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.mission-point:hover {
+    transform: translateY(-5px);
+}
+
+.mission-point i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.mission-point h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.team-member {
+    text-align: center;
+    background: var(--background-light);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+    transform: translateY(-5px);
+}
+
+.team-member img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.team-member h3 {
+    font-size: 1.5rem;
+    margin: 20px 0 5px;
+}
+
+.team-member .role {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.team-member .bio {
+    padding: 0 20px 20px;
+    color: var(--text-color);
+}
+
+.contact-content {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.contact-info i {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.contact-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form textarea {
+    height: 150px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .story-content,
+    .mission-content,
+    .team-grid,
+    .contact-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .story-content {
+        flex-direction: column;
+    }
+    
+    .mission-content,
+    .team-grid,
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-content {
+        flex-direction: column;
+    }
+}
+
+.timeline-image-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+.timeline-interactive {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.timeline-static-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .timeline-image-container {
+        padding: 0 10px;
+    }
+}
+
+.timeline-hotspot {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.timeline-hotspot::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+.timeline-hotspot:hover::before {
+    transform: scale(2.5);
+}
+
+.timeline-tooltip {
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    width: 250px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+.timeline-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid white;
+}
+
+.timeline-tooltip h4 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.timeline-tooltip p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.timeline-hotspot:hover .timeline-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+}
+
+@media (max-width: 768px) {
+    .timeline-tooltip {
+        width: 200px;
+        font-size: 0.9rem;
+    }
+    
+    .timeline-hotspot {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+/* NEW RULE: Show waste area when parent layout has the class */
+.problem-interactive-layout.show-indirect-waste .problem-graph #indirect-waste-area {
+    opacity: 0.55 !important;
+    fill: #ed3d00;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Show owner-inflation-area on hover */
+.problem-interactive-layout.show-owner-inflation .problem-graph #owner-inflation-area {
+    opacity: 0.55 !important;
+    fill: #c00000;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Ensure owner-inflation-area is hidden by default */
+#owner-inflation-area {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}

@@ -52,11 +52,104 @@ document.addEventListener('DOMContentLoaded', function() {
     initSimpleSlider();
     calculateWasteArea();
 
-    // Add event listeners for line hover
-    const lines = document.querySelectorAll('.data-line');
-    lines.forEach(line => {
-        line.addEventListener('mouseenter', () => handleLineHover(line.id));
-        line.addEventListener('mouseleave', () => handleLineLeave(line.id));
+    // Set owner card in default state without hover animations
+    const ownerCard = document.querySelector('.problem-card[data-series="owner"]');
+    if (ownerCard) {
+        // Show owner tooltip by default without animation
+        const ownerTooltip = ownerCard.querySelector('.tooltip');
+        if (ownerTooltip) {
+            ownerTooltip.style.opacity = '1';
+            ownerTooltip.style.visibility = 'visible';
+            ownerTooltip.style.transition = 'none';
+            ownerTooltip.style.transform = 'none';
+            ownerTooltip.style.animation = 'none';
+        }
+        
+        // Show owner icon without animation
+        const ownerIcon = ownerCard.querySelector('.card-icon');
+        if (ownerIcon) {
+            ownerIcon.style.transform = 'none';
+            ownerIcon.style.transition = 'none';
+            ownerIcon.style.animation = 'none';
+        }
+
+        // Add hover class to card to maintain hover state
+        ownerCard.classList.add('hover');
+        
+        // Set owner highlights without animation
+        highlightElements('owner', true);
+    }
+
+    // Add event listeners for problem cards
+    problemCards.forEach(card => {
+        const series = card.getAttribute('data-series');
+        
+        card.addEventListener('mouseenter', () => {
+            // Remove hover class from owner card if it's not the one being hovered
+            if (series !== 'owner') {
+                ownerCard.classList.remove('hover');
+            }
+
+            // Hide all tooltips first
+            problemCards.forEach(c => {
+                const tooltip = c.querySelector('.tooltip');
+                if (tooltip) {
+                    tooltip.style.opacity = '0';
+                    tooltip.style.visibility = 'hidden';
+                }
+            });
+            
+            // Show current card's tooltip
+            const tooltip = card.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '1';
+                tooltip.style.visibility = 'visible';
+            }
+            
+            // Clear all highlights first
+            ['owner', 'indirect', 'materialwages', 'inflation'].forEach(s => {
+                highlightElements(s, false);
+            });
+            
+            // Apply new highlight
+            highlightElements(series, true);
+        });
+
+        card.addEventListener('mouseleave', () => {
+            // Hide current card's tooltip
+            const tooltip = card.querySelector('.tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '0';
+                tooltip.style.visibility = 'hidden';
+            }
+            
+            // Clear all highlights
+            ['owner', 'indirect', 'materialwages', 'inflation'].forEach(s => {
+                highlightElements(s, false);
+            });
+            
+            // Show owner state without animation
+            const ownerTooltip = ownerCard.querySelector('.tooltip');
+            if (ownerTooltip) {
+                ownerTooltip.style.opacity = '1';
+                ownerTooltip.style.visibility = 'visible';
+                ownerTooltip.style.transition = 'none';
+                ownerTooltip.style.transform = 'none';
+                ownerTooltip.style.animation = 'none';
+            }
+            
+            const ownerIcon = ownerCard.querySelector('.card-icon');
+            if (ownerIcon) {
+                ownerIcon.style.transform = 'none';
+                ownerIcon.style.transition = 'none';
+                ownerIcon.style.animation = 'none';
+            }
+
+            // Re-add hover class to owner card
+            ownerCard.classList.add('hover');
+            
+            highlightElements('owner', true);
+        });
     });
 });
 
@@ -219,69 +312,101 @@ document.addEventListener('keydown', (e) => {
 
 // Interactive Problem Chart Highlight
 const problemCards = document.querySelectorAll('.problem-card');
-problemCards.forEach(card => {
-  card.addEventListener('mouseenter', () => {
-    const series = card.getAttribute('data-series');
-    document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
-    document.querySelectorAll('.endpoint-marker.visible').forEach(el => el.classList.remove('visible'));
-    document.querySelectorAll('.endpoint-text.visible').forEach(el => el.classList.remove('visible'));
+const problemLines = document.querySelectorAll('.problem-graph svg path[id^="line-"]');
+const endpointCircles = document.querySelectorAll('.problem-graph svg .endpoint-marker');
+const endpointTexts = document.querySelectorAll('.problem-graph svg .endpoint-text');
+const problemGraphSVG = document.querySelector('.problem-graph svg');
+const interactiveLayout = document.querySelector('.problem-interactive-layout'); // Get the parent layout
+const indirectWasteArea = document.getElementById('indirect-waste-area'); // Get the waste area element
+const ownerInflationArea = document.getElementById('owner-inflation-area'); // Get the owner inflation area element
+
+function highlightElements(series, highlight) {
+    // Highlight lines
+    problemLines.forEach(line => {
+        if (line.id === `line-${series}` || 
+            (highlight && (series === 'indirect' || series === 'owner') && line.id === 'line-inflation')) {
+            line.classList.toggle('highlight', highlight);
+            line.style.opacity = highlight ? '1' : '0.3';
+        } else {
+            line.style.opacity = highlight ? '0.3' : '1';
+        }
+    });
+
+    // Highlight corresponding circle and text
+    const circle = document.getElementById(`circle-${series}`);
+    const text = document.getElementById(`text-${series}`);
+    if (circle) circle.classList.toggle('visible', highlight);
+    if (text) text.classList.toggle('visible', highlight);
+
+    // For indirect series, also show inflation circle and text
+    if (series === 'indirect') {
+        const inflationCircle = document.getElementById('circle-inflation');
+        const inflationText = document.getElementById('text-inflation');
+        if (inflationCircle) inflationCircle.classList.toggle('visible', highlight);
+        if (inflationText) inflationText.classList.toggle('visible', highlight);
+    }
+
+    // For owner series, also show inflation circle and text
+    if (series === 'owner') {
+        const inflationCircle = document.getElementById('circle-inflation');
+        const inflationText = document.getElementById('text-inflation');
+        if (inflationCircle) inflationCircle.classList.toggle('visible', highlight);
+        if (inflationText) inflationText.classList.toggle('visible', highlight);
+    }
+
+    // Handle waste explanation visibility
+    const wasteExplanation = document.getElementById('waste-explanation');
+    if (wasteExplanation) {
+        wasteExplanation.style.opacity = highlight ? '0' : '1';
+    }
+
+    // Handle indirect waste area
+    if (interactiveLayout && series === 'indirect') {
+        interactiveLayout.classList.toggle('show-indirect-waste', highlight);
+    }
+
+    // Handle owner inflation area
+    if (interactiveLayout && series === 'owner') {
+        interactiveLayout.classList.toggle('show-owner-inflation', highlight);
+    }
+
+    // Adjust overall SVG opacity if highlighting
+    if (problemGraphSVG) {
+        problemGraphSVG.style.opacity = highlight ? '1' : '1'; // Keep full opacity
+    }
+}
+
+function handleLineHover(lineId) {
+    // Show the corresponding circle and text
+    const circleId = lineId.replace('line', 'circle');
+    const textId = lineId.replace('line', 'text');
     
-    const line = document.getElementById('line-' + series);
-    const circle = document.getElementById('circle-' + series);
-    const text = document.getElementById('text-' + series);
-
-    if (line) line.classList.add('highlight');
-    if (line && circle) {
-        const pathData = line.getAttribute('d');
-        const pathSegments = pathData.split(/[\s,]+/); // Split by spaces or commas
-        // Get the last two numbers which should be the final x, y coordinates
-        const lastX = parseFloat(pathSegments[pathSegments.length - 2]);
-        const lastY = parseFloat(pathSegments[pathSegments.length - 1]);
-
-        if (!isNaN(lastX) && !isNaN(lastY)) {
-            circle.setAttribute('cx', lastX);
-            circle.setAttribute('cy', lastY);
-            circle.classList.add('visible');
-            if (text) text.classList.add('visible');
+    document.getElementById(circleId).classList.add('visible');
+    document.getElementById(textId).classList.add('visible');
+    
+    // Dim other lines
+    const allLines = document.querySelectorAll('.data-line');
+    allLines.forEach(line => {
+        if (line.id !== lineId) {
+            line.style.opacity = '0.2';
         }
-    }
-  });
-  card.addEventListener('mouseleave', () => {
-    document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
-    document.querySelectorAll('.endpoint-marker.visible').forEach(el => el.classList.remove('visible'));
-    document.querySelectorAll('.endpoint-text.visible').forEach(el => el.classList.remove('visible'));
-  });
-  card.addEventListener('focus', () => {
-    const series = card.getAttribute('data-series');
-    document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
-    document.querySelectorAll('.endpoint-marker.visible').forEach(el => el.classList.remove('visible'));
-    document.querySelectorAll('.endpoint-text.visible').forEach(el => el.classList.remove('visible'));
+    });
+}
 
-    const line = document.getElementById('line-' + series);
-    const circle = document.getElementById('circle-' + series);
-    const text = document.getElementById('text-' + series);
-
-    if (line) line.classList.add('highlight');
-    if (line && circle) {
-        const pathData = line.getAttribute('d');
-        const pathSegments = pathData.split(/[\s,]+/);
-        const lastX = parseFloat(pathSegments[pathSegments.length - 2]);
-        const lastY = parseFloat(pathSegments[pathSegments.length - 1]);
-        
-        if (!isNaN(lastX) && !isNaN(lastY)) {
-            circle.setAttribute('cx', lastX);
-            circle.setAttribute('cy', lastY);
-            circle.classList.add('visible');
-            if (text) text.classList.add('visible');
-        }
-    }
-  });
-  card.addEventListener('blur', () => {
-    document.querySelectorAll('.problem-graph .highlight').forEach(el => el.classList.remove('highlight'));
-    document.querySelectorAll('.endpoint-marker.visible').forEach(el => el.classList.remove('visible'));
-    document.querySelectorAll('.endpoint-text.visible').forEach(el => el.classList.remove('visible'));
-  });
-});
+function handleLineLeave(lineId) {
+    // Hide the corresponding circle and text
+    const circleId = lineId.replace('line', 'circle');
+    const textId = lineId.replace('line', 'text');
+    
+    document.getElementById(circleId).classList.remove('visible');
+    document.getElementById(textId).classList.remove('visible');
+    
+    // Restore other lines
+    const allLines = document.querySelectorAll('.data-line');
+    allLines.forEach(line => {
+        line.style.opacity = '1';
+    });
+}
 
 // Scroll Animation Handler
 function handleScrollAnimations() {
@@ -356,11 +481,11 @@ function calculateWasteArea() {
         return;
     }
 
-    // Set the fill color to a brighter yellow with 20% opacity
-    wasteArea.setAttribute('fill', 'rgba(255, 255, 0, 0.2)');
+    // Set the fill color to transparent
+    wasteArea.setAttribute('fill', 'rgba(231, 76, 60, 0)');
     // Force the color using style as well to ensure it overrides any existing styles
-    wasteArea.style.fill = 'rgba(255, 255, 0, 0.2)';
-    wasteArea.style.opacity = '1';
+    wasteArea.style.fill = 'rgba(231, 76, 60, 0)';
+    wasteArea.style.opacity = '0';
     
     // Make sure the waste area is rendered below the lines
     const svg = wasteArea.closest('svg');
@@ -382,35 +507,3 @@ document.addEventListener('DOMContentLoaded', () => {
     // Calculate waste area with a small delay to ensure SVG is loaded
     setTimeout(calculateWasteArea, 100);
 });
-
-function handleLineHover(lineId) {
-    // Show the corresponding circle and text
-    const circleId = lineId.replace('line', 'circle');
-    const textId = lineId.replace('line', 'text');
-    
-    document.getElementById(circleId).classList.add('visible');
-    document.getElementById(textId).classList.add('visible');
-    
-    // Dim other lines
-    const allLines = document.querySelectorAll('.data-line');
-    allLines.forEach(line => {
-        if (line.id !== lineId) {
-            line.style.opacity = '0.2';
-        }
-    });
-}
-
-function handleLineLeave(lineId) {
-    // Hide the corresponding circle and text
-    const circleId = lineId.replace('line', 'circle');
-    const textId = lineId.replace('line', 'text');
-    
-    document.getElementById(circleId).classList.remove('visible');
-    document.getElementById(textId).classList.remove('visible');
-    
-    // Restore other lines
-    const allLines = document.querySelectorAll('.data-line');
-    allLines.forEach(line => {
-        line.style.opacity = '1';
-    });
-}
