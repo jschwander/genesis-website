@@ -151,6 +151,47 @@ document.addEventListener('DOMContentLoaded', function() {
             highlightElements('owner', true);
         });
     });
+
+    // Open modal on card click
+    document.querySelectorAll('.problem-modal-card').forEach(card => {
+        card.addEventListener('click', function() {
+            closeAllProblemModals();
+            const modalId = card.getAttribute('data-modal');
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.add('active');
+        });
+    });
+
+    // Close modal on close button or overlay click
+    document.querySelectorAll('.problem-modal-close').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const closeId = btn.getAttribute('data-close');
+            const modal = document.getElementById(closeId);
+            if (modal) modal.classList.remove('active');
+            e.stopPropagation();
+        });
+    });
+
+    document.querySelectorAll('.problem-modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) overlay.classList.remove('active');
+        });
+    });
+
+    // Modal navigation (Next/Previous)
+    document.querySelectorAll('.modal-nav button').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const target = btn.getAttribute('data-nav');
+            if (target) {
+                // Close all modals
+                closeAllProblemModals();
+                // Open the target modal
+                const modal = document.getElementById(target);
+                if (modal) modal.classList.add('active');
+            }
+        });
+    });
 });
 
 // Simple Card Slider for Timeline
@@ -507,3 +548,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Calculate waste area with a small delay to ensure SVG is loaded
     setTimeout(calculateWasteArea, 100);
 });
+
+// Problem Modal Popup Logic
+function closeAllProblemModals() {
+    document.querySelectorAll('.problem-modal-overlay').forEach(m => m.classList.remove('active'));
+}

@@ -164,7 +164,7 @@ nav {
 
 .problem-graph svg .highlight {
     stroke-width: 20px !important;
-    filter: drop-shadow(0 0 8px #e74c3c);
+    filter: drop-shadow(0 0 12px rgba(231, 76, 60, 0.8));
 }
 
 .problem-cards {
@@ -184,7 +184,7 @@ nav {
 .problem-card {
     background: #fff;
     border-radius: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
     width: 110px;
     height: 110px;
     display: flex;
@@ -216,6 +216,7 @@ nav {
 .problem-card:hover {
     animation: none;
     transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
 
 .problem-card img {
@@ -405,7 +406,10 @@ max-width: 750px;
 margin: 0 auto 25px
 }
 
-blockquote {
+.section-intro blockquote {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
     background: #f8f9fa;
     border-left: 4px solid #156082;
     padding: 25px 30px;
@@ -501,6 +505,12 @@ cite {
     line-height: 1.6;
     color: #555;
     padding: 0 20px;
+    text-align: center;
+}
+
+.section-intro p {
+    max-width: 1150px;
+    margin: 0 auto;
     text-align: center;
 }
 
@@ -1733,7 +1743,7 @@ footer {
 
 .problem-graph svg .highlight {
     stroke-width: 20px !important;
-    filter: drop-shadow(0 0 8px #e74c3c);
+    filter: drop-shadow(0 0 12px rgba(231, 76, 60, 0.8));
 }
 
 @media (max-width: 900px) {
@@ -2013,7 +2023,7 @@ h2::after {
 
 #waste-explanation rect {
     fill: white;
-    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.35));
     rx: 20;
     ry: 20;
     stroke: rgba(231, 76, 60, 0.2);
@@ -2091,6 +2101,7 @@ h2::after {
     transition: opacity 0.3s ease;
     stroke-width: 4;
     r: 30;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
 }
 
 .endpoint-marker.visible {
@@ -2464,4 +2475,307 @@ h2::after {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     pointer-events: none;
+}
+
+.chart-title-container {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.data-sources-link {
+    font-size: 36px;
+    color: #595959;
+    text-decoration: none;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.data-sources-link:hover {
+    color: #156082;
+}
+
+/* Modal styles */
+.data-sources-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 30px;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.modal-content p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.modal-content a {
+    color: #156082;
+    text-decoration: none;
+}
+
+.modal-content a:hover {
+    text-decoration: underline;
+}
+
+.close-modal {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #333;
+}
+
+/* Problem Card Grid Styles */
+.problem-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem auto;
+  padding: 0 20px;
+}
+@media (max-width: 1100px) {
+  .problem-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .problem-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.problem-modal-card {
+  background: rgba(255,255,255,0.85);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 2.2rem 1.5rem 2rem 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
+  position: relative;
+  overflow: visible;
+  will-change: transform;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 0.8s forwards;
+  display: flex;
+  flex-direction: column;
+}
+.problem-modal-card:nth-child(1) { animation-delay: 0.1s; }
+.problem-modal-card:nth-child(2) { animation-delay: 0.2s; }
+.problem-modal-card:nth-child(3) { animation-delay: 0.3s; }
+.problem-modal-card:nth-child(4) { animation-delay: 0.4s; }
+
+.section.visible .problem-modal-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.problem-modal-card:hover {
+  transform: scale(1.06) translateY(-6px);
+  box-shadow: 0 12px 36px rgba(21,96,130,0.22), 0 2px 8px rgba(21,96,130,0.07);
+  background: #f7fbfd;
+  z-index: 2;
+}
+
+.icon-bg {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.1rem auto;
+  font-size: 2.2rem;
+  box-shadow: 0 2px 8px rgba(21,96,130,0.07);
+}
+.icon-bg-blue { background: #e3f0fa; color: #156082; }
+.icon-bg-green { background: #e6f7ec; color: #27ae60; }
+.icon-bg-yellow { background: #fff9e3; color: #f1c40f; }
+.icon-bg-red { background: #fdeaea; color: #c0392b; }
+
+.problem-modal-card h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 0.7rem;
+}
+.problem-modal-card p {
+  color: #555;
+  font-size: 1.05rem;
+  margin-bottom: 0;
+}
+
+/* Full-screen modal overlay for long-form content */
+.problem-modal-overlay {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(255,255,255,0.35); /* subtle white overlay */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); /* for Safari */
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+  overflow-y: auto;
+  padding: 0;
+}
+.problem-modal-overlay.active {
+  display: flex;
+}
+.problem-modal-content {
+  background: #fff;
+  border-radius: 18px;
+  padding: 3rem 3rem 2.5rem 3rem;
+  width: 80vw;
+  max-width: 1200px;
+  margin: 4vh auto;
+  box-shadow: 0 12px 48px rgba(21,96,130,0.22), 0 2px 8px rgba(21,96,130,0.07);
+  text-align: left;
+  position: relative;
+  animation: fadeIn 0.3s;
+  max-height: 92vh;
+  overflow-y: auto;
+  color: #222;
+  font-size: 1.13rem;
+  line-height: 1.7;
+}
+@media (max-width: 900px) {
+  .problem-modal-content {
+    max-width: 98vw;
+    width: 98vw;
+    padding: 2rem 1rem 1.5rem 1rem;
+  }
+}
+.problem-modal-content h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #156082;
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+.problem-modal-content p, .problem-modal-content ul, .problem-modal-content ol {
+  color: #222;
+  font-size: 1.13rem;
+  margin-bottom: 1.2em;
+  line-height: 1.7;
+}
+.problem-modal-content ul, .problem-modal-content ol {
+  padding-left: 1.5em;
+}
+.problem-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 28px;
+  font-size: 2.2rem;
+  color: #156082;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 10;
+  background: none;
+  border: none;
+  line-height: 1;
+}
+.problem-modal-close:hover {
+  color: #c0392b;
+}
+
+.modal-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  gap: 1.5rem;
+}
+.modal-nav button {
+  background: #156082;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7em 1.5em;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(21,96,130,0.07);
+  outline: none;
+}
+.modal-nav button:hover {
+  background: #0d4d6d;
+  color: #fff;
+}
+
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: auto;
+  color: #156082 !important;
+  background: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  user-select: none;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  justify-content: center;
+  align-self: center;
+}
+.card-cta i {
+  font-size: 1.05em;
+  transition: transform 0.2s;
+  color: #156082 !important;
+}
+.problem-modal-card:hover .card-cta,
+.card-cta:hover {
+  color: #0d4d6d !important;
+  text-decoration: underline;
+}
+.problem-modal-card:hover .card-cta i,
+.card-cta:hover i {
+  transform: translateX(5px);
 }
