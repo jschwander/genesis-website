@@ -192,6 +192,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Animate sections on scroll
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target); // Animate only once
+            }
+        });
+    }, {
+        threshold: 0.15 // Animate when 15% of the section is visible
+    });
+
+    document.querySelectorAll('.scroll-animation').forEach(section => {
+        observer.observe(section);
+    });
 });
 
 // Simple Card Slider for Timeline
