@@ -208,6 +208,46 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.scroll-animation').forEach(section => {
         observer.observe(section);
     });
+
+    // Deming Quote Rotation
+    const demingQuotes = [
+        "94% of problems in business are systems-driven and only 6% are people-driven.",
+        "A system is a network of interdependent components, all working together to help accomplish the aim of the system",
+        "Put a good person in a bad system and the bad system wins, no contest.",
+        "Best efforts will not substitute for knowledge.",
+        "Blame the system, not the people. Most people are trying to do a good job.",
+        "You do not install quality; you begin to work on the causes of quality."
+    ];
+    
+    let currentQuote = 1; // Start with second quote since first is hardcoded
+    const quoteSpan = document.getElementById('deming-quote-text');
+    
+    if (quoteSpan) {
+        console.log("Quote span found");
+        
+        function fadeOut() {
+            quoteSpan.style.opacity = '0';
+            setTimeout(changeQuote, 800); // Wait for fade out
+        }
+        
+        function changeQuote() {
+            quoteSpan.textContent = '"' + demingQuotes[currentQuote] + '"'; // Add quotation marks
+            currentQuote = (currentQuote + 1) % demingQuotes.length;
+            quoteSpan.style.opacity = '1'; // Fade in
+        }
+        
+        // First rotation after 15 seconds to give time to read first quote
+        setTimeout(() => {
+            console.log("Starting quote rotation");
+            // Add CSS transition if not already present
+            quoteSpan.style.transition = 'opacity 0.8s ease-in-out';
+            fadeOut(); 
+            // Start regular interval after first change
+            setTimeout(() => {
+                setInterval(fadeOut, 7000);
+            }, 7000);
+        }, 8000);
+    }
 });
 
 // Simple Card Slider for Timeline

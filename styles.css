@@ -2577,7 +2577,7 @@ h2::after {
   background: rgba(255,255,255,0.85);
   border-radius: 18px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-  padding: 2.2rem 1.5rem 2rem 1.5rem;
+  padding: 2.5rem 2rem 2.2rem 2rem;
   text-align: center;
   cursor: pointer;
   transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
@@ -2589,6 +2589,7 @@ h2::after {
   animation: fadeInUp 0.8s forwards;
   display: flex;
   flex-direction: column;
+  max-width: 440px;
 }
 .problem-modal-card:nth-child(1) { animation-delay: 0.1s; }
 .problem-modal-card:nth-child(2) { animation-delay: 0.2s; }
@@ -2777,4 +2778,112 @@ h2::after {
 .problem-modal-card:hover .card-cta i,
 .card-cta:hover i {
   transform: translateX(5px);
+}
+
+.deming-quote-flex {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 3.5rem 0;
+}
+
+.deming-quote-author {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 130px;
+  height: 100%;
+  justify-content: center;
+}
+
+.deming-portrait {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 50%;
+  border: 4px solid #156082;
+  box-shadow: 0 2px 12px rgba(21,96,130,0.12);
+  background: #fff;
+}
+
+.deming-quote-name {
+  margin-top: 0.7rem;
+  font-weight: bold;
+  font-size: 1.08rem;
+  color: #222;
+  text-align: center;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+#deming-quote-text {
+  display: block;
+  min-height: 80px;
+  font-size: 1.3rem !important;
+  line-height: 1.6;
+  color: #444 !important;
+  font-style: italic;
+  opacity: 1 !important;
+  text-align: center;
+  font-weight: normal;
+}
+
+.deming-quote-flex blockquote {
+  margin: 0;
+  flex: 1 1 0;
+  position: relative;
+  padding: 2.2rem 1.5rem;
+  min-height: 120px; /* Ensures consistent height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 700px) {
+  .deming-quote-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .deming-quote-author {
+    min-width: 0;
+    height: auto;
+  }
+  .deming-quote-flex blockquote::before {
+    display: none;
+  }
+}
+
+.deming-quote-flex blockquote::before {
+  content: '';
+  position: absolute;
+  left: -1.1rem;
+  top: 10%;
+  width: 2px;
+  height: 80%;
+  background: #e0e0e0;
+  border-radius: 2px;
+  display: block;
+}
+
+.solution-image-card {
+  max-width: 800px;
+  margin: 2.5rem auto 2.5rem auto;
+  background: #fff;
+  border-radius: 22px;
+  box-shadow: 0 12px 48px rgba(21,96,130,0.22), 0 2px 8px rgba(21,96,130,0.07);
+  padding: 2.2rem 2.2rem 1.5rem 2.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.solution-image-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  display: block;
 }
