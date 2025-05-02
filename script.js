@@ -248,6 +248,69 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 7000);
         }, 8000);
     }
+
+    // --- Annotations and shaded area logic for Indirect and Owner ---
+    const indirectAnnotation = document.getElementById('indirect-annotation');
+    const ownerAnnotation = document.getElementById('owner-annotation');
+
+    function showAnnotation(type) {
+        console.log('showAnnotation called with type:', type);
+        if (type === 'indirect') {
+            if (indirectAnnotation) {
+                indirectAnnotation.setAttribute('opacity', '1');
+                console.log('Set indirect-annotation opacity to 1');
+            }
+            if (ownerAnnotation) ownerAnnotation.setAttribute('opacity', '0');
+            if (indirectWasteArea) indirectWasteArea.setAttribute('opacity', '0.55');
+            if (ownerInflationArea) ownerInflationArea.setAttribute('opacity', '0');
+        } else if (type === 'materialwages' || type === 'inflation') {
+            if (indirectAnnotation) indirectAnnotation.setAttribute('opacity', '0');
+            if (ownerAnnotation) ownerAnnotation.setAttribute('opacity', '0');
+            if (indirectWasteArea) indirectWasteArea.setAttribute('opacity', '0');
+            if (ownerInflationArea) ownerInflationArea.setAttribute('opacity', '0');
+        } else {
+            if (indirectAnnotation) {
+                indirectAnnotation.setAttribute('opacity', '0');
+                console.log('Set indirect-annotation opacity to 0');
+            }
+            if (ownerAnnotation) ownerAnnotation.setAttribute('opacity', '1');
+            if (indirectWasteArea) indirectWasteArea.setAttribute('opacity', '0');
+            if (ownerInflationArea) ownerInflationArea.setAttribute('opacity', '0.55');
+        }
+    }
+
+    if (ownerCard) {
+        ownerCard.addEventListener('mouseenter', () => showAnnotation('owner'));
+        ownerCard.addEventListener('mouseleave', () => showAnnotation());
+    }
+    // On page load, show 2X by default and red shaded area
+    showAnnotation();
+
+    const indirectCard = document.querySelector('.problem-card[data-series="indirect"]');
+    console.log('indirectCard:', indirectCard);
+    if (indirectCard) {
+        console.log('Attaching event listeners to indirectCard');
+        indirectCard.addEventListener('mouseenter', () => {
+            console.log('mouseenter on indirectCard');
+            showAnnotation('indirect');
+        });
+        indirectCard.addEventListener('mouseleave', () => {
+            console.log('mouseleave on indirectCard');
+            showAnnotation();
+        });
+    }
+
+    // Attach listeners for materialwages and inflation cards
+    const materialCard = document.querySelector('.problem-card[data-series="materialwages"]');
+    const inflationCard = document.querySelector('.problem-card[data-series="inflation"]');
+    if (materialCard) {
+        materialCard.addEventListener('mouseenter', () => showAnnotation('materialwages'));
+        materialCard.addEventListener('mouseleave', () => showAnnotation());
+    }
+    if (inflationCard) {
+        inflationCard.addEventListener('mouseenter', () => showAnnotation('inflation'));
+        inflationCard.addEventListener('mouseleave', () => showAnnotation());
+    }
 });
 
 // Simple Card Slider for Timeline

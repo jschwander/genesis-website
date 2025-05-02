@@ -85,7 +85,10 @@ nav {
 /* Hero Section */
 .hero {
     min-height: 100vh;
-    background: var(--background-dark);
+    background:
+        linear-gradient(rgba(26,31,44,0.92), rgba(26,31,44,0.92)),
+        url('images/herooverlay.png') center center / cover no-repeat;
+    background-attachment: scroll, fixed;
     padding: 80px 20px 0;
     position: relative;
     overflow: hidden;
@@ -2886,4 +2889,32 @@ h2::after {
   height: auto;
   border-radius: 14px;
   display: block;
+}
+
+#contact {
+  padding-bottom: 5rem;
+}
+
+.btn.primary {
+  background-color: #226381;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 1.2rem 2.5rem;
+  border-radius: 14px;
+  border: none;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 4px 24px rgba(21,96,130,0.10);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.btn.primary:hover, .btn.primary:focus {
+  background-color: #19516a;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(21,96,130,0.18);
 }

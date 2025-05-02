@@ -159,6 +159,25 @@
                           
                           <circle id="circle-owner" class="endpoint-marker" r="20" cx="3185" cy="1410.05"/>
                           <text id="text-owner" class="endpoint-text" x="3100" y="1350" fill="#c00000" font-size="64" font-weight="bold" opacity="0">1823%</text>
+
+                          <!-- 2X Annotation for Owner Pays (visible by default) -->
+                          <g id="owner-annotation" opacity="1">
+                            <text x="3000" y="1800" fill="yellow" font-size="90" font-weight="bold" stroke="#fff" stroke-width="2">2X</text>
+                            <!-- Upward arrow -->
+                            <path d="M3040 1710 L3040 1620" stroke="yellow" stroke-width="18" fill="none"/>
+                            <polygon points="3025,1635 3040,1590 3055,1635" fill="yellow"/>
+                            <!-- Downward arrow -->
+                            <path d="M3040 1820 L3040 1980" stroke="yellow" stroke-width="18" fill="none"/>
+                            <polygon points="3025,1965 3040,2010 3055,1965" fill="yellow"/>
+                          </g>
+                          <g id="indirect-annotation" opacity="0">
+                            <text x="3000" y="1200" fill="black" font-size="90" font-weight="bold" stroke="#fff" stroke-width="2">4X</text>
+                            <!-- Vertical arrow from inflation endpoint up to indirect endpoint -->
+                            <path d="M3040 1220 L3040 1960" stroke="black" stroke-width="18" fill="none"/>
+                            <polygon points="3025,1965 3040,2010 3055,1965" fill="black"/>
+                            <path d="M3040 1110 L3040 840" stroke="black" stroke-width="18" fill="none"/>
+                            <polygon points="3025,840 3040,800 3055,840" fill="black"/>
+                        </g>
                         </svg>
                         <div class="chart-sources-link" style="text-align:center; margin-top: 6px;">
                           <a href="#" onclick="openDataSourcesModal(); return false;" class="data-sources-link" style="font-size: 1rem; color: #156082; text-decoration: underline; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4em;">
@@ -416,7 +435,7 @@ With decades of waste built into the industry, even removing the most obvious la
     </section>
 
     <section id="contact" class="section scroll-animation">
-        <h2>Ready to See What's Possible?</h2>
+        <h2>Start your journey—connect with us today.</h2>
         <form class="contact-form">
             <input type="text" placeholder="Name" required>
             <input type="text" placeholder="Role" required>
