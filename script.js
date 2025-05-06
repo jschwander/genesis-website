@@ -193,21 +193,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Animate sections on scroll
-    const observer = new IntersectionObserver((entries, observer) => {
+    // Enhanced scroll-triggered entrance and exit animations
+    const animatedSections = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in');
+
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Animate only once
+                entry.target.classList.remove('exit');
+            } else {
+                entry.target.classList.remove('visible');
+                entry.target.classList.add('exit');
             }
         });
     }, {
-        threshold: 0.15 // Animate when 15% of the section is visible
+        threshold: 0.15
     });
 
-    document.querySelectorAll('.scroll-animation').forEach(section => {
-        observer.observe(section);
-    });
+    animatedSections.forEach(section => observer.observe(section));
 
     // Deming Quote Rotation
     const demingQuotes = [
@@ -672,3 +675,61 @@ document.addEventListener('DOMContentLoaded', () => {
 function closeAllProblemModals() {
     document.querySelectorAll('.problem-modal-overlay').forEach(m => m.classList.remove('active'));
 }
+
+// Owner/Developer Modal
+document.addEventListener('DOMContentLoaded', function() {
+    // Get the Owner/Developer learn more link using the ID for more reliable targeting
+    const ownerDeveloperLink = document.getElementById('owner-developer-link');
+    const ownerDeveloperModal = document.getElementById('owner-developer-modal');
+    
+    if (ownerDeveloperLink && ownerDeveloperModal) {
+        console.log('Owner/Developer link and modal found');
+        
+        // Add event listener to open modal when clicking learn more
+        ownerDeveloperLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Owner/Developer link clicked');
+            closeAllProblemModals();
+            ownerDeveloperModal.classList.add('active');
+        });
+        
+        // Close modal when clicking the close button
+        const closeButton = ownerDeveloperModal.querySelector('.problem-modal-close');
+        if (closeButton) {
+            closeButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                ownerDeveloperModal.classList.remove('active');
+            });
+        }
+        
+        // Close modal when clicking outside of it
+        ownerDeveloperModal.addEventListener('click', function(e) {
+            if (e.target === ownerDeveloperModal) {
+                ownerDeveloperModal.classList.remove('active');
+            }
+        });
+        
+        // Contact Us button functionality
+        const contactUsBtn = ownerDeveloperModal.querySelector('.contact-us-btn');
+        if (contactUsBtn) {
+            contactUsBtn.addEventListener('click', function() {
+                // Close the modal
+                ownerDeveloperModal.classList.remove('active');
+                
+                // Scroll to contact section
+                const contactSection = document.getElementById('contact');
+                if (contactSection) {
+                    contactSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        }
+    } else {
+        console.error('Owner/Developer link or modal not found', { 
+            linkExists: !!ownerDeveloperLink, 
+            modalExists: !!ownerDeveloperModal 
+        });
+    }
+});
