@@ -6,9 +6,51 @@
     <title>About Genesis - Construction's New Beginning</title>
     <link rel="stylesheet" href="styles.css?v=1.0.1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Custom header styling for About page only */
+        .about-hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+                              url('images/genesis_founded.png');
+            background-size: cover;
+            background-position: center;
+            text-align: center !important;
+        }
+        
+        /* Override hero-content and hero-text for About page only */
+        .about-hero .hero-content {
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            gap: 0 !important;
+        }
+        
+        .about-hero .hero-text {
+            flex: 0 0 100% !important;
+            max-width: 90% !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+        }
+        
+        .about-hero h1 {
+            text-align: center !important;
+            width: 100% !important;
+            margin: 0 auto 1.5rem !important;
+            font-size: 4rem !important;
+        }
+        
+        .about-hero p {
+            text-align: center !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+            font-size: 1.2rem !important;
+            line-height: 1.6 !important;
+        }
+    </style>
 </head>
 <body>
-    <header class="hero">
+    <header class="hero about-hero">
         <nav>
             <div class="logo">
                 <a href="index.html">
@@ -25,8 +67,8 @@
         </nav>
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Building a Better Future for Construction</h1>
-                <p>Genesis was founded on a simple but powerful idea: construction doesn't have to be inefficient, expensive, or unpredictable. We're bringing proven management principles to an industry that's been stuck in the past for too long.</p>
+                <h1>The System Is The Solution</h1>
+                <p>Deming taught us that 94% of problems are system-driven. We’re here to fix the system—so owners, designers, and builders can do their best work together.</p>
             </div>
         </div>
     </header>

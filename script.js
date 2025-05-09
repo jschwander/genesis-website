@@ -52,46 +52,35 @@ document.addEventListener('DOMContentLoaded', function() {
     initSimpleSlider();
     calculateWasteArea();
 
-    // Set owner card in default state without hover animations
+    // Get all problem cards
+    const problemCards = document.querySelectorAll('.problem-card');
+    const indirectCard = document.querySelector('.problem-card[data-series="indirect"]');
     const ownerCard = document.querySelector('.problem-card[data-series="owner"]');
-    if (ownerCard) {
-        // Show owner tooltip by default without animation
-        const ownerTooltip = ownerCard.querySelector('.tooltip');
-        if (ownerTooltip) {
-            ownerTooltip.style.opacity = '1';
-            ownerTooltip.style.visibility = 'visible';
-            ownerTooltip.style.transition = 'none';
-            ownerTooltip.style.transform = 'none';
-            ownerTooltip.style.animation = 'none';
-        }
-        
-        // Show owner icon without animation
-        const ownerIcon = ownerCard.querySelector('.card-icon');
-        if (ownerIcon) {
-            ownerIcon.style.transform = 'none';
-            ownerIcon.style.transition = 'none';
-            ownerIcon.style.animation = 'none';
-        }
 
-        // Add hover class to card to maintain hover state
-        ownerCard.classList.add('hover');
-        
-        // Set owner highlights without animation
-        highlightElements('owner', true);
+    // Initial highlight for Indirect (default)
+    highlightElements('indirect', true);
+    
+    // Show the tooltip for the initially selected indirect card
+    const indirectTooltip = indirectCard.querySelector('.tooltip');
+    if (indirectTooltip) {
+        indirectTooltip.style.opacity = '1';
+        indirectTooltip.style.visibility = 'visible';
     }
-
-    // Add event listeners for problem cards
+    
+    // Add click event listeners for problem cards
     problemCards.forEach(card => {
         const series = card.getAttribute('data-series');
         
-        card.addEventListener('mouseenter', () => {
-            // Remove hover class from owner card if it's not the one being hovered
-            if (series !== 'owner') {
-                ownerCard.classList.remove('hover');
-            }
-
-            // Hide all tooltips first
+        card.addEventListener('click', () => {
+            // Get the current state of the clicked button
+            const isPressed = card.getAttribute('aria-pressed') === 'true';
+            
+            // Don't allow deselection - if already pressed, do nothing
+            if (isPressed) return;
+            
+            // Reset all cards
             problemCards.forEach(c => {
+                c.setAttribute('aria-pressed', 'false');
                 const tooltip = c.querySelector('.tooltip');
                 if (tooltip) {
                     tooltip.style.opacity = '0';
@@ -99,28 +88,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
-            // Show current card's tooltip
+            // Set the clicked card's state
+            card.setAttribute('aria-pressed', 'true');
+            
+            // Show tooltip if present
             const tooltip = card.querySelector('.tooltip');
             if (tooltip) {
                 tooltip.style.opacity = '1';
                 tooltip.style.visibility = 'visible';
-            }
-            
-            // Clear all highlights first
-            ['owner', 'indirect', 'materialwages', 'inflation'].forEach(s => {
-                highlightElements(s, false);
-            });
-            
-            // Apply new highlight
-            highlightElements(series, true);
-        });
-
-        card.addEventListener('mouseleave', () => {
-            // Hide current card's tooltip
-            const tooltip = card.querySelector('.tooltip');
-            if (tooltip) {
-                tooltip.style.opacity = '0';
-                tooltip.style.visibility = 'hidden';
             }
             
             // Clear all highlights
@@ -128,27 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 highlightElements(s, false);
             });
             
-            // Show owner state without animation
-            const ownerTooltip = ownerCard.querySelector('.tooltip');
-            if (ownerTooltip) {
-                ownerTooltip.style.opacity = '1';
-                ownerTooltip.style.visibility = 'visible';
-                ownerTooltip.style.transition = 'none';
-                ownerTooltip.style.transform = 'none';
-                ownerTooltip.style.animation = 'none';
-            }
-            
-            const ownerIcon = ownerCard.querySelector('.card-icon');
-            if (ownerIcon) {
-                ownerIcon.style.transform = 'none';
-                ownerIcon.style.transition = 'none';
-                ownerIcon.style.animation = 'none';
-            }
-
-            // Re-add hover class to owner card
-            ownerCard.classList.add('hover');
-            
-            highlightElements('owner', true);
+            // Apply highlight and show annotation for the selected button
+            highlightElements(series, true);
+            showAnnotation(series);
         });
     });
 
@@ -255,14 +212,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Annotations and shaded area logic for Indirect and Owner ---
     const indirectAnnotation = document.getElementById('indirect-annotation');
     const ownerAnnotation = document.getElementById('owner-annotation');
+    const indirectWasteArea = document.getElementById('indirect-waste-area');
+    const ownerInflationArea = document.getElementById('owner-inflation-area');
 
     function showAnnotation(type) {
         console.log('showAnnotation called with type:', type);
         if (type === 'indirect') {
-            if (indirectAnnotation) {
-                indirectAnnotation.setAttribute('opacity', '1');
-                console.log('Set indirect-annotation opacity to 1');
-            }
+            if (indirectAnnotation) indirectAnnotation.setAttribute('opacity', '1');
             if (ownerAnnotation) ownerAnnotation.setAttribute('opacity', '0');
             if (indirectWasteArea) indirectWasteArea.setAttribute('opacity', '0.55');
             if (ownerInflationArea) ownerInflationArea.setAttribute('opacity', '0');
@@ -271,48 +227,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (ownerAnnotation) ownerAnnotation.setAttribute('opacity', '0');
             if (indirectWasteArea) indirectWasteArea.setAttribute('opacity', '0');
             if (ownerInflationArea) ownerInflationArea.setAttribute('opacity', '0');
-        } else {
-            if (indirectAnnotation) {
-                indirectAnnotation.setAttribute('opacity', '0');
-                console.log('Set indirect-annotation opacity to 0');
-            }
+        } else if (type === 'owner') {
+            if (indirectAnnotation) indirectAnnotation.setAttribute('opacity', '0');
             if (ownerAnnotation) ownerAnnotation.setAttribute('opacity', '1');
             if (indirectWasteArea) indirectWasteArea.setAttribute('opacity', '0');
             if (ownerInflationArea) ownerInflationArea.setAttribute('opacity', '0.55');
         }
-    }
-
-    if (ownerCard) {
-        ownerCard.addEventListener('mouseenter', () => showAnnotation('owner'));
-        ownerCard.addEventListener('mouseleave', () => showAnnotation());
-    }
-    // On page load, show 2X by default and red shaded area
-    showAnnotation();
-
-    const indirectCard = document.querySelector('.problem-card[data-series="indirect"]');
-    console.log('indirectCard:', indirectCard);
-    if (indirectCard) {
-        console.log('Attaching event listeners to indirectCard');
-        indirectCard.addEventListener('mouseenter', () => {
-            console.log('mouseenter on indirectCard');
-            showAnnotation('indirect');
-        });
-        indirectCard.addEventListener('mouseleave', () => {
-            console.log('mouseleave on indirectCard');
-            showAnnotation();
-        });
-    }
-
-    // Attach listeners for materialwages and inflation cards
-    const materialCard = document.querySelector('.problem-card[data-series="materialwages"]');
-    const inflationCard = document.querySelector('.problem-card[data-series="inflation"]');
-    if (materialCard) {
-        materialCard.addEventListener('mouseenter', () => showAnnotation('materialwages'));
-        materialCard.addEventListener('mouseleave', () => showAnnotation());
-    }
-    if (inflationCard) {
-        inflationCard.addEventListener('mouseenter', () => showAnnotation('inflation'));
-        inflationCard.addEventListener('mouseleave', () => showAnnotation());
     }
 });
 
@@ -434,43 +354,51 @@ window.addEventListener('scroll', () => {
 });
 
 // Video Modal Functionality
-const videoModal = document.getElementById('videoModal');
-const videoFrame = document.getElementById('videoFrame');
-const closeModal = document.querySelector('.close-modal');
-const watchButton = document.querySelector('.btn.primary');
+document.addEventListener('DOMContentLoaded', () => {
+    const videoModal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    const closeModal = document.querySelector('.close-modal');
+    const watchButton = document.querySelector('.btn.primary');
 
-// Replace this URL with your YouTube video URL
-const videoUrl = 'https://www.youtube.com/embed/tDu47czfwiI';
+    // Replace this URL with your YouTube video URL
+    const videoUrl = 'https://www.youtube.com/embed/tDu47czfwiI';
 
-watchButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    videoFrame.src = videoUrl;
-    videoModal.style.display = 'flex';
-    setTimeout(() => {
-        videoModal.classList.add('show');
-    }, 10);
-});
-
-closeModal.addEventListener('click', () => {
-    videoModal.classList.remove('show');
-    setTimeout(() => {
-        videoModal.style.display = 'none';
-        videoFrame.src = '';
-    }, 300);
-});
-
-// Close modal when clicking outside the video
-videoModal.addEventListener('click', (e) => {
-    if (e.target === videoModal) {
-        closeModal.click();
+    if (watchButton) {
+        watchButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            videoFrame.src = videoUrl;
+            videoModal.style.display = 'flex';
+            setTimeout(() => {
+                videoModal.classList.add('show');
+            }, 10);
+        });
     }
-});
 
-// Close modal with escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && videoModal.classList.contains('show')) {
-        closeModal.click();
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
+            videoModal.classList.remove('show');
+            setTimeout(() => {
+                videoModal.style.display = 'none';
+                videoFrame.src = '';
+            }, 300);
+        });
     }
+
+    // Close modal when clicking outside the video
+    if (videoModal) {
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeModal.click();
+            }
+        });
+    }
+
+    // Close modal with escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && videoModal?.classList.contains('show')) {
+            closeModal.click();
+        }
+    });
 });
 
 // Interactive Problem Chart Highlight
@@ -480,8 +408,6 @@ const endpointCircles = document.querySelectorAll('.problem-graph svg .endpoint-
 const endpointTexts = document.querySelectorAll('.problem-graph svg .endpoint-text');
 const problemGraphSVG = document.querySelector('.problem-graph svg');
 const interactiveLayout = document.querySelector('.problem-interactive-layout'); // Get the parent layout
-const indirectWasteArea = document.getElementById('indirect-waste-area'); // Get the waste area element
-const ownerInflationArea = document.getElementById('owner-inflation-area'); // Get the owner inflation area element
 
 function highlightElements(series, highlight) {
     // Highlight lines
@@ -608,11 +534,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Scroll Indicator Handler
-document.querySelector('.scroll-indicator').addEventListener('click', () => {
-    document.querySelector('#problem').scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', () => {
+            document.querySelector('#problem')?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
+    }
 });
 
 // Initialize
@@ -622,19 +553,23 @@ window.addEventListener('scroll', () => {
 });
 
 // Initial check for elements in view
-handleScrollAnimations();
-updateScrollProgress();
-
-// Add hover effects to cards and interactive elements
-document.querySelectorAll('.problem-card, .role-card, .solution-point').forEach(card => {
-    card.classList.add('hover-lift', 'hover-glow');
+document.addEventListener('DOMContentLoaded', () => {
+    handleScrollAnimations();
+    updateScrollProgress();
+    
+    // Add hover effects to cards and interactive elements
+    document.querySelectorAll('.problem-card, .role-card, .solution-point').forEach(card => {
+        card.classList.add('hover-lift', 'hover-glow');
+    });
 });
 
 // Optional: Parallax effect for hero section
 window.addEventListener('scroll', () => {
     const hero = document.querySelector('.hero');
-    const scrolled = window.pageYOffset;
-    hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
+    if (hero) {
+        const scrolled = window.pageYOffset;
+        hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
+    }
 });
 
 function calculateWasteArea() {
@@ -661,15 +596,6 @@ function calculateWasteArea() {
         }
     }
 }
-
-// Ensure the function is called after DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize the timeline slider
-    initSimpleSlider();
-    
-    // Calculate waste area with a small delay to ensure SVG is loaded
-    setTimeout(calculateWasteArea, 100);
-});
 
 // Problem Modal Popup Logic
 function closeAllProblemModals() {

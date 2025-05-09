@@ -49,6 +49,50 @@
             color: #156082;
             margin-right: 0.5rem;
         }
+        
+        /* Problem card custom outlines by data series */
+        .problem-card[data-series="indirect"] {
+            border: 2px solid #ed3d00 !important;
+        }
+        .problem-card[data-series="owner"] {
+            border: 2px solid #c00000 !important;
+        }
+        .problem-card[data-series="materialwages"] {
+            border: 2px solid #156082 !important;
+        }
+        .problem-card[data-series="inflation"] {
+            border: 2px solid #7f7f7f !important;
+        }
+
+        /* Custom active/hover states by data series */
+        .problem-card[data-series="indirect"][aria-pressed="true"],
+        .problem-card[data-series="indirect"]:hover,
+        .problem-card[data-series="indirect"]:focus {
+            background: #fff7f0 !important;
+            border: 3px solid #ed3d00 !important;
+            color: #ed3d00 !important;
+        }
+        .problem-card[data-series="owner"][aria-pressed="true"],
+        .problem-card[data-series="owner"]:hover,
+        .problem-card[data-series="owner"]:focus {
+            background: #fff5f5 !important;
+            border: 3px solid #c00000 !important;
+            color: #c00000 !important;
+        }
+        .problem-card[data-series="materialwages"][aria-pressed="true"],
+        .problem-card[data-series="materialwages"]:hover,
+        .problem-card[data-series="materialwages"]:focus {
+            background: #f5faff !important;
+            border: 3px solid #156082 !important;
+            color: #156082 !important;
+        }
+        .problem-card[data-series="inflation"][aria-pressed="true"],
+        .problem-card[data-series="inflation"]:hover,
+        .problem-card[data-series="inflation"]:focus {
+            background: #f7f7f7 !important;
+            border: 3px solid #7f7f7f !important;
+            color: #7f7f7f !important;
+        }
     </style>
 </head>
 <body>
@@ -63,52 +107,52 @@
                 <a href="#philosophy">Philosophy</a>
                 <a href="#solution">Solution</a>
                 <a href="#who-we-help">Who We Help</a>
+                <a href="about.html">About</a>
                 <a href="#contact">Contact</a>
             </div>
         </nav>
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Value-driven Planning, Design, and Construction
+                <h1>An End to Construction’s Skyrocketing Cost Crisis
                 </h1>
                 
-                <p>There's no end in sight to excessive cost escalation—because it's fueled by overhead-driven waste baked into cost-plus and billable-hour compensation across all levels of design and production.
-                    But the same management philosophy that transformed manufacturing and retail—like the Toyota Production System—can shift construction from cost-driven to value-driven profit. The solution is ready to be put into practice.</p>
+                <p>Building costs have doubled beyond what inflation justifies—a crisis that  builders and architects do not want to be made known.  Worse yet, there’s been no end in sight to the skyrocketing waste and outrageous overhead. The root cause—decades of cost-plus contracting—can now be replaced with a proven, win-win systems approach that transformed manufacturing.</p>
             </div>
             <div class="hero-chart">
                 <div class="problem-interactive-layout">
                     <div class="problem-cards">
-                        <div class="problem-card" data-series="indirect">
-                            <img src="images/indirect.png" alt="Indirect Labor OH & Profit">
+                        <button class="problem-card" data-series="indirect" aria-pressed="true">
+                            Indirect Labor OH & Profit
                             <div class="tooltip">
-                                <span class="tooltip-title">OH, Indirect Labor, and Waste:</span>
-                                <p>OH, Indirect Labor, and Waste:
-                                    Overhead and indirect costs have surged 3,500% since 1967—fueled by siloed management, markups, and embedded inefficiencies. These hidden costs, not labor or materials, now outpace national inflation by over 4x.</p>
+                                
+                                <p>Since 1967, indirect labor overhead and profit have grown 3522% - far more than materials, wages, or national inflation. This component is driving most of the cost increase in construction.</p>
                             </div>
-                        </div>
-                        <div class="problem-card" data-series="owner">
-                            <img src="images/owner.png" alt="Owner Pays (Construction Analytics)">
+                        </button>
+                        <button class="problem-card" data-series="owner" aria-pressed="false" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <div>Owner Pays</div>
+                            <div style="font-size: 0.75em;">(Construction Analytics)</div>
                             <div class="tooltip">
-                                <span class="tooltip-title">What the Owner Pays:</span>
-                                <p>The total price tag for owners—now more than double what inflation, materials, and labor alone would justify. Fueled by misaligned incentives, unnecessary complexity, and cost-plus or billable-hour contracting.</p>
+                                
+                                <p>The actual cost that owners pay for construction has risen at twice the rate of national inflation. Construction Analytics data shows a sustained divergence beginning in the 1970s.</p>
                             </div>
-                        </div>
-                        <div class="problem-card" data-series="materialwages">
-                            <img src="images/materialwages.png" alt="Construction Materials & Wages">
+                        </button>
+                        <button class="problem-card" data-series="materialwages" aria-pressed="false">
+                            Construction Materials & Wages
                             <div class="tooltip">
-                                <span class="tooltip-title">Materials and Direct Labor:</span>
-                                <p>This line reflects the real, justifiable cost of materials and field labor—the essential ingredients of any building. Everything above this line represents waste, overhead, and profit.</p>
+                                
+                                <p>Direct building materials and labor wages have increased only slightly above the rate of national inflation. Most of the industry escalation is not coming from these components.</p>
                             </div>
-                        </div>
-                        <div class="problem-card" data-series="inflation">
-                            <img src="images/inflation.png" alt="National Inflation">
+                        </button>
+                        <button class="problem-card" data-series="inflation" aria-pressed="false">
+                            National Inflation
                             <div class="tooltip">
-                                <span class="tooltip-title">U.S. National Inflation:</span>
-                                <p>This is the baseline for economic inflation in the U.S. Construction has far outpaced national inflation—but not because of materials or wages.</p>
+                                
+                                <p>The U.S. Consumer Price Index represents the baseline economic inflation rate. All other construction costs should theoretically track roughly with this rate over time.</p>
                             </div>
-                        </div>
+                        </button>
                     </div>
                     <div class="problem-graph">
-                        <svg style="width:95%;max-width:900px;height:auto;display:block;margin:0 auto;" viewBox="400 0 2900 2585" xmlns="http://www.w3.org/2000/svg">
+                        <svg style="width:95%;max-width:900px;height:auto;display:block;margin:0 auto;" viewBox="350 0 3000 2585" xmlns="http://www.w3.org/2000/svg">
                           <!-- Chart Title (centered) -->
                           <g class="chart-title-container">
                               <text x="1750" y="70" text-anchor="middle" font-size="84" font-weight="bold" fill="#595959">
@@ -116,17 +160,17 @@
                               </text>
                           </g>
                           <!-- Y-Axis Labels (unchanged) -->
-                          <text x="520" y="2421" font-size="41" fill="#595959" text-anchor="end">0%</text>
-                          <text x="520" y="2190" font-size="41" fill="#595959" text-anchor="end">400%</text>
-                          <text x="520" y="1959" font-size="41" fill="#595959" text-anchor="end">800%</text>
-                          <text x="520" y="1728" font-size="41" fill="#595959" text-anchor="end">1200%</text>
-                          <text x="520" y="1497" font-size="41" fill="#595959" text-anchor="end">1600%</text>
-                          <text x="520" y="1266" font-size="41" fill="#595959" text-anchor="end">2000%</text>
-                          <text x="520" y="1035" font-size="41" fill="#595959" text-anchor="end">2400%</text>
-                          <text x="520" y="804" font-size="41" fill="#595959" text-anchor="end">2800%</text>
-                          <text x="520" y="573" font-size="41" fill="#595959" text-anchor="end">3200%</text>
-                          <text x="520" y="343" font-size="41" fill="#595959" text-anchor="end">3600%</text>
-                          <text x="520" y="112" font-size="41" fill="#595959" text-anchor="end">4000%</text>
+                          <text x="450" y="2421" font-size="41" fill="#595959" text-anchor="end">0%</text>
+                          <text x="450" y="2190" font-size="41" fill="#595959" text-anchor="end">400%</text>
+                          <text x="450" y="1959" font-size="41" fill="#595959" text-anchor="end">800%</text>
+                          <text x="450" y="1728" font-size="41" fill="#595959" text-anchor="end">1200%</text>
+                          <text x="450" y="1497" font-size="41" fill="#595959" text-anchor="end">1600%</text>
+                          <text x="450" y="1266" font-size="41" fill="#595959" text-anchor="end">2000%</text>
+                          <text x="450" y="1035" font-size="41" fill="#595959" text-anchor="end">2400%</text>
+                          <text x="450" y="804" font-size="41" fill="#595959" text-anchor="end">2800%</text>
+                          <text x="450" y="573" font-size="41" fill="#595959" text-anchor="end">3200%</text>
+                          <text x="450" y="343" font-size="41" fill="#595959" text-anchor="end">3600%</text>
+                          <text x="450" y="112" font-size="41" fill="#595959" text-anchor="end">4000%</text>
                           <!-- X-Axis Labels (scaled and shifted x by -195) -->
                           <text x="644.41" y="2486" font-size="41" fill="#595959">1967</text>
                           <text x="818.87" y="2486" font-size="41" fill="#595959">1971</text>
@@ -179,8 +223,11 @@
                           <path id="line-materialwages" d="M669.995 2421 650 2418.58 753.83646 2414.58 797.16789 2410.58 840.06932 2407.58 883.97075 2404.58 927.00218 2399.58 969.90231 2390.58 1012.90244 2381.58 1057.20256 2375.58 1101.90817 2368.58 1146.90817 2359.58 1191.90817 2344.58 1237.00817 2325.58 1281.90817 2309.58 1326.90817 2298.58 1371.9222 2292.58 1416.8222 2284.58 1462.8222 2276.57 1506.9222 2272.57 1550.8222 2265.57 1598.3222 2256.57 1642.2222 2245.57 1686.1222 2232.57 1731.3222 2221.57 1775.2222 2213.57 1820.4365 2206.57 1865.3365 2198.57 1910.2365 2190.57 1955.4365 2183.57 1999.3365 2178.57 2043.2365 2171.57 2089.4365 2164.57 2133.3365 2153.57 2177.2365 2144.57 2222.4365 2139.57 2266.3408 2131.57 2310.2408 2121.57 2356.5808 2109.57 2400.4808 2097.57 2444.3808 2086.57 2490.3808 2070.57 2535.4808 2072.57 2582.2408 2066.57 2626.1408 2052.57 2672.1408 2043.57 2716.3851 2036.57 2760.2851 2029.57 2806.4851 2029.57 2850.5151 2023.57 2894.4151 2013.57 2940.5451 2002.57 2984.5451 1993.57 3028.6751 1987.57 3072.6751 1964.56 3116.7751 1922.56 3160.7194 1899.56 3185 1851.5" stroke="#156082" stroke-width="11.4583" fill="none"/>
                           <path id="line-indirect" d="M667.29 2421 650 2416.08 754.55146 2401.08 797.453 2386.08 840.35432 2359.08 884.68575 2344.08 927.58718 2331.08 974.38731 2291.08 1015.82004 2288.07 1057.72147 2290.08 1101.9229 2287.07 1145.95433 2271.07 1188.85446 2246.07 1232.78719 2221.07 1274.08719 2185.07 1315.9829 2145.07 1362.1959 2114.07 1405.2272 2092.07 1447.1272 2081.07 1492.4572 2069.07 1536.4572 2053.07 1581.686 2038.07 1625.586 2032.07 1669.586 2025.07 1714.8172 2031.07 1758.7172 2042.07 1802.6315 2034.07 1847.9615 2016.07 1891.8615 1995.07 1935.7615 1980.06 1980.092 1947.06 2024.992 1909.06 2070.3215 1879.06 2114.2215 1845.06 2158.1215 1838.06 2203.3515 1824.06 2247.2515 1815.06 2291.1658 1784.06 2336.4958 1707.06 2380.3958 1579.05 2424.2958 1449.05 2469.726 1353.04 2513.626 1426.05 2557.526 1490.05 L2691.6558 1423.05 L2736.9999 1387.05 L2780.9999 1286.04 L2826.2301 1247.04 L2870.1301 1166.04 L2914.0301 986.032 L2959.3601 927.03 L3003.2601 863.028 L3047.1601 682.022 L3092.4901 615.02 L3136.4044 549.018 L3180.3044 464.015 L3185 388" stroke="#ed3d00" stroke-width="10.3125" stroke-dasharray="30.9375 41.25" fill="none"/>
 
+                          <!-- Add the new owner cost curve -->
+                          <path id="line-owner" d="M667.29 2421 L650 2418.08 L754.55146 2410.08 L797.453 2402.08 L840.35432 2391.08 L884.68575 2385.08 L927.58718 2377.08 L974.38731 2357.08 L1019.01601 2351.08 L1064.81614 2347.08 L1110.61628 2341.08 L1156.41641 2330.08 L1202.21655 2312.08 L1232.18719 2291.08 L1274.08719 2268.07 L1315.9829 2248.07 L1362.1959 2234.07 L1405.2272 2221.07 L1447.1272 2212.07 L1492.4572 2205.07 L1536.4572 2195.07 L1581.686 2184.07 L1625.586 2175.07 L1669.586 2164.07 L1714.8172 2159.07 L1758.7172 2157.07 L1802.6315 2149.07 L1847.9615 2138.07 L1891.8615 2126.07 L1935.7615 2116.07 L1980.092 2102.07 L2024.992 2085.07 L2070.3215 2071.07 L2114.2215 2052.07 L2158.1215 2043.07 L2203.3515 2035.07 L2247.2515 2027.07 L2291.1658 2010.07 L2336.4958 1976.06 L2380.3958 1926.06 L2424.2958 1876.06 L2469.726 1834.06 L2513.626 1859.06 L2557.526 1876.06 L2602.8558 1868.06 L2646.7558 1851.06 L2691.6558 1834.06 L2736.9999 1817.06 L2780.9999 1784.06 L2826.2301 1767.06 L2870.1301 1734.06 L2914.0301 1667.05 L2959.3601 1642.05 L3003.2601 1616.05 L3047.1601 1541.05 L3092.4901 1491.05 L3136.4044 1454.05 L3185 1410.05" stroke="#c00000" stroke-width="11.4583" fill="none"/>
+
                           <!-- Add shaded area between indirect and inflation curves (hidden by default) -->
-                          <path id="indirect-waste-area" d="M667.29 2421 L650 2416.08 L754.55146 2401.08 L797.453 2386.08 L840.35432 2359.08 L884.68575 2344.08 L927.58718 2331.08 L974.38731 2291.08 L1015.82004 2288.07 L1057.72147 2290.08 L1101.9229 2287.07 L1145.95433 2271.07 L1188.85446 2246.07 L1232.78719 2221.07 L1274.08719 2185.07 L1315.9829 2145.07 L1362.1959 2114.07 L1405.2272 2092.07 L1447.1272 2081.07 L1492.4572 2069.07 L1536.4572 2053.07 L1581.686 2038.07 L1625.586 2032.07 L1669.586 2025.07 L1714.8172 2031.07 L1758.7172 2042.07 L1802.6315 2034.07 L1847.9615 2016.07 L1891.8615 1995.07 L1935.7615 1980.06 L1980.092 1947.06 L2024.992 1909.06 L2070.3215 1879.06 L2114.2215 1845.06 L2158.1215 1838.06 L2203.3515 1824.06 L2247.2515 1815.06 L2291.1658 1784.06 L2336.4958 1707.06 L2380.3958 1579.05 L2424.2958 1449.05 L2469.726 1353.04 L2513.626 1426.05 L2557.526 1490.05 L2602.8558 1492.05 L2646.7558 1460.05 L2691.6558 1423.05 L2736.9999 1387.05 L2780.9999 1286.04 L2826.2301 1247.04 L2870.1301 1166.04 L2914.0301 986.032 L2959.3601 927.03 L3003.2601 863.028 L3047.1601 682.022 L3092.4901 615.02 L3136.4044 549.018 L3180.3044 464.015 L3185 388 L3185 1928 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2015.07 L3003.2601 2036.07 L2959.3601 2041.07 L2914.0301 2049.07 L2870.1301 2059.07 L2826.2301 2067.07 L2780.9999 2073.07 L2736.9999 2073.07 L2691.6558 2079.07 L2646.7558 2085.07 L2602.8558 2093.07 L2557.526 2105.07 L2513.626 2111.07 L2469.726 2110.07 L2424.2958 2123.07 L2380.3958 2133.07 L2336.4958 2144.07 L2291.1658 2155.07 L2247.2515 2163.07 L2203.3515 2170.07 L2158.1215 2175.07 L2114.2215 2183.07 L2070.3215 2193.07 L2024.992 2199.07 L1980.092 2205.07 L1935.7615 2210.07 L1891.8615 2216.07 L1847.9615 2223.07 L1802.6315 2230.07 L1758.7172 2237.07 L1714.8172 2244.07 L1669.586 2253.07 L1625.586 2265.07 L1581.686 2274.07 L1536.4572 2283.07 L1492.4572 2289.07 L1447.1272 2293.07 L1405.2272 2299.07 L1362.1959 2307.07 L1315.9829 2312.07 L1274.08719 2322.07 L1232.18719 2336.07 L1202.21655 2353.07 L1156.41641 2366.07 L1110.61628 2374.07 L1064.81614 2381.07 L1019.01601 2386.07 L974.38731 2394.07 L927.58718 2402.07 L884.68575 2409.07 L840.35432 2412.07 L797.453 2415.07 L754.55146 2415.07 L667.29 2421 Z" fill="rgba(255, 165, 0, 0.15)" stroke="rgba(255, 165, 0, 0.3)" stroke-width="2" opacity="0"/>
+                          <path id="indirect-waste-area" d="M667.29 2421 L650 2416.08 L754.55146 2401.08 L797.453 2386.08 L840.35432 2359.08 L884.68575 2344.08 L927.58718 2331.08 L974.38731 2291.08 L1015.82004 2288.07 L1057.72147 2290.08 L1101.9229 2287.07 L1145.95433 2271.07 L1188.85446 2246.07 L1232.78719 2221.07 L1274.08719 2185.07 L1315.9829 2145.07 L1362.1959 2114.07 L1405.2272 2092.07 L1447.1272 2081.07 L1492.4572 2069.07 L1536.4572 2053.07 L1581.686 2038.07 L1625.586 2032.07 L1669.586 2025.07 L1714.8172 2031.07 L1758.7172 2042.07 L1802.6315 2034.07 L1847.9615 2016.07 L1891.8615 1995.07 L1935.7615 1980.06 L1980.092 1947.06 L2024.992 1909.06 L2070.3215 1879.06 L2114.2215 1845.06 L2158.1215 1838.06 L2203.3515 1824.06 L2247.2515 1815.06 L2291.1658 1784.06 L2336.4958 1707.06 L2380.3958 1579.05 L2424.2958 1449.05 L2469.726 1353.04 L2513.626 1426.05 L2557.526 1490.05 L2602.8558 1492.05 L2646.7558 1460.05 L2691.6558 1423.05 L2736.9999 1387.05 L2780.9999 1286.04 L2826.2301 1247.04 L2870.1301 1166.04 L2914.0301 986.032 L2959.3601 927.03 L3003.2601 863.028 L3047.1601 682.022 L3092.4901 615.02 L3136.4044 549.018 L3180.3044 464.015 L3185 388 L3185 1928 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2015.07 L3003.2601 2036.07 L2959.3601 2041.07 L2914.0301 2049.07 L2870.1301 2059.07 L2826.2301 2067.07 L2780.9999 2073.07 L2736.9999 2073.07 L2691.6558 2079.07 L2646.7558 2085.07 L2602.8558 2093.07 L2557.526 2105.07 L2513.626 2111.07 L2469.726 2110.07 L2424.2958 2123.07 L2380.3958 2133.07 L2336.4958 2144.07 L2291.1658 2155.07 L2247.2515 2163.07 L2203.3515 2170.07 L2158.1215 2175.07 L2114.2215 2183.07 L2070.3215 2193.07 L2024.992 2199.07 L1980.092 2205.07 L1935.7615 2210.07 L1891.8615 2216.07 L1847.9615 2223.07 L1802.6315 2230.07 L1758.7172 2237.07 L1714.8172 2244.07 L1669.586 2253.07 L1625.586 2265.07 L1581.686 2274.07 L1536.4572 2283.07 L1492.4572 2289.07 L1447.1272 2293.07 L1405.2272 2299.07 L1362.1959 2307.07 L1315.9829 2312.07 L1274.08719 2322.07 L1232.18719 2336.07 L1202.21655 2353.07 L1156.41641 2366.07 L1110.61628 2374.07 L1064.81614 2381.07 L1019.01601 2386.07 L974.38731 2394.07 L927.58718 2402.07 L884.68575 2409.07 L840.35432 2412.07 L797.453 2415.07 L754.55146 2415.07 L667.29 2421 Z" fill="rgba(255, 165, 0, 0.15)" stroke="rgba(255, 165, 0, 0.3)" stroke-width="2" opacity="0.55"/>
 
                           <!-- Add shaded area between owner and inflation curves -->
                           <path id="owner-inflation-area" d="M667.29 2421 L650 2418.08 L754.55146 2410.08 L797.453 2402.08 L840.35432 2391.08 L884.68575 2385.08 L927.58718 2377.08 L974.38731 2357.08 L1019.01601 2351.08 L1064.81614 2347.08 L1110.61628 2341.08 L1156.41641 2330.08 L1202.21655 2312.08 L1232.18719 2291.08 L1274.08719 2268.07 L1315.9829 2248.07 L1362.1959 2234.07 L1405.2272 2221.07 L1447.1272 2212.07 L1492.4572 2205.07 L1536.4572 2195.07 L1581.686 2184.07 L1625.586 2175.07 L1669.586 2164.07 L1714.8172 2159.07 L1758.7172 2157.07 L1802.6315 2149.07 L1847.9615 2138.07 L1891.8615 2126.07 L1935.7615 2116.07 L1980.092 2102.07 L2024.992 2085.07 L2070.3215 2071.07 L2114.2215 2052.07 L2158.1215 2043.07 L2203.3515 2035.07 L2247.2515 2027.07 L2291.1658 2010.07 L2336.4958 1976.06 L2380.3958 1926.06 L2424.2958 1876.06 L2469.726 1834.06 L2513.626 1859.06 L2557.526 1876.06 L2602.8558 1868.06 L2646.7558 1851.06 L2691.6558 1834.06 L2736.9999 1817.06 L2780.9999 1784.06 L2826.2301 1767.06 L2870.1301 1734.06 L2914.0301 1667.05 L2959.3601 1642.05 L3003.2601 1616.05 L3047.1601 1541.05 L3092.4901 1491.05 L3136.4044 1454.05 L3185 1410.05 L3185 1928 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2015.07 L3003.2601 2036.07 L2959.3601 2041.07 L2914.0301 2049.07 L2870.1301 2059.07 L2826.2301 2067.07 L2780.9999 2073.07 L2736.9999 2073.07 L2691.6558 2079.07 L2646.7558 2085.07 L2602.8558 2093.07 L2557.526 2105.07 L2513.626 2111.07 L2469.726 2110.07 L2424.2958 2123.07 L2380.3958 2133.07 L2336.4958 2144.07 L2291.1658 2155.07 L2247.2515 2163.07 L2203.3515 2170.07 L2158.1215 2175.07 L2114.2215 2183.07 L2070.3215 2193.07 L2024.992 2199.07 L1980.092 2205.07 L1935.7615 2210.07 L1891.8615 2216.07 L1847.9615 2223.07 L1802.6315 2230.07 L1758.7172 2237.07 L1714.8172 2244.07 L1669.586 2253.07 L1625.586 2265.07 L1581.686 2274.07 L1536.4572 2283.07 L1492.4572 2289.07 L1447.1272 2293.07 L1405.2272 2299.07 L1362.1959 2307.07 L1315.9829 2312.07 L1274.08719 2322.07 L1232.18719 2336.07 L1202.21655 2353.07 L1156.41641 2366.07 L1110.61628 2374.07 L1064.81614 2381.07 L1019.01601 2386.07 L974.38731 2394.07 L927.58718 2402.07 L884.68575 2409.07 L840.35432 2412.07 L797.453 2415.07 L754.55146 2415.07 L667.29 2421 Z" fill="rgba(231, 76, 60, 0.15)" stroke="rgba(231, 76, 60, 0.3)" stroke-width="2"/>
@@ -201,8 +248,8 @@
                           <!--<text id="text-owner" class="endpoint-text" x="3100" y="1350" fill="#c00000" font-size="64" font-weight="bold" opacity="0">1823%</text>
 
                            2X Annotation for Owner Pays (visible by default) -->
-                          <g id="owner-annotation" opacity="1">
-                            <text x="3130" y="1750" fill="Black" font-size="90" font-weight="bold" stroke="#fff" stroke-width="2">2X</text>
+                          <g id="owner-annotation" opacity="0">
+                            <text x="3070" y="1750" fill="Black" font-size="90" font-weight="bold" stroke="#fff" stroke-width="2">2X</text>
                             <!-- Upward arrow -->
                             <path d="M3190 1680 L3190 1475" stroke="black" stroke-width="18" fill="none"/>
                             <polygon points="3165,1480 3190,1445 3215,1480" fill="black"/>
@@ -210,8 +257,8 @@
                             <path d="M3190 1770 L3190 1860" stroke="black" stroke-width="18" fill="none"/>
                             <polygon points="3165,1855 3190,1900 3215,1855" fill="black"/>
                           </g>
-                          <g id="indirect-annotation" opacity="0">
-                            <text x="3110" y="1200" fill="black" font-size="90" font-weight="bold" stroke="#fff" stroke-width="2">4.5X</text>
+                          <g id="indirect-annotation" opacity="1">
+                            <text x="3050" y="1200" fill="black" font-size="90" font-weight="bold" stroke="#fff" stroke-width="2">4.5X</text>
                             <!-- Vertical arrow from inflation endpoint up to indirect endpoint -->
                             <path d="M3190 440 L3190 1100" stroke="black" stroke-width="18" fill="none"/>
                             <polygon points="3165,1850 3190,1900 3215,1850" fill="black"/>
@@ -219,13 +266,12 @@
                             <polygon points="3165,470 3190,420 3215,470" fill="black"/>
                         </g>
                         </svg>
-                        <div class="chart-sources-link" style="text-align:center; margin-top: 6px;">
-                          <a href="#" onclick="openDataSourcesModal(); return false;" class="data-sources-link" style="font-size: 1rem; color: #156082; text-decoration: underline; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4em;">
-                            <i class="fas fa-link"></i> View Data Sources
-                          </a>
-                        </div>
                     </div>
-                    
+                    <div class="chart-sources-link" style="text-align:center; margin-top: 6px;">
+                      <a href="#" onclick="openDataSourcesModal(); return false;" class="data-sources-link" style="font-size: 1rem; color: #156082; text-decoration: underline; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4em;">
+                        <i class="fas fa-link"></i> View Data Sources
+                      </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -236,37 +282,40 @@
     </div>
 
     <section id="problem" class="section scroll-animation fade-in">
-      <h2>Measuring Construction's Suicide Mission</h2>
+      <h2>The Hidden Truth Behind Construction’s Cost Crisis</h2>
       <div class="problem-card-grid">
         <!-- Card 1 -->
         <div class="problem-modal-card" data-modal="modal1">
           <div class="icon-bg icon-bg-blue"><i class="fas fa-chart-bar"></i></div>
-          <h3>2X Cost Problem</h3>
-          <p>Owners now pay double—or more—than inflation justifies, and the gap keeps growing.</p>
-          <span class="card-cta">Learn more <i class="fas fa-arrow-right"></i></span>
+          <h3>2X Cost Climb</h3>
+          <p>Owners pay double what inflation justifies, with no relief in sight.</p>
+          <span class="card-cta">See the Data <i class="fas fa-arrow-right"></i></span>
         </div>
         <!-- Card 2 -->
         <div class="problem-modal-card" data-modal="modal2">
           <div class="icon-bg icon-bg-green"><i class="fas fa-hard-hat"></i></div>
-          <h3>4.5X Overhead Bloat</h3>
-          <p>Overhead now takes up more than half the budget—4.5× more than inflation would justify.</p>
-          <span class="card-cta">Learn more <i class="fas fa-arrow-right"></i></span>
+          <h3>4.5X OH Bloat</h3>
+          <p>Owners pay 4.5x the waste - mostly overhead-related.</p>
+          <span class="card-cta">See the Data <i class="fas fa-arrow-right"></i></span>
         </div>
         <!-- Card 3 -->
         <div class="problem-modal-card" data-modal="modal3">
           <div class="icon-bg icon-bg-yellow"><i class="fas fa-sitemap"></i></div>
-          <h3>Silos Still Reign</h3>
-          <p>Construction still runs on fragmented files, manual handoffs, and guesswork—not real systems.</p>
-          <span class="card-cta">Learn more <i class="fas fa-arrow-right"></i></span>
+          <h3>80-Year Time Warp</h3>
+          <p>Construction’s archaic system, unchanged for 80 years, keeps winning over progress.</p>
+          <span class="card-cta">Uncover the Reality<i class="fas fa-arrow-right"></i></span>
         </div>
         <!-- Card 4 -->
         <div class="problem-modal-card" data-modal="modal4">
           <div class="icon-bg icon-bg-red"><i class="fas fa-dollar-sign"></i></div>
-          <h3>Broken Incentives</h3>
-          <p>When profit rises with cost and time, no one's incentivized to reduce waste.</p>
-          <span class="card-cta">Learn more <i class="fas fa-arrow-right"></i></span>
+          <h3>Cost-Plus Trap</h3>
+          <p> Profit on waste drives costs, not value, crippling the industry.</p>
+          <span class="card-cta">See Why<i class="fas fa-arrow-right"></i></span>
         </div>
       </div>
+      <div class="section-intro">
+        <p>These shocking truths are often ignored, but a proven solution can break this cycle. Without action, the impact will worsen, threatening future owner’s financial health and the national economy.</p>
+        </div>
     </section>
 
     <!-- Modals for Details -->
@@ -610,9 +659,10 @@
     </div>
 
     <section id="philosophy" class="section scroll-animation fade-in-left">
-        <h2>A Proven Management Philosophy for Construction</h2>
+        <h2>A Proven Alternative to the Cost Crisis</h2>
         <div class="section-intro">
-            <p>Construction's cost problems are not caused by poor effort — they are systemic. W. Edwards Deming showed that to improve outcomes, industries must align incentives, base decisions on impartial data, organize processes around a shared truth, and eliminate fear from improvement. His philosophy transformed manufacturing and inspired the Toyota Production System, proving that systems thinking — not isolated fixes — leads to lasting gains.</p>
+            <p>Most in construction overlook W. Edwards Deming’s principles, which revolutionized manufacturing and retail. Now, they can transform construction by replacing wasteful cost-plus models with value-driven incentives. Watch Deming’s wisdom unfold in animated quotes.
+            </p>
             
             <div class="deming-quote-flex">
               <div class="deming-quote-author">
@@ -624,17 +674,16 @@
               </blockquote>
             </div>
 
-            <p>Construction, with its complexity and fragmentation, stands to benefit even more by applying these same principles from the earliest stages of planning and design. Applying Deming's "system of profound knowledge" allows owners, consultants, designers, and builders to evaluate and improve value at every step, replacing outdated, wasteful compensation models with outcome-focused incentives.</p>
+            <p>Construction’s complexity makes it ideal for Deming’s system of profound knowledge. By aligning teams with outcome-focused incentives, we cut waste and boost value from planning to delivery, creating win-win outcomes for owners, builders, and communities.</p>
         </div>
     </section>
 
     <section id="solution" class="section scroll-animation fade-in-right">
         <div class="solution-header">
-            <h2>A Systems Approach, Delivered by Genesis</h2>
-            <p class="solution-intro">Genesis, together with its technology affiliate Building Catalyst, brings Deming's principles to construction — transforming complex planning, design, and delivery into a faster, more reliable process.
-With decades of waste built into the industry, even removing the most obvious layers unlocks massive gains — cutting both time and cost.</p>
+            <h2>A Value-Driven, Systems Approach to Construction</h2>
+            <p class="solution-intro">With costs doubling and waste soaring, Genesis and Building Catalyst apply Deming’s principles to streamline and automate planning, design, and construction support. Replacing methods unchanged for decades, our approach removes layers upon layers of waste in time and cost.</p>
             <div class="solution-image-card">
-              <img src="images/costtovalue.jpg" alt="Cost-Based vs Value-Driven Delivery" />
+              <img src="images/Rethinking.jpg" alt="Cost-Based vs Value-Driven Delivery" />
             </div>
         </div>
 

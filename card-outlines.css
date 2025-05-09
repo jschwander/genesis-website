@@ -1,0 +1,5 @@
+/* --- Problem Card Custom Outlines by Data Series --- */
+.problem-card[data-series="indirect"] { border: 2px solid #ed3d00 !important; }
+.problem-card[data-series="owner"] { border: 2px solid #c00000 !important; }
+.problem-card[data-series="materialwages"] { border: 2px solid #156082 !important; }
+.problem-card[data-series="inflation"] { border: 2px solid #7f7f7f !important; }
