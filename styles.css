@@ -157,7 +157,7 @@ nav {
   gap: 18px;
   margin: 0 auto 0 auto;
   justify-content: center;
-  align-items: flex-start;
+    align-items: flex-start;
   width: 100%;
   max-width: 900px;
 }
@@ -395,9 +395,9 @@ nav {
 
     .problem-interactive-layout {
         flex-direction: column;
-    }
+}
 
-    .problem-cards {
+.problem-cards {
         flex-direction: row;
         justify-content: center;
         gap: 10px;
@@ -7864,8 +7864,8 @@ h2 {
 .scroll-progress {
     position: fixed;
     right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+        top: 50%;
+        transform: translateY(-50%);
     width: 3px;
     height: 100px;
     background: rgba(0, 0, 0, 0.1);
@@ -10989,7 +10989,7 @@ h2 {
 }
 
 .solution-image-card {
-  max-width: 800px;
+  max-width: 600px;
   margin: 2.5rem auto 2.5rem auto;
   background: #fff;
   border-radius: 22px;

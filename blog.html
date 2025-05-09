@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Genesis Building Company</title>
+    <link rel="stylesheet" href="styles.css?v=1.0.2">
+    <link rel="stylesheet" href="blog-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="hero blog-hero">
+        <nav>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/GenesisLogo.png" alt="Genesis Logo" class="logo-image">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#problem">Problem</a>
+                <a href="index.html#philosophy">Philosophy</a>
+                <a href="index.html#solution">Solution</a>
+                <a href="index.html#who-we-help">Who We Serve</a>
+                <a href="about.html">About</a>
+                <a href="blog.html" class="active">Blog</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Construction Insights & Innovation</h1>
+                <p>Discover the latest trends, insights, and best practices in construction management and systems-based building.</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="blog-content">
+        <div class="blog-grid">
+            <!-- Blog posts will be loaded dynamically from Sanity -->
+            <div class="loading-indicator">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading blog posts...</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-subscribe">
+        <div class="subscribe-content">
+            <h2>Stay Updated with the Latest Insights</h2>
+            <p>Subscribe to our newsletter to receive monthly updates on construction innovation, cost management strategies, and industry trends.</p>
+            <form class="subscribe-form">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit" class="btn primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Genesis</h3>
+                <p>Genesis Building Company was founded to bring order to the chaos of construction. Backed by 30+ years of systems research and powered by Building Catalyst's historical data, we exist to help you build with confidence and clarity.</p>
+            </div>
+            <div class="footer-section latest-post">
+                <h3>Latest from the Blog</h3>
+                <div class="latest-post-content">
+                    <!-- Latest blog post will be loaded dynamically -->
+                    <div class="placeholder-image">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Genesis Building Company. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="blog-integration.js"></script>
+    <script src="latest-blog-post.js"></script>
+    <script src="script.js?v=1.0.2"></script>
+</body>
+</html> 
