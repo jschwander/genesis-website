@@ -1,6 +1,4 @@
 // Serverless function to handle Sanity webhooks in Vercel
-const fs = require('fs');
-const path = require('path');
 const https = require('https');
 
 // Sanity configuration
@@ -8,9 +6,11 @@ const SANITY_PROJECT_ID = '80jerngq';
 const SANITY_DATASET = 'production';
 const WEBHOOK_SECRET = 'genesis-sanity-webhook';
 
-// File paths
-const TEMPLATE_FILE = path.join(process.cwd(), 'posts', 'blog-post-template.html');
-const POSTS_DIRECTORY = path.join(process.cwd(), 'posts');
+// GitHub configuration
+const GITHUB_OWNER = 'jschwander';
+const GITHUB_REPO = 'genesis-website';
+const GITHUB_BRANCH = 'main';
+// NOTE: You'll need to set GITHUB_TOKEN as an environment variable in Vercel
 
 // Format date for display
 function formatDate(dateString) {
@@ -32,42 +32,6 @@ function slugify(text) {
     .replace(/&/g, '-and-')
     .replace(/[^\w\-]+/g, '')
     .replace(/\-\-+/g, '-');
-}
-
-// Fetch all posts from Sanity
-async function fetchAllPosts() {
-  return new Promise((resolve, reject) => {
-    const query = encodeURIComponent(`
-      *[_type == "post"] {
-        title,
-        slug,
-        publishedAt,
-        "categories": categories[]->title,
-        "author": author->name
-      }
-    `);
-    
-    const url = `https://${SANITY_PROJECT_ID}.api.sanity.io/v2021-10-21/data/query/${SANITY_DATASET}?query=${query}`;
-    
-    https.get(url, (res) => {
-      let data = '';
-      
-      res.on('data', (chunk) => {
-        data += chunk;
-      });
-      
-      res.on('end', () => {
-        try {
-          const parsedData = JSON.parse(data);
-          resolve(parsedData.result);
-        } catch (e) {
-          reject(new Error(`Error parsing Sanity response: ${e.message}`));
-        }
-      });
-    }).on('error', (e) => {
-      reject(new Error(`Error fetching from Sanity: ${e.message}`));
-    });
-  });
 }
 
 // Fetch a specific post from Sanity by ID
@@ -110,82 +74,190 @@ async function fetchPostById(postId) {
   });
 }
 
-// Read the template file
-async function readTemplate() {
+// Fetch template file from GitHub repository
+async function fetchTemplateFromGitHub() {
   return new Promise((resolve, reject) => {
-    fs.readFile(TEMPLATE_FILE, 'utf8', (err, data) => {
-      if (err) {
-        reject(new Error(`Error reading template: ${err.message}`));
-        return;
+    const options = {
+      hostname: 'api.github.com',
+      path: `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/posts/blog-post-template.html?ref=${GITHUB_BRANCH}`,
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Sanity-Webhook-Bot',
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': `token ${process.env.GITHUB_TOKEN}`
       }
-      resolve(data);
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      
+      res.on('end', () => {
+        try {
+          const response = JSON.parse(data);
+          if (res.statusCode !== 200) {
+            reject(new Error(`GitHub API error: ${response.message}`));
+            return;
+          }
+          
+          // Template content is base64 encoded
+          const content = Buffer.from(response.content, 'base64').toString('utf8');
+          resolve(content);
+        } catch (e) {
+          reject(new Error(`Error parsing GitHub response: ${e.message}`));
+        }
+      });
     });
+    
+    req.on('error', (e) => {
+      reject(new Error(`Error fetching template from GitHub: ${e.message}`));
+    });
+    
+    req.end();
   });
 }
 
-// Generate an HTML file for a post
-async function generatePostFile(post, template) {
+// Generate HTML content for a post
+function generatePostHTML(post, template) {
+  let fileContent = template;
+  
+  // Replace title
+  fileContent = fileContent.replace(
+    /<title>.*?<\/title>/,
+    `<title>${post.title} - Genesis Building Company</title>`
+  );
+  
+  // Replace blog post title
+  fileContent = fileContent.replace(
+    /<h1 class="blog-post-title">.*?<\/h1>/,
+    `<h1 class="blog-post-title">${post.title}</h1>`
+  );
+  
+  // Replace date if available
+  if (post.publishedAt) {
+    const formattedDate = formatDate(post.publishedAt);
+    fileContent = fileContent.replace(
+      /<span>May 9, 2025<\/span>/,
+      `<span>${formattedDate}</span>`
+    );
+  }
+  
+  // Replace author if available
+  if (post.author) {
+    fileContent = fileContent.replace(
+      /<span>John Smith<\/span>/,
+      `<span>${post.author}</span>`
+    );
+  }
+  
+  // Replace category if available
+  if (post.categories && post.categories.length > 0) {
+    fileContent = fileContent.replace(
+      /<span>Construction Costs<\/span>/,
+      `<span>${post.categories[0]}</span>`
+    );
+  }
+  
+  return fileContent;
+}
+
+// Commit file to GitHub repository
+async function commitFileToGitHub(filePath, content, commitMessage) {
   return new Promise((resolve, reject) => {
-    // Create filename from slug if available, otherwise from title
-    const fileName = post.slug && post.slug.current 
-      ? `${post.slug.current}.html`
-      : `${slugify(post.title)}.html`;
-    
-    const filePath = path.join(POSTS_DIRECTORY, fileName);
-    
-    // Check if file already exists - we'll overwrite it now
-    const fileStatus = fs.existsSync(filePath) ? 'updated' : 'created';
-    
-    // Replace placeholder content with actual post data
-    let fileContent = template;
-    
-    // Replace title
-    fileContent = fileContent.replace(
-      /<title>.*?<\/title>/,
-      `<title>${post.title} - Genesis Building Company</title>`
-    );
-    
-    // Replace blog post title
-    fileContent = fileContent.replace(
-      /<h1 class="blog-post-title">.*?<\/h1>/,
-      `<h1 class="blog-post-title">${post.title}</h1>`
-    );
-    
-    // Replace date if available
-    if (post.publishedAt) {
-      const formattedDate = formatDate(post.publishedAt);
-      fileContent = fileContent.replace(
-        /<span>May 9, 2025<\/span>/,
-        `<span>${formattedDate}</span>`
-      );
-    }
-    
-    // Replace author if available
-    if (post.author) {
-      fileContent = fileContent.replace(
-        /<span>John Smith<\/span>/,
-        `<span>${post.author}</span>`
-      );
-    }
-    
-    // Replace category if available
-    if (post.categories && post.categories.length > 0) {
-      fileContent = fileContent.replace(
-        /<span>Construction Costs<\/span>/,
-        `<span>${post.categories[0]}</span>`
-      );
-    }
-    
-    // Write the file
-    fs.writeFile(filePath, fileContent, 'utf8', (err) => {
-      if (err) {
-        reject(new Error(`Error writing file ${fileName}: ${err.message}`));
-        return;
+    // First check if file exists to get SHA if it does
+    const options = {
+      hostname: 'api.github.com',
+      path: `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}?ref=${GITHUB_BRANCH}`,
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Sanity-Webhook-Bot',
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': `token ${process.env.GITHUB_TOKEN}`
       }
+    };
+
+    const checkReq = https.request(options, (res) => {
+      let data = '';
       
-      console.log(`File ${fileStatus}: ${fileName}`);
-      resolve(fileName);
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      
+      res.on('end', () => {
+        let sha = null;
+        
+        // If file exists, get its SHA
+        if (res.statusCode === 200) {
+          try {
+            const fileInfo = JSON.parse(data);
+            sha = fileInfo.sha;
+          } catch (e) {
+            console.error('Error parsing existing file info:', e);
+          }
+        }
+        
+        // Now create or update the file
+        const postData = JSON.stringify({
+          message: commitMessage,
+          content: Buffer.from(content).toString('base64'),
+          branch: GITHUB_BRANCH,
+          ...(sha && { sha }) // Include SHA if file exists
+        });
+        
+        const commitOptions = {
+          hostname: 'api.github.com',
+          path: `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${filePath}`,
+          method: 'PUT',
+          headers: {
+            'User-Agent': 'Sanity-Webhook-Bot',
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(postData),
+            'Accept': 'application/vnd.github.v3+json',
+            'Authorization': `token ${process.env.GITHUB_TOKEN}`
+          }
+        };
+        
+        const commitReq = https.request(commitOptions, (commitRes) => {
+          let commitData = '';
+          
+          commitRes.on('data', (chunk) => {
+            commitData += chunk;
+          });
+          
+          commitRes.on('end', () => {
+            if (commitRes.statusCode === 200 || commitRes.statusCode === 201) {
+              resolve({
+                success: true,
+                path: filePath
+              });
+            } else {
+              try {
+                const response = JSON.parse(commitData);
+                reject(new Error(`GitHub API error: ${response.message}`));
+              } catch (e) {
+                reject(new Error(`Error committing file: ${commitRes.statusCode}`));
+              }
+            }
+          });
+        });
+        
+        commitReq.on('error', (e) => {
+          reject(new Error(`Error committing file to GitHub: ${e.message}`));
+        });
+        
+        commitReq.write(postData);
+        commitReq.end();
+      });
     });
+    
+    checkReq.on('error', (e) => {
+      reject(new Error(`Error checking file existence: ${e.message}`));
+    });
+    
+    checkReq.end();
   });
 }
 
@@ -201,48 +273,30 @@ async function processSinglePost(postId) {
       return null;
     }
     
-    // Read template file
-    const template = await readTemplate();
+    // Read template file from GitHub
+    const template = await fetchTemplateFromGitHub();
     
-    // Generate HTML file
-    const fileName = await generatePostFile(post, template);
+    // Generate HTML content
+    const htmlContent = generatePostHTML(post, template);
+    
+    // Create filename from slug if available, otherwise from title
+    const fileName = post.slug && post.slug.current 
+      ? `${post.slug.current}.html`
+      : `${slugify(post.title)}.html`;
+    
+    const filePath = `posts/${fileName}`;
+    
+    // Commit file to GitHub
+    await commitFileToGitHub(
+      filePath,
+      htmlContent,
+      `Add/update blog post: ${post.title}`
+    );
+    
     return fileName;
   } catch (error) {
     console.error('Error processing post:', error);
     return null;
-  }
-}
-
-// Generate files for all posts
-async function generateAllPostFiles() {
-  try {
-    console.log("Starting blog post generation process for all posts...");
-    
-    // Fetch all posts from Sanity
-    const posts = await fetchAllPosts();
-    console.log(`Found ${posts.length} posts in Sanity`);
-    
-    // Read template file
-    const template = await readTemplate();
-    console.log("Template loaded successfully");
-    
-    // Generate files for each post
-    console.log("Generating HTML files for posts...");
-    const fileNames = [];
-    for (const post of posts) {
-      try {
-        const fileName = await generatePostFile(post, template);
-        fileNames.push(fileName);
-      } catch (err) {
-        console.error(`Error generating file for post '${post.title}':`, err);
-      }
-    }
-    
-    console.log("Post generation complete!");
-    return fileNames;
-  } catch (error) {
-    console.error("Error generating posts:", error);
-    return [];
   }
 }
 
@@ -262,6 +316,16 @@ export default async function handler(req, res) {
     return;
   }
   
+  // Check if GitHub token is configured
+  if (!process.env.GITHUB_TOKEN) {
+    console.error('GITHUB_TOKEN environment variable is not set');
+    res.status(500).json({ 
+      success: false, 
+      message: 'Server configuration error: GitHub token not set' 
+    });
+    return;
+  }
+  
   try {
     // Parse webhook payload
     const payload = req.body;
@@ -274,7 +338,7 @@ export default async function handler(req, res) {
       if (fileName) {
         res.status(200).json({
           success: true,
-          message: `Generated file: ${fileName}`
+          message: `Generated and committed file: ${fileName}`
         });
       } else {
         res.status(500).json({
@@ -283,13 +347,9 @@ export default async function handler(req, res) {
         });
       }
     } else {
-      // Default: regenerate all files
-      const fileNames = await generateAllPostFiles();
-      
-      res.status(200).json({
-        success: true,
-        message: `Generated ${fileNames.length} files`,
-        files: fileNames
+      res.status(400).json({
+        success: false,
+        message: `Unsupported webhook type or missing documentId`
       });
     }
   } catch (error) {
