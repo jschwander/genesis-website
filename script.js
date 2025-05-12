@@ -172,11 +172,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Deming Quote Rotation
     const demingQuotes = [
         "94% of problems in business are systems-driven and only 6% are people-driven.",
-        "A system is a network of interdependent components, all working together to help accomplish the aim of the system",
-        "Put a good person in a bad system and the bad system wins, no contest.",
-        "Best efforts will not substitute for knowledge.",
-        "Blame the system, not the people. Most people are trying to do a good job.",
-        "You do not install quality; you begin to work on the causes of quality."
+        "A bad system will beat a good person every time.",
+        "It is not necessary to change. Survival is not mandatory.",
+        "Learning is not compulsory... neither is survival.",
+        "The system that people work in and the interaction with people may account for 90 or 95 percent of performance.",
+        "Improve quality, you automatically improve productivity.",
+        "Uncontrolled variation is the enemy of quality.",
+        "We should work on our process, not the outcome of our processes."
     ];
     
     let currentQuote = 1; // Start with second quote since first is hardcoded
@@ -184,11 +186,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (quoteSpan) {
         console.log("Quote span found");
-        
-        function fadeOut() {
+        setInterval(() => {
             quoteSpan.style.opacity = '0';
             setTimeout(changeQuote, 800); // Wait for fade out
-        }
+        }, 3000); // Changed from 15000 (15 seconds) to 3000 (3 seconds)
         
         function changeQuote() {
             quoteSpan.textContent = '"' + demingQuotes[currentQuote] + '"'; // Add quotation marks
@@ -196,17 +197,15 @@ document.addEventListener('DOMContentLoaded', function() {
             quoteSpan.style.opacity = '1'; // Fade in
         }
         
-        // First rotation after 15 seconds to give time to read first quote
+        // First rotation after 3 seconds to give time to read first quote
         setTimeout(() => {
             console.log("Starting quote rotation");
-            // Add CSS transition if not already present
+            setInterval(() => {
+                quoteSpan.style.opacity = '0';
+                setTimeout(changeQuote, 800); // Wait for fade out
+            }, 3000); // Changed from 15000 (15 seconds) to 3000 (3 seconds)
             quoteSpan.style.transition = 'opacity 0.8s ease-in-out';
-            fadeOut(); 
-            // Start regular interval after first change
-            setTimeout(() => {
-                setInterval(fadeOut, 7000);
-            }, 7000);
-        }, 8000);
+        }, 3000); // Changed from 15000 (15 seconds) to 3000 (3 seconds)
     }
 
     // --- Annotations and shaded area logic for Indirect and Owner ---
@@ -247,29 +246,30 @@ function initSimpleSlider() {
     const nextBtn = document.querySelector('.slider-next');
     const dotsContainer = document.querySelector('.slider-dots');
     
-    // Calculate how many slides we can show at once
+    let currentSlide = 0;
     const containerWidth = sliderContainer.offsetWidth;
-    const slideWidth = 400 + 40; // slide width + margin
-    const visibleSlides = Math.floor(containerWidth / slideWidth) || 1;
+    let slideWidth = containerWidth;
     
-    console.log(`Container width: ${containerWidth}, Slide width: ${slideWidth}, Visible slides: ${visibleSlides}`);
+    // Make slides the same width as the container
+    slides.forEach(slide => {
+        slide.style.width = `${slideWidth}px`;
+    });
     
-    // Set the width of the track based on the number of slides
+    // Set the width of the slider track
     sliderTrack.style.width = `${slides.length * slideWidth}px`;
     
-    let currentSlide = 0;
-    const maxSlide = slides.length - visibleSlides;
-    
-    // Create navigation dots
-    if (dotsContainer) {
-        dotsContainer.innerHTML = ''; // Clear existing dots
+    // Create dots
+    for (let i = 0; i < slides.length; i++) {
+        const dot = document.createElement('button');
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.classList.add('slider-dot');
         
-        for (let i = 0; i <= maxSlide; i++) {
-            const dot = document.createElement('span');
-            dot.classList.add('slider-dot');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
+        if (i === 0) {
+            dot.classList.add('active');
         }
+        
+        dot.addEventListener('click', () => goToSlide(i));
+        dotsContainer.appendChild(dot);
     }
     
     const dots = dotsContainer.querySelectorAll('.slider-dot');
@@ -277,64 +277,57 @@ function initSimpleSlider() {
     // Initialize the slider
     updateSlider();
     
-    // Add event listeners
-    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-    
-    function prevSlide() {
-        currentSlide = Math.max(currentSlide - 1, 0);
-        updateSlider();
+    // Previous and next buttons
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateSlider();
+        });
     }
     
-    function nextSlide() {
-        currentSlide = Math.min(currentSlide + 1, maxSlide);
-        updateSlider();
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlider();
+        });
     }
     
+    // Go to a specific slide
     function goToSlide(index) {
-        currentSlide = Math.min(Math.max(index, 0), maxSlide);
+        currentSlide = index;
         updateSlider();
     }
     
     function updateSlider() {
-        // Move the track to show the current slide
         const translateX = -currentSlide * slideWidth;
+        
         sliderTrack.style.transform = `translateX(${translateX}px)`;
         
-        // Update active classes on slides
-        slides.forEach((slide, index) => {
-            const isActive = index >= currentSlide && index < currentSlide + visibleSlides;
-            slide.classList.toggle('active', isActive);
-        });
-        
-        // Update the active dot
+        // Update active dot
         dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
+            if (index === currentSlide) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
         });
-        
-        // Update button states
-        if (prevBtn) prevBtn.disabled = currentSlide === 0;
-        if (nextBtn) nextBtn.disabled = currentSlide === maxSlide;
     }
     
     // Handle window resize
     window.addEventListener('resize', () => {
-        clearTimeout(window.resizeTimer);
-        window.resizeTimer = setTimeout(() => {
-            // Recalculate visible slides
-            const newContainerWidth = sliderContainer.offsetWidth;
-            const newVisibleSlides = Math.floor(newContainerWidth / slideWidth) || 1;
-            
-            // Update maxSlide if needed
-            const newMaxSlide = slides.length - newVisibleSlides;
-            
-            // Adjust current slide if we're past the new max
-            if (currentSlide > newMaxSlide) {
-                currentSlide = newMaxSlide;
-            }
-            
-            updateSlider();
-        }, 250);
+        const newContainerWidth = sliderContainer.offsetWidth;
+        slideWidth = newContainerWidth;
+        
+        // Update slide widths
+        slides.forEach(slide => {
+            slide.style.width = `${slideWidth}px`;
+        });
+        
+        // Update track width
+        sliderTrack.style.width = `${slides.length * slideWidth}px`;
+        
+        // Update slider position
+        updateSlider();
     });
 }
 
