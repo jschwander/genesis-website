@@ -1,4 +1,4 @@
-# Setting Up Automatic Blog Post Generation with Vercel & Sanity
+# Setting Up Automatic Blog Post Generation with Vercel & GitHub Actions
 
 This guide will help you set up your website to automatically generate blog post HTML files whenever you publish a post in Sanity.
 
@@ -7,7 +7,9 @@ This guide will help you set up your website to automatically generate blog post
 1. Go to [GitHub Settings > Developer Settings > Personal Access Tokens](https://github.com/settings/tokens)
 2. Click "Generate new token (classic)"
 3. Give it a name like "Sanity Blog Webhook"
-4. Select these scopes: `repo` (full control of repositories)
+4. Select these scopes: 
+   - `repo` (full control of repositories)
+   - `workflow` (to trigger GitHub Actions)
 5. Click "Generate token" and **copy the token** (you'll only see it once!)
 
 ## Step 2: Configure Vercel Environment Variables
@@ -23,7 +25,7 @@ This guide will help you set up your website to automatically generate blog post
 
 ## Step 3: Deploy Your Website to Vercel
 
-1. Push this code to GitHub (or GitLab/BitBucket)
+1. Push this code to GitHub
 2. Your site should automatically deploy on Vercel
 3. If not already deployed, you can manually trigger a deploy from the Vercel dashboard
 
@@ -49,16 +51,18 @@ This guide will help you set up your website to automatically generate blog post
 1. Edit or create a post in Sanity
 2. Publish the post
 3. Check your Vercel logs to see if the webhook was triggered
-4. Check your GitHub repository - a new commit should appear with the HTML file
+4. Check your GitHub repository - a new GitHub Action should run
+5. Once the action completes, your new blog post HTML file should be created
 
 ## Understanding How It Works
 
 1. When you publish a post in Sanity, it sends a webhook to your Vercel function
-2. The Vercel function fetches the post data from Sanity
-3. It generates HTML content for the post
-4. It commits the HTML file directly to your GitHub repository
-5. GitHub notifies Vercel of the new commit
-6. Vercel automatically deploys the updated site with the new blog post
+2. The Vercel function triggers a GitHub Action via repository_dispatch event
+3. The GitHub Action:
+   - Checks out your repository code
+   - Runs the post generator script to create the HTML file
+   - Commits and pushes the change back to GitHub
+4. Vercel automatically deploys the updated site with the new blog post
 
 ## Troubleshooting
 
@@ -66,12 +70,24 @@ If posts aren't being generated automatically:
 
 1. Check the Vercel function logs in the Vercel dashboard
 2. Make sure your GitHub token has the correct permissions
-3. Verify the webhook is configured correctly in Sanity
-4. Check that the `GITHUB_TOKEN` environment variable is set in Vercel
+3. Check the GitHub Actions tab in your repository to see if the action is running
+4. Verify the webhook is configured correctly in Sanity
+5. Check that the `GITHUB_TOKEN` environment variable is set in Vercel
+
+## Manual Fallback Process
+
+If automated generation isn't working, you can still manually run:
+
+```bash
+node sanity-post-generator.js
+git add posts/*.html
+git commit -m "Add new blog post"
+git push
+```
 
 ## Security Note
 
 For production use:
 1. Consider using a GitHub App instead of a personal access token for better security
-2. Change the webhook secret in `api/sanity-webhook.js` to a strong random string
+2. Change the webhook secret in `api/trigger-github-action.js` to a strong random string
 3. Update the same secret in the Sanity webhook configuration 
