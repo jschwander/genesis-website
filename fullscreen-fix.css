@@ -27,11 +27,6 @@ section, header, footer, .hero {
     background-position: center center !important;
 }
 
-/* Background color fix for entire page */
-body {
-    background-color: #1a1f2c;
-}
-
 /* Hide overflow on main containers */
 .container, .main-content {
     max-width: 100%;
@@ -49,7 +44,7 @@ body {
         bottom: 0;
         width: 100vw;
         height: 100vh;
-        background-color: #1a1f2c;
+        background-color: transparent;
         z-index: -999;
         pointer-events: none;
     }
