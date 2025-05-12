@@ -150,8 +150,27 @@ function renderBlogPost(post) {
   // Update featured image
   const featuredImage = document.querySelector('.featured-image');
   if (featuredImage && post.imageUrl) {
+    // Set the src attribute which will trigger the image loading
     featuredImage.src = `${post.imageUrl}?w=1200&h=675&fit=crop`;
     featuredImage.alt = post.title;
+    
+    // Remove loading indicator when image is fully loaded
+    featuredImage.onload = function() {
+      // Add the 'loaded' class to fade in the image
+      this.classList.add('loaded');
+      
+      // Optionally hide the loading spinner
+      const imageLoading = document.querySelector('.image-loading');
+      if (imageLoading) {
+        setTimeout(() => {
+          imageLoading.style.display = 'none';
+        }, 300); // Short delay for smoother transition
+      }
+    };
+  } else {
+    // Hide the image container if no image is available
+    const imageContainer = document.querySelector('.featured-image-container');
+    if (imageContainer) imageContainer.style.display = 'none';
   }
   
   // Update blog post content
@@ -256,8 +275,9 @@ function displayNotFound() {
     `;
   }
   
-  const featuredImage = document.querySelector('.featured-image');
-  if (featuredImage) featuredImage.style.display = 'none';
+  // Hide the image container
+  const imageContainer = document.querySelector('.featured-image-container');
+  if (imageContainer) imageContainer.style.display = 'none';
   
   const metaElements = document.querySelector('.blog-post-meta');
   if (metaElements) metaElements.style.display = 'none';
@@ -281,8 +301,9 @@ function displayError() {
     `;
   }
   
-  const featuredImage = document.querySelector('.featured-image');
-  if (featuredImage) featuredImage.style.display = 'none';
+  // Hide the image container
+  const imageContainer = document.querySelector('.featured-image-container');
+  if (imageContainer) imageContainer.style.display = 'none';
   
   const metaElements = document.querySelector('.blog-post-meta');
   if (metaElements) metaElements.style.display = 'none';

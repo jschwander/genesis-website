@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "functions": {
+    "api/sanity-webhook.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/sanity-webhook",
+      "dest": "/api/sanity-webhook.js"
+    }
+  ]
+} 
