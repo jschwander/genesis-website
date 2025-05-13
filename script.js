@@ -183,29 +183,74 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let currentQuote = 1; // Start with second quote since first is hardcoded
     const quoteSpan = document.getElementById('deming-quote-text');
+    let quoteInterval;
+    let quoteTimeout;
+    let isTransitioning = false;
     
     if (quoteSpan) {
-        console.log("Quote span found");
-        setInterval(() => {
-            quoteSpan.style.opacity = '0';
-            setTimeout(changeQuote, 800); // Wait for fade out
-        }, 3000); // Changed from 15000 (15 seconds) to 3000 (3 seconds)
+        const prevButton = document.querySelector('.quote-prev');
+        const nextButton = document.querySelector('.quote-next');
         
-        function changeQuote() {
-            quoteSpan.textContent = '"' + demingQuotes[currentQuote] + '"'; // Add quotation marks
-            currentQuote = (currentQuote + 1) % demingQuotes.length;
-            quoteSpan.style.opacity = '1'; // Fade in
+        function changeQuote(direction = 'next') {
+            if (isTransitioning) return; // Prevent rapid-fire clicks
+            isTransitioning = true;
+            
+            // Add immediate visual feedback
+            if (direction === 'next') {
+                nextButton.style.transform = 'scale(0.95)';
+                setTimeout(() => nextButton.style.transform = '', 150);
+            } else {
+                prevButton.style.transform = 'scale(0.95)';
+                setTimeout(() => prevButton.style.transform = '', 150);
+            }
+            
+            quoteSpan.style.opacity = '0';
+            quoteSpan.style.transform = direction === 'next' ? 'translateX(-10px)' : 'translateX(10px)';
+            
+            // Shorter timeout for better responsiveness
+            setTimeout(() => {
+                if (direction === 'next') {
+                    currentQuote = (currentQuote + 1) % demingQuotes.length;
+                } else {
+                    currentQuote = (currentQuote - 1 + demingQuotes.length) % demingQuotes.length;
+                }
+                quoteSpan.textContent = `"${demingQuotes[currentQuote]}"`;
+                quoteSpan.style.transform = direction === 'next' ? 'translateX(10px)' : 'translateX(-10px)';
+                
+                // Use requestAnimationFrame for smoother transition
+                requestAnimationFrame(() => {
+                    quoteSpan.style.opacity = '1';
+                    quoteSpan.style.transform = 'translateX(0)';
+                    isTransitioning = false;
+                });
+            }, 200); // Reduced from default timing
         }
         
-        // First rotation after 3 seconds to give time to read first quote
-        setTimeout(() => {
-            console.log("Starting quote rotation");
-            setInterval(() => {
-                quoteSpan.style.opacity = '0';
-                setTimeout(changeQuote, 800); // Wait for fade out
-            }, 3000); // Changed from 15000 (15 seconds) to 3000 (3 seconds)
-            quoteSpan.style.transition = 'opacity 0.8s ease-in-out';
-        }, 3000); // Changed from 15000 (15 seconds) to 3000 (3 seconds)
+        function startAutoRotation() {
+            stopAutoRotation();
+            quoteInterval = setInterval(() => changeQuote('next'), 3000);
+        }
+        
+        function stopAutoRotation() {
+            if (quoteInterval) clearInterval(quoteInterval);
+            if (quoteTimeout) clearTimeout(quoteTimeout);
+        }
+        
+        // Event listeners for navigation buttons
+        if (prevButton && nextButton) {
+            prevButton.addEventListener('click', () => {
+                stopAutoRotation();
+                changeQuote('prev');
+            });
+            
+            nextButton.addEventListener('click', () => {
+                stopAutoRotation();
+                changeQuote('next');
+            });
+        }
+        
+        // Start auto-rotation
+        startAutoRotation();
     }
 
     // --- Annotations and shaded area logic for Indirect and Owner ---

@@ -10875,6 +10875,44 @@ h2 {
   gap: 1.5rem;
   justify-content: center;
   margin: 3.5rem 0;
+  position: relative;
+}
+
+.quote-nav {
+  background-color: rgba(21, 96, 130, 0.1);
+  border: none;
+  color: #156082;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease-out;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0 0.5rem;
+}
+
+.quote-nav:hover {
+  background-color: #156082;
+  color: white;
+}
+
+.quote-nav:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(21, 96, 130, 0.3);
+}
+
+@media (max-width: 700px) {
+  .quote-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
 }
 
 .deming-quote-author {
@@ -10918,6 +10956,7 @@ h2 {
   opacity: 1 !important;
   text-align: center;
   font-weight: normal;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
 .deming-quote-flex blockquote {
