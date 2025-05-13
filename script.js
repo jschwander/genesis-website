@@ -171,17 +171,60 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Deming Quote Rotation
     const demingQuotes = [
-        "94% of problems in business are systems-driven and only 6% are people-driven.",
+        "What we need to do is learn to work in the system, by which I mean that everybody, every team, every platform, every division, every component is there not for individual competitive profit or recognition, but for contribution to the system as a whole on a win-win basis.",
+        "A system is a network of interdependent components that work together to try to accomplish the aim of the system. A system must have an aim. Without the aim, there is no system.",
+        "A change in philosophy requires unlearning industrial thinking evident in departmentalization, scarcity of knowledge and information competitiveness.",
+        "Lack of knowledge…that is the problem.",
+        "Information is not knowledge. Let's not confuse the two.",
+        "The world is drowning in information but is slow in acquisition of knowledge. There is no substitute for knowledge.",
+        "Scientific data are not taken for museum purposes; they are taken as a basis for doing something. If nothing is to be done with the data, then there is no use in collecting any. The ultimate purpose of taking data is to provide a basis for action or a recommendation for action. The step intermediate between the collection of data and the action is prediction.",
+        "In God we trust. All others bring data.",
         "A bad system will beat a good person every time.",
+        "Understanding variation is the key to success in quality and business.",
+        "Customer expectations? Nonsense. No customer ever asked for the electric light, the pneumatic tire, the VCR, or the CD. All customer expectations are only what you and your competitor have led him to expect. He knows nothing else.",
+        "Two basic rules of life are: 1) Change is inevitable. 2) Everybody resists change.",
+        "Long-term commitment to new learning and new philosophy is required of any management that seeks transformation. The timid and the fainthearted, and the people that expect quick results, are doomed to disappointment.",
+        "The ultimate purpose of collecting the data is to provide a basis for action or a recommendation.",
+        "Management is prediction.",
+        "We are here to learn, to make a difference and to have fun.",
         "It is not necessary to change. Survival is not mandatory.",
-        "Learning is not compulsory... neither is survival.",
-        "The system that people work in and the interaction with people may account for 90 or 95 percent of performance.",
+        "Nobody should try to use data unless he has collected data.",
+        "Innovation comes from the producer - not from the customer.",
+        "My mother was my biggest role model. She taught me to hate waste. We never wasted anything.",
+        "Almost any system of management will do well in a seller's market.",
+        "American management thinks that they can just copy from Japan. But they don't know what to copy.",
+        "The result of long-term relationships is better and better quality, and lower and lower costs.",
+        "The prevailing system of management has crushed fun out of the workplace.",
+        "I am forever learning and changing.",
         "Improve quality, you automatically improve productivity.",
+        "Manage the cause, not the result.",
+        "Innovation comes from people who take joy in their work.",
+        "People work in the system. Management creates the system.",
+        "We should work on our process, not the outcome of our processes.",
+        "The most valuable 'currency' of any organization is the initiative and creativity of its members. Every leader has the solemn moral responsibility to develop these to the maximum in all his people. This is the leader's highest priority.",
         "Uncontrolled variation is the enemy of quality.",
-        "We should work on our process, not the outcome of our processes."
+        "Transformation is not automatic. It must be learned; it must be led.",
+        "Our prevailing system of management has destroyed our people. People are born with intrinsic motivation, self-respect, dignity, curiosity to learn, joy in learning.",
+        "You must not run your Organization as a functional hierarchy. You must understand it as a System.",
+        "The customer is the most important part of the production line.",
+        "When we cooperate, everybody wins.",
+        "To optimize the whole, we must sub-optimize the parts",
+        "Management's job is to optimize the whole system.",
+        "A goal without a method is nonsense.",
+        "A leader is a coach, not a judge.",
+        "Quality starts in the boardroom.",
+        "Most American executives think they are in the business to make money, rather than products or service. The Japanese corporate credo, on the other hand, is that a company should become the world's most efficient provider of whatever product and service it offers. Once it becomes the world leader and continues to offer good products, profits follow.",
+        "The source of innovation is freedom. All we have - new knowledge, invention - comes from freedom. Discoveries and new knowledge come from freedom. When somebody is responsible only to himself, [has] only himself to satisfy, then you'll have invention, new thought, now product, new design, new ideas.",
+        "The transformation will come from leadership.",
+        "We are here to make another world.",
+        "It is management's job to direct the efforts of all components toward the aim of the system. The first step is clarification: everyone in the organization must understand the aim of the system, and how to direct his efforts toward it.",
+        "Everyone must understand the damage and loss to the whole organization from a team that seeks to become a selfish, independent, profit center.",
+        "Sub-optimization is when everyone is for himself. Optimization is when everyone is working to help the company.",
+        "Anyone that enjoys his work is a pleasure to work with.",
+        "He that would run his company on visible figures alone will in time have neither company nor figures."
     ];
     
-    let currentQuote = 1; // Start with second quote since first is hardcoded
+    let currentQuote = 0; // Start with the first quote
     const quoteSpan = document.getElementById('deming-quote-text');
     let quoteInterval;
     let quoteTimeout;
@@ -190,6 +233,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (quoteSpan) {
         const prevButton = document.querySelector('.quote-prev');
         const nextButton = document.querySelector('.quote-next');
+        
+        // Set initial quote immediately
+        quoteSpan.textContent = `"${demingQuotes[0]}"`;
         
         function changeQuote(direction = 'next') {
             if (isTransitioning) return; // Prevent rapid-fire clicks
@@ -207,33 +253,24 @@ document.addEventListener('DOMContentLoaded', function() {
             quoteSpan.style.opacity = '0';
             quoteSpan.style.transform = direction === 'next' ? 'translateX(-10px)' : 'translateX(10px)';
             
-            // Shorter timeout for better responsiveness
+            // Update current quote index
+            if (direction === 'next') {
+                currentQuote = (currentQuote + 1) % demingQuotes.length;
+            } else {
+                currentQuote = (currentQuote - 1 + demingQuotes.length) % demingQuotes.length;
+            }
+            
+            // Update quote text with transition
             setTimeout(() => {
-                if (direction === 'next') {
-                    currentQuote = (currentQuote + 1) % demingQuotes.length;
-                } else {
-                    currentQuote = (currentQuote - 1 + demingQuotes.length) % demingQuotes.length;
-                }
                 quoteSpan.textContent = `"${demingQuotes[currentQuote]}"`;
                 quoteSpan.style.transform = direction === 'next' ? 'translateX(10px)' : 'translateX(-10px)';
                 
-                // Use requestAnimationFrame for smoother transition
                 requestAnimationFrame(() => {
                     quoteSpan.style.opacity = '1';
                     quoteSpan.style.transform = 'translateX(0)';
                     isTransitioning = false;
                 });
-            }, 200); // Reduced from default timing
-        }
-        
-        function startAutoRotation() {
-            stopAutoRotation();
-            quoteInterval = setInterval(() => changeQuote('next'), 3000);
-        }
-        
-        function stopAutoRotation() {
-            if (quoteInterval) clearInterval(quoteInterval);
-            if (quoteTimeout) clearTimeout(quoteTimeout);
+            }, 200);
         }
         
         // Event listeners for navigation buttons
@@ -241,16 +278,28 @@ document.addEventListener('DOMContentLoaded', function() {
             prevButton.addEventListener('click', () => {
                 stopAutoRotation();
                 changeQuote('prev');
+                startAutoRotation(); // Restart auto-rotation after manual navigation
             });
             
             nextButton.addEventListener('click', () => {
                 stopAutoRotation();
                 changeQuote('next');
+                startAutoRotation(); // Restart auto-rotation after manual navigation
             });
         }
         
-        // Start auto-rotation
-        startAutoRotation();
+        function startAutoRotation() {
+            stopAutoRotation();
+            quoteInterval = setInterval(() => changeQuote('next'), 8000); // Increased interval to 8 seconds
+        }
+        
+        function stopAutoRotation() {
+            if (quoteInterval) clearInterval(quoteInterval);
+            if (quoteTimeout) clearTimeout(quoteTimeout);
+        }
+        
+        // Start auto-rotation after a delay
+        setTimeout(startAutoRotation, 1000);
     }
 
     // --- Annotations and shaded area logic for Indirect and Owner ---
