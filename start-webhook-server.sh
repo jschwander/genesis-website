@@ -3,7 +3,7 @@
 # Start the Sanity webhook server
 echo "Starting Sanity webhook server..."
 node sanity-webhook-server.js &
-
+ 
 # Save the process ID
 echo $! > sanity-webhook.pid
 echo "Webhook server started with PID: $!"

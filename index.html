@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css?v=1.0.2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="fullscreen-fix.css">
+    <link rel="stylesheet" href="owner-developer-modal.css">
     
     <!-- Favicon -->
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
@@ -272,11 +273,11 @@
                         </g>
                         </svg>
                     </div>
-                    <div class="chart-sources-link" style="text-align:center; margin-top: 6px;">
-                      <a href="#" onclick="openDataSourcesModal(); return false;" class="data-sources-link" style="font-size: 1rem; color: #156082; text-decoration: underline; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4em;">
-                        <i class="fas fa-link"></i> View Data Sources
-                      </a>
-                    </div>
+                        <div class="chart-sources-link" style="text-align:center; margin-top: 6px;">
+                          <a href="#" onclick="openDataSourcesModal(); return false;" class="data-sources-link" style="font-size: 1rem; color: #156082; text-decoration: underline; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4em;">
+                            <i class="fas fa-link"></i> View Data Sources
+                          </a>
+                        </div>
                 </div>
             </div>
         </div>
@@ -320,7 +321,7 @@
       </div>
       <div class="section-intro">
         <p>Myriads of solutions—like BIM and lean construction—hold great potential but often add to the overhead problem. Today, both the problem and the improvement can be measured. A massive opportunity awaits innovative builders, designers, owner reps, and owners to turn waste into profit and value.</p>
-        </div>
+      </div>
     </section>
 
     <!-- Modals for Details -->
@@ -369,7 +370,7 @@
         </div>
         <h4 style="font-size: 1.2rem; margin-bottom: 0.5rem;text-align:center">Figure 1 – The Systemic Problem Over Time</h4>
         <p style="font-size: 1rem; margin-bottom: 1rem;">
-        
+
         </p>
         <p style="font-size: 1rem; margin-bottom: 1rem;">
           Let's take an example of a $5M project in 1967. Based on national inflation that building should cost $47.7M today. But, as the Construction Analytics data shows,  owners now pay $96.1M—more than double what inflation warrants.
@@ -516,157 +517,436 @@
 
     <!-- Owner/Developer Modal -->
     <div id="owner-developer-modal" class="problem-modal-overlay">
-      <div class="problem-modal-content">
-        <h3>Owner / Developer <span class="problem-modal-close" data-close="owner-developer-modal">&times;</span></h3>
-        <div class="modal-body">
-          <h4>Value-Driven PDC Discovery Map</h4>
-          <p>In just a few weeks, you can gain a clear path to flipping your consultants' and builder's compensation from a traditional cost-plus and billable-hour model to a value-based, win-win system. Along the way, you'll see manual and fragmented processes become integrated, automated, and more effective.</p>
-          
-          <p><strong>There's no charge for the first two of the six steps.</strong></p>
-          
-          <ol>
-            <li>
-              <strong>Planning, Design, and Construction Survey & Assessment</strong>
-              <p>We'll send you a brief intake form to assess your current practices. Based on your responses, we'll develop a tailored discovery plan.</p>
-              <p><a href="#" class="intake-form-link">Click here to access the intake form.</a></p>
-            </li>
-            
-            <li>
-              <strong>Piloting Cost Certainty and Value Potential Assessment</strong>
-              <p>Using Building CATALYST, we'll model your projects impartially and reliably, based on real-world factors. We'll then propose a multi-stage value optimization strategy.</p>
-            </li>
-            
-            <li>
-              <strong>Piloting Cost Optimization Using the Value-Driven PDC Approach</strong>
-              <p>We'll conduct deeper analysis on recent or current projects and pilot value-driven improvements using proven Win-Win strategies.</p>
-            </li>
-            
-            <li>
-              <strong>Innovation Vision Casting & Strategic Plan</strong>
-              <p>Building on the pilot, we'll facilitate a planning process to reduce waste systemically and improve performance through measurable continuous improvement.</p>
-            </li>
-            
-            <li>
-              <strong>Value-Driven PDC Design, Training, and Implementation</strong>
-              <p>We'll support the design and rollout of the system—grounded in Deming's principles—with training, education, and implementation support for a core team.</p>
-            </li>
-            
-            <li>
-              <strong>Continuous Improvement Process</strong>
-              <p>Finally, we'll assist with implementation and scaling of a continuous, measurable improvement process—built on the proven philosophies and methods of Deming.</p>
-            </li>
-          </ol>
-          
-          <div class="modal-nav">
-            <button class="contact-us-btn">Contact Us To Learn More</button>
-          </div>
-        </div>
+        <div class="modal">
+            <div class="header">
+                <p><strong>Owner / Developer</strong></p>
+                <h2 class="custom-serve-header">Value-Driven PDC Discovery Map</h2>
+                <p>In just a few weeks, transform your planning, design, and construction process from a cost-plus, billable-hour model to a value-driven, win-win system. Manual, fragmented processes will become integrated and automated for greater efficiency.</p>
+            </div>
+            <div class="pricing">
+                <p>Steps 1–2 are free, while steps 3–6 are available at a charge.</p>
+                <button onclick="window.location.href='#contact'">Contact Us for Pricing Details</button>
+            </div>
+            <div class="progress">
+                <div class="free"></div>
+                <div class="paid"></div>
+            </div>
+            <div class="section">
+                <div class="free-steps">
+                    <h3>Free Steps (1–2)</h3>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>1. Planning, Design, and Construction Survey & Assessment</strong><br>
+                            We'll provide an intake form to assess your current practices and develop a tailored discovery plan.<br>
+                            <a href="#" class="link">Click here to access the intake form</a>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>2. Piloting Cost Certainty and Value Potential Assessment</strong><br>
+                            Using Building Catalyst, we'll model your projects impartially and propose a multi-stage value optimization strategy.
+                        </div>
+                    </div>
+                </div>
+                <div class="paid-steps">
+                    <h3 style="color: #1e3a8a">Paid Steps (3–6)</h3>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>3. Piloting Cost Optimization Using the Value-Driven PDC Approach</strong><br>
+                            We'll analyze recent or current projects and pilot value-driven improvements using Win-Win strategies.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>4. Innovation Vision Casting & Strategic Plan</strong><br>
+                            We'll facilitate a planning process to reduce waste and improve performance through measurable continuous improvement.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>5. Value-Driven PDC Design, Training, and Implementation</strong><br>
+                            We'll support the design and rollout of a Deming-based system, with training and implementation for your core team.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>6. Continuous Improvement Process</strong><br>
+                            Finally, we'll assist with implementation and scaling of a continuous, measurable improvement process—built on the proven philosophies and methods of Deming.
+                        </div>
+                    </div>
+                </div>
+                <button class="toggle-btn" onclick="togglePaidSteps()">Show Paid Steps</button>
+            </div>
+            <div class="cta">
+                <button onclick="window.location.href='#contact'">Contact Us to Learn More</button>
+            </div>
+            <span class="problem-modal-close" data-close="owner-developer-modal">&times;</span>
       </div>
     </div>
 
     <!-- Consultant Modal -->
     <div id="consultant-modal" class="problem-modal-overlay">
-      <div class="problem-modal-content">
-        <h3>Owner's Rep / Cost Consultant <span class="problem-modal-close" data-close="consultant-modal">&times;</span></h3>
-        <div class="modal-body">
-          <h4>Value-Driven PDC Discovery Map</h4>
-          <p>Are you a planning or cost consultant, program manager, or owner's representative? In just a few weeks, you'll be equipped to offer a significantly more advanced and automated process for:</p>
-          
-          <ul style="margin: 20px 40px; padding-left: 20px;">
-            <li>Feasibility studies</li>
-            <li>Budgeting</li>
-            <li>Set-based and rapid scenario planning</li>
-            <li>Cost management</li>
-            <li>And more</li>
-          </ul>
-          
-          <p>You'll also gain the ability to guide your clients in selecting the AEC team using a Win-Win, value-based approach—one that generates a significantly higher return on effort for your services.</p>
-          
-          <p>You can choose to have us operate the Building CATALYST app, receive training to operate it yourself, or use a hybrid model.</p>
-          
-          <p><strong>There's no charge for the first two of the six steps.</strong></p>
-          
-          <ol>
-            <li>
-              <strong>Planning, Design, and Construction Survey & Assessment</strong>
-              <p>We'll provide an intake form to assess your current practices and tailor a discovery plan specific to your role and clients.</p>
-              <p><a href="#" class="intake-form-link">Access the intake form here.</a></p>
-            </li>
-            
-            <li>
-              <strong>Piloting Cost Certainty and Value Potential Assessment</strong>
-              <p>Using Building CATALYST, we'll demonstrate how your clients' projects can be impartially and reliably modeled. Based on this, we'll outline a multi-stage value optimization strategy.</p>
-            </li>
-            
-            <li>
-              <strong>Piloting Cost Optimization Using the VPDC Approach</strong>
-              <p>We'll analyze recent or current projects in greater depth and pilot value-based strategies tailored to Win-Win outcomes.</p>
-            </li>
-            
-            <li>
-              <strong>VPDC Innovation Vision Casting & Strategic Plan</strong>
-              <p>Following the pilot, we'll lead a strategic planning process to reduce waste and improve quality and performance—measurably and systematically.</p>
-            </li>
-            
-            <li>
-              <strong>VPDC Design, Training, and Implementation</strong>
-              <p>We'll support the full system design and provide hands-on education and training for your core team, grounded in the Deming management philosophy and relevant technologies.</p>
-            </li>
-            
-            <li>
-              <strong>VPDC Continuous Improvement Process</strong>
-              <p>Finally, we'll assist with rolling out a measurable, continuous improvement system built on proven principles of performance, value, and data-driven management.</p>
-            </li>
-          </ol>
-          
-          <div class="modal-nav">
-            <button class="contact-us-btn">Contact Us To Learn More</button>
+        <div class="modal">
+            <div class="header">
+                <p><strong>Consultant</strong></p>
+                <h2 class="custom-serve-header">Value-Driven PDC Discovery Map</h2>
+                <p>Transform your consulting practice by integrating data-driven cost modeling with strategic advisory services. Help your clients achieve significantly better outcomes through our proven system.</p>
           </div>
+            <div class="pricing">
+                <p>Steps 1–2 are free, while steps 3–6 are available at a charge.</p>
+                <button onclick="window.location.href='#contact'">Contact Us for Pricing Details</button>
         </div>
+            <div class="progress">
+                <div class="free"></div>
+                <div class="paid"></div>
+            </div>
+            <div class="section">
+                <div class="free-steps">
+                    <h3>Free Steps (1–2)</h3>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>1. Planning, Design, and Construction Survey & Assessment</strong><br>
+                            We'll provide an intake form to assess your current practices and develop a tailored discovery plan.
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>2. Piloting Cost Certainty and Value Potential Assessment</strong><br>
+                            Using Building Catalyst, we'll model your projects impartially and propose a multi-stage value optimization strategy.
+                        </div>
+                    </div>
+                </div>
+                <div class="paid-steps">
+                    <h3 style="color: #1e3a8a">Paid Steps (3–6)</h3>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>3.</strong> Piloting Cost Optimization Using the VPDC Approach<br>
+                            We'll analyze recent or current projects in greater depth and pilot value-based strategies.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>4.</strong> VPDC Innovation Vision Casting & Strategic Plan<br>
+                            Following the pilot, we'll lead a strategic planning process to reduce waste and improve quality.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>5.</strong> VPDC Design, Training, and Implementation<br>
+                            We'll support the full system design and provide hands-on education for your core team.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>6.</strong> VPDC Continuous Improvement Process<br>
+                            Finally, we'll assist with rolling out a measurable, continuous improvement system.
+                        </div>
+                    </div>
+                </div>
+                <button class="toggle-btn" onclick="togglePaidSteps()">Show Paid Steps</button>
+            </div>
+            <div class="cta">
+                <button>Contact Us to Learn More</button>
+            </div>
+            <span class="problem-modal-close" data-close="consultant-modal">&times;</span>
       </div>
     </div>
 
     <!-- Builder Modal -->
     <div id="builder-modal" class="problem-modal-overlay">
-      <div class="problem-modal-content">
-        <h3>Builder <span class="problem-modal-close" data-close="builder-modal">&times;</span></h3>
-        <div class="modal-body">
-          <h4>Value-Driven PDC Discovery Map</h4>
-          <p>Are you working with an owner facing a serious budget challenge? That's not just a problem—it's an opportunity. By piloting the Win-Win Systems approach, you can help solve a major issue while beginning your transition away from today's fragmented, one-off, manual preconstruction methods toward a highly integrated and automated system.</p>
-          
-          <p><strong>There's no charge for the first two of the six steps.</strong></p>
-          
-          <ol>
-            <li>
-              <strong>Seed a Historical Project Database</strong>
-              <p>We'll help you record one or two of your recent real-world projects in Building CATALYST, and give you access to a few public projects as well. This will grow your confidence in cost modeling and help kick-start your digital transformation.</p>
-            </li>
-            
-            <li>
-              <strong>Piloting Cost Certainty and Value Potential Assessment</strong>
-              <p>We'll hand you the controls to Building CATALYST through a free pilot. You'll model project costs and analyze risks with our support, gaining firsthand experience in computer-driven cost modeling.</p>
-            </li>
-            
-            <li>
-              <strong>Vision, Strategic Plan, and Optimization Pilot</strong>
-              <p>On a selected project, we'll work with you to craft and present a vision and strategic plan using the Value-Driven PDC model and contracting approach—highlighting the benefits to the owner.</p>
-            </li>
-            
-            <li>
-              <strong>Piloting Cost Optimization on a Real Project</strong>
-              <p>With owner buy-in—and architect engagement where possible—we'll help implement and measure the Win-Win benefits on a live project using the full VPDC system.</p>
-            </li>
-            
-            <li>
-              <strong>Action Plan, Training, and Rollout</strong>
-              <p>We'll support you in designing and rolling out the system. That includes training a core team and applying Deming-based management principles alongside advanced technical tools.</p>
-            </li>
-          </ol>
-          
-          <div class="modal-nav">
-            <button class="contact-us-btn">Contact Us To Learn More</button>
-          </div>
+        <div class="modal">
+            <div class="header">
+                <p><strong>Builder</strong></p>
+                <h2 class="custom-serve-header">Value-Driven PDC Discovery Map</h2>
+                <p>Transform your construction business by integrating data-driven cost modeling with proven value-based delivery methods. Stand out in the market with superior results for your clients.</p>
+            </div>
+            <div class="pricing">
+                <p>Steps 1–2 are free, while steps 3–5 are available at a charge.</p>
+                <button>Contact Us for Pricing Details</button>
+            </div>
+            <div class="progress">
+                <div class="free"></div>
+                <div class="paid"></div>
+            </div>
+            <div class="section">
+                <div class="free-steps">
+                    <h3>Free Steps (1–2)</h3>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>1. Seed a Historical Project Database</strong><br>
+                            We'll help you record one or two of your recent real-world projects in Building Catalyst.
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>2. Piloting Cost Certainty and Value Potential Assessment</strong><br>
+                            We'll hand you the controls to Building Catalyst through a free pilot.
+                        </div>
+                    </div>
+                </div>
+                <div class="paid-steps">
+                    <h3>Paid Steps (3–5)</h3>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>3.</strong> Vision, Strategic Plan, and Optimization Pilot<br>
+                            We'll work with you to craft and present a vision using the Value-Driven PDC model.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>4.</strong> Piloting Cost Optimization on a Real Project<br>
+                            With owner buy-in, we'll help implement and measure the Win-Win benefits on a live project.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>5.</strong> Action Plan, Training, and Rollout<br>
+                            We'll support you in designing and rolling out the system, including core team training.
+                        </div>
+                    </div>
+                </div>
+                <button class="toggle-btn" onclick="togglePaidSteps()">Show Paid Steps</button>
+            </div>
+            <div class="cta">
+                <button>Contact Us to Learn More</button>
+            </div>
+            <span class="problem-modal-close" data-close="builder-modal">&times;</span>
         </div>
+    </div>
+
+    <!-- Architect Modal -->
+    <div id="architect-modal" class="problem-modal-overlay">
+        <div class="modal">
+            <div class="header">
+                <h2>Value-Driven Design Discovery Map</h2>
+                <p>Transform your architectural practice by integrating data-driven cost modeling with creative design. Our approach helps you deliver both aesthetic excellence and financial value to your clients.</p>
+            </div>
+            <div class="pricing">
+                <p>Steps 1–2 are free, while steps 3–6 are available at a charge.</p>
+                <button>Contact Us for Pricing Details</button>
+            </div>
+            <div class="progress">
+                <div class="free"></div>
+                <div class="paid"></div>
+            </div>
+            <div class="section">
+                <div class="free-steps">
+                    <h3>Free Steps (1–2)</h3>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>1.</strong> Design and Cost Integration Assessment<br>
+                            We'll evaluate your current design process and identify opportunities for integrating value-driven cost modeling.
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>2.</strong> Feasibility Study Pilot<br>
+                            Experience how Building Catalyst can enhance your feasibility studies with rapid, accurate cost modeling.
+                        </div>
+                    </div>
+                </div>
+                <div class="paid-steps">
+                    <h3>Paid Steps (3–6)</h3>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>3.</strong> Design Option Analysis<br>
+                            Learn to use Building Catalyst to evaluate multiple design options quickly and accurately.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>4.</strong> Value Engineering Integration<br>
+                            Implement data-driven value engineering processes that preserve design intent.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>5.</strong> Team Training and Implementation<br>
+                            Full team training on the integrated design and cost modeling system.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>6.</strong> Continuous Improvement Process<br>
+                            Establish ongoing processes for refining and optimizing your integrated approach.
+                        </div>
+                    </div>
+                </div>
+                <button class="toggle-btn" onclick="togglePaidSteps()">Show Paid Steps</button>
+            </div>
+            <div class="cta">
+                <button>Contact Us to Learn More</button>
+            </div>
+            <span class="problem-modal-close" data-close="architect-modal">&times;</span>
+        </div>
+    </div>
+
+    <!-- Educator/Researcher Modal -->
+    <div id="educator-modal" class="problem-modal-overlay">
+        <div class="modal">
+            <div class="header">
+                <h2>Construction Education Innovation Program</h2>
+                <p>Join us in revolutionizing construction education by integrating Deming's principles with modern technology and data-driven methodologies.</p>
+            </div>
+            <div class="pricing">
+                <p>Steps 1–2 are free, while steps 3–6 are available at a charge.</p>
+                <button>Contact Us for Pricing Details</button>
+            </div>
+            <div class="progress">
+                <div class="free"></div>
+                <div class="paid"></div>
+            </div>
+            <div class="section">
+                <div class="free-steps">
+                    <h3>Free Steps (1–2)</h3>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>1.</strong> Current Curriculum Assessment<br>
+                            We'll review your existing construction education program and identify opportunities for integration.
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>2.</strong> Research Opportunity Analysis<br>
+                            Explore potential research areas and funding opportunities in construction innovation.
+                        </div>
+                    </div>
+                </div>
+                <div class="paid-steps">
+                    <h3>Paid Steps (3–6)</h3>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>3.</strong> Curriculum Development<br>
+                            Create integrated modules combining Deming principles with construction management.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>4.</strong> Technology Integration<br>
+                            Implement Building Catalyst and other tools in your educational program.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>5.</strong> Research Program Development<br>
+                            Establish a comprehensive research program focused on construction innovation.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>6.</strong> Industry Partnership Program<br>
+                            Create sustainable industry partnerships for research and education.
+                        </div>
+                    </div>
+                </div>
+                <button class="toggle-btn" onclick="togglePaidSteps()">Show Paid Steps</button>
+            </div>
+            <div class="cta">
+                <button>Contact Us to Learn More</button>
+            </div>
+            <span class="problem-modal-close" data-close="educator-modal">&times;</span>
+        </div>
+    </div>
+
+    <!-- Reformer Modal -->
+    <div id="reformer-modal" class="problem-modal-overlay">
+        <div class="modal">
+            <div class="header">
+                <h2>Construction Industry Reform Initiative</h2>
+                <p>Join a network of industry leaders committed to transforming construction through data-driven, value-based approaches.</p>
+          </div>
+            <div class="pricing">
+                <p>Steps 1–2 are free, while steps 3–6 are available at a charge.</p>
+                <button>Contact Us for Pricing Details</button>
+        </div>
+            <div class="progress">
+                <div class="free"></div>
+                <div class="paid"></div>
+            </div>
+            <div class="section">
+                <div class="free-steps">
+                    <h3>Free Steps (1–2)</h3>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>1.</strong> Industry Impact Assessment<br>
+                            Analyze your potential role in driving industry-wide transformation.
+                        </div>
+                    </div>
+                    <div class="step">
+                        <span class="icon">✔️</span>
+                        <div>
+                            <strong>2.</strong> Reform Strategy Workshop<br>
+                            Participate in a collaborative session to develop reform initiatives.
+                        </div>
+                    </div>
+                </div>
+                <div class="paid-steps">
+                    <h3>Paid Steps (3–6)</h3>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>3.</strong> Leadership Coalition Building<br>
+                            Help form and lead industry coalitions for systemic change.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>4.</strong> Policy Development<br>
+                            Contribute to developing new industry standards and practices.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>5.</strong> Implementation Framework<br>
+                            Create practical frameworks for industry-wide adoption.
+                        </div>
+                    </div>
+                    <div class="step paid-step">
+                        <span class="icon">$</span>
+                        <div>
+                            <strong>6.</strong> Measurement and Validation<br>
+                            Establish metrics and processes for tracking industry transformation.
+                        </div>
+                    </div>
+                </div>
+                <button class="toggle-btn" onclick="togglePaidSteps()">Show Paid Steps</button>
+            </div>
+            <div class="cta">
+                <button>Contact Us to Learn More</button>
+            </div>
+            <span class="problem-modal-close" data-close="reformer-modal">&times;</span>
       </div>
     </div>
 

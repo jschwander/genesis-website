@@ -10714,8 +10714,8 @@ h2 {
 
 /* Ensure the modal header stays fixed at the top */
 .problem-modal-content h3 {
-  color: white;
-  background-color: #156082;
+  color: #156082;
+  text-align: center;
   font-size: 2rem;
   font-weight: bold;
   padding: 20px 40px;
@@ -11085,7 +11085,7 @@ h2::after {
   color: white;
   margin: 0 0 5px 0;
   padding: 25px 40px;
-  background-color: #156082;
+  
   font-size: 2rem;
   font-weight: bold;
   position: sticky;
@@ -11194,7 +11194,7 @@ h2::after {
   color: white;
   margin: 0 0 5px 0;
   padding: 25px 40px;
-  background-color: #156082;
+  
   font-size: 2rem;
   font-weight: bold;
   position: sticky;
@@ -11247,7 +11247,6 @@ h2::after {
   color: white;
   margin: 0 0 5px 0;
   padding: 25px 40px;
-  background-color: #156082;
   font-size: 2rem;
   font-weight: bold;
   position: sticky;
@@ -11345,11 +11344,11 @@ h2::after {
 
 #owner-developer-modal h3,
 #consultant-modal h3 {
-  color: white;
+  color: #166534;
   margin: 0;
-  padding: 20px 40px;
-  background-color: #156082;
-  font-size: 2rem;
+  padding: 10px 10px;
+  
+  font-size: 1.5rem;
   font-weight: bold;
   position: sticky;
   top: 0;

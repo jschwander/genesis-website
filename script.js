@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
         indirectTooltip.style.opacity = '1';
         indirectTooltip.style.visibility = 'visible';
     }
-    
+
     // Add click event listeners for problem cards
     problemCards.forEach(card => {
         const series = card.getAttribute('data-series');
@@ -115,23 +115,33 @@ document.addEventListener('DOMContentLoaded', function() {
             closeAllProblemModals();
             const modalId = card.getAttribute('data-modal');
             const modal = document.getElementById(modalId);
-            if (modal) modal.classList.add('active');
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.classList.add('active');
+            }
         });
     });
 
     // Close modal on close button or overlay click
     document.querySelectorAll('.problem-modal-close').forEach(btn => {
         btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             const closeId = btn.getAttribute('data-close');
             const modal = document.getElementById(closeId);
-            if (modal) modal.classList.remove('active');
-            e.stopPropagation();
+            if (modal) {
+                modal.classList.remove('active');
+                modal.style.display = 'none';
+            }
         });
     });
 
     document.querySelectorAll('.problem-modal-overlay').forEach(overlay => {
         overlay.addEventListener('click', function(e) {
-            if (e.target === overlay) overlay.classList.remove('active');
+            if (e.target === overlay) {
+                overlay.classList.remove('active');
+                overlay.style.display = 'none';
+            }
         });
     });
 
@@ -356,14 +366,14 @@ function initSimpleSlider() {
     for (let i = 0; i < slides.length; i++) {
         const dot = document.createElement('button');
         dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-        dot.classList.add('slider-dot');
+            dot.classList.add('slider-dot');
         
         if (i === 0) {
             dot.classList.add('active');
         }
         
-        dot.addEventListener('click', () => goToSlide(i));
-        dotsContainer.appendChild(dot);
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
     }
     
     const dots = dotsContainer.querySelectorAll('.slider-dot');
@@ -375,14 +385,14 @@ function initSimpleSlider() {
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
             currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            updateSlider();
+        updateSlider();
         });
     }
     
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
             currentSlide = (currentSlide + 1) % slides.length;
-            updateSlider();
+        updateSlider();
         });
     }
     
@@ -409,19 +419,19 @@ function initSimpleSlider() {
     
     // Handle window resize
     window.addEventListener('resize', () => {
-        const newContainerWidth = sliderContainer.offsetWidth;
+            const newContainerWidth = sliderContainer.offsetWidth;
         slideWidth = newContainerWidth;
-        
+            
         // Update slide widths
         slides.forEach(slide => {
             slide.style.width = `${slideWidth}px`;
         });
-        
+            
         // Update track width
         sliderTrack.style.width = `${slides.length * slideWidth}px`;
         
         // Update slider position
-        updateSlider();
+            updateSlider();
     });
 }
 
@@ -442,49 +452,49 @@ window.addEventListener('scroll', () => {
 
 // Video Modal Functionality
 document.addEventListener('DOMContentLoaded', () => {
-    const videoModal = document.getElementById('videoModal');
-    const videoFrame = document.getElementById('videoFrame');
-    const closeModal = document.querySelector('.close-modal');
-    const watchButton = document.querySelector('.btn.primary');
+const videoModal = document.getElementById('videoModal');
+const videoFrame = document.getElementById('videoFrame');
+const closeModal = document.querySelector('.close-modal');
+const watchButton = document.querySelector('.btn.primary');
 
-    // Replace this URL with your YouTube video URL
-    const videoUrl = 'https://www.youtube.com/embed/tDu47czfwiI';
+// Replace this URL with your YouTube video URL
+const videoUrl = 'https://www.youtube.com/embed/tDu47czfwiI';
 
     if (watchButton) {
-        watchButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            videoFrame.src = videoUrl;
-            videoModal.style.display = 'flex';
-            setTimeout(() => {
-                videoModal.classList.add('show');
-            }, 10);
-        });
+watchButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    videoFrame.src = videoUrl;
+    videoModal.style.display = 'flex';
+    setTimeout(() => {
+        videoModal.classList.add('show');
+    }, 10);
+});
     }
 
     if (closeModal) {
-        closeModal.addEventListener('click', () => {
-            videoModal.classList.remove('show');
-            setTimeout(() => {
-                videoModal.style.display = 'none';
-                videoFrame.src = '';
-            }, 300);
-        });
+closeModal.addEventListener('click', () => {
+    videoModal.classList.remove('show');
+    setTimeout(() => {
+        videoModal.style.display = 'none';
+        videoFrame.src = '';
+    }, 300);
+});
     }
 
-    // Close modal when clicking outside the video
+// Close modal when clicking outside the video
     if (videoModal) {
-        videoModal.addEventListener('click', (e) => {
-            if (e.target === videoModal) {
-                closeModal.click();
-            }
-        });
+videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
+        closeModal.click();
+    }
+});
     }
 
-    // Close modal with escape key
-    document.addEventListener('keydown', (e) => {
+// Close modal with escape key
+document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && videoModal?.classList.contains('show')) {
-            closeModal.click();
-        }
+        closeModal.click();
+    }
     });
 });
 
@@ -626,9 +636,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (scrollIndicator) {
         scrollIndicator.addEventListener('click', () => {
             document.querySelector('#problem')?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        behavior: 'smooth',
+        block: 'start'
+    });
         });
     }
 });
@@ -641,12 +651,12 @@ window.addEventListener('scroll', () => {
 
 // Initial check for elements in view
 document.addEventListener('DOMContentLoaded', () => {
-    handleScrollAnimations();
-    updateScrollProgress();
-    
-    // Add hover effects to cards and interactive elements
-    document.querySelectorAll('.problem-card, .role-card, .solution-point').forEach(card => {
-        card.classList.add('hover-lift', 'hover-glow');
+handleScrollAnimations();
+updateScrollProgress();
+
+// Add hover effects to cards and interactive elements
+document.querySelectorAll('.problem-card, .role-card, .solution-point').forEach(card => {
+    card.classList.add('hover-lift', 'hover-glow');
     });
 });
 
@@ -654,8 +664,8 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('scroll', () => {
     const hero = document.querySelector('.hero');
     if (hero) {
-        const scrolled = window.pageYOffset;
-        hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
+    const scrolled = window.pageYOffset;
+    hero.style.backgroundPositionY = `${scrolled * 0.5}px`;
     }
 });
 
@@ -686,7 +696,10 @@ function calculateWasteArea() {
 
 // Problem Modal Popup Logic
 function closeAllProblemModals() {
-    document.querySelectorAll('.problem-modal-overlay').forEach(m => m.classList.remove('active'));
+    document.querySelectorAll('.problem-modal-overlay').forEach(modal => {
+        modal.classList.remove('active');
+        modal.style.display = 'none';
+    });
 }
 
 // Owner/Developer Modal
@@ -745,4 +758,68 @@ document.addEventListener('DOMContentLoaded', function() {
             modalExists: !!ownerDeveloperModal 
         });
     }
+});
+
+// Function to toggle paid steps visibility in owner/developer modal
+function togglePaidSteps() {
+    const paidSteps = document.querySelector('.paid-steps');
+    const toggleBtn = document.querySelector('.toggle-btn');
+    if (paidSteps.classList.contains('active')) {
+        paidSteps.classList.remove('active');
+        toggleBtn.textContent = 'Show Paid Steps';
+    } else {
+        paidSteps.classList.add('active');
+        toggleBtn.textContent = 'Hide Paid Steps';
+    }
+}
+
+function togglePaidSteps(event) {
+    const modal = event.target.closest('.modal');
+    const paidSteps = modal.querySelector('.paid-steps');
+    const toggleBtn = event.target;
+    
+    if (paidSteps.classList.contains('active')) {
+        paidSteps.classList.remove('active');
+        toggleBtn.textContent = 'Show Paid Steps';
+    } else {
+        paidSteps.classList.add('active');
+        toggleBtn.textContent = 'Hide Paid Steps';
+    }
+}
+
+// Add click event listeners for all modal links
+document.addEventListener('DOMContentLoaded', function() {
+    const modalLinks = document.querySelectorAll('.role-card .learn-more');
+    
+    modalLinks.forEach(link => {
+        const roleCard = link.closest('.role-card');
+        const role = roleCard.querySelector('h3').textContent.toLowerCase().split(' ')[0];
+        const modalId = `${role}-modal`;
+        
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.classList.add('active');
+            }
+        });
+    });
+
+    // Add click event listeners for all toggle buttons
+    const toggleButtons = document.querySelectorAll('.toggle-btn');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', togglePaidSteps);
+    });
+
+    // Close modal when clicking outside or on close button
+    const modals = document.querySelectorAll('.problem-modal-overlay');
+    modals.forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal || e.target.classList.contains('problem-modal-close')) {
+                modal.style.display = 'none';
+                modal.classList.remove('active');
+            }
+        });
+    });
 });

@@ -1,0 +1,337 @@
+/* Common Modal Styles */
+.modal {
+    width: 650px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    padding: 30px;
+    margin: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a2a44;
+    margin: 0 0 10px;
+}
+
+.header p {
+    font-size: 16px;
+    color: #5a6a88;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.pricing {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #f8faff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.pricing p {
+    font-size: 14px;
+    color: #1a2a44;
+    margin: 0 0 10px;
+}
+
+.pricing button {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.pricing button:hover {
+    background-color: #152e6f;
+}
+
+.progress {
+    width: 100%;
+    height: 6px;
+    background-color: #e0e0e0;
+    margin: 20px 0;
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+}
+
+.progress .free {
+    background: linear-gradient(90deg, #166534, #2a7040);
+    height: 100%;
+    width: 33%;
+}
+
+.progress .paid {
+    background: linear-gradient(90deg, #1e3a8a, #3b5cba);
+    height: 100%;
+    width: 67%;
+}
+
+.section {
+    margin-bottom: 15px;
+}
+
+.section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    color: #1a2a44;
+}
+
+.free-steps, .paid-steps {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease;
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.paid-steps {
+    display: none;
+}
+
+.paid-steps.active {
+    display: block;
+}
+
+.step {
+    font-size: 14px;
+    color: #5a6a88;
+    margin: 10px 0;
+    display: flex;
+    align-items: flex-start;
+    padding: 0;
+}
+
+.step strong {
+    font-weight: 600;
+    color: #1a2a44;
+    margin-right: 5px;
+}
+
+.step .icon {
+    font-size: 18px;
+    margin-right: 10px;
+    line-height: 20px;
+}
+
+.free-step .icon {
+    color: #166534;
+}
+
+.paid-step .icon {
+    color: #1e3a8a;
+}
+
+.link {
+    color: #166534;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.link:hover {
+    color: #14532d;
+    text-decoration: underline;
+}
+
+.toggle-btn {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.toggle-btn:hover {
+    background-color: #152e6f;
+}
+
+.cta {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.cta button {
+    background: linear-gradient(90deg, #1e3a8a, #3b5cba);
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(30,58,138,0.3);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.cta button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(30,58,138,0.4);
+}
+
+/* Modal-specific styles */
+#architect-modal .free-steps h3,
+#architect-modal .free-step .icon {
+    color: #156082;
+}
+
+#architect-modal .free-steps {
+    background-color: #f2f9fc;
+    border-color: #d4e4e8;
+}
+
+#educator-modal .free-steps h3,
+#educator-modal .free-step .icon {
+    color: #7f7f7f;
+}
+
+#educator-modal .free-steps {
+    background-color: #f9f9f9;
+    border-color: #e0e0e0;
+}
+
+#reformer-modal .free-steps h3,
+#reformer-modal .free-step .icon {
+    color: #c00000;
+}
+
+#reformer-modal .free-steps {
+    background-color: #fff5f5;
+    border-color: #e8d4d4;
+}
+
+.modal .header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.modal .header p strong {
+    color: #2c5282;
+    font-size: 1.2rem;
+}
+
+.modal .header .custom-serve-header {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a2a44;
+    margin: 10px 0;
+}
+
+.modal .section h3 {
+    background-color: #2c5282;
+    color: white !important;
+    padding: 15px 20px;
+    margin: 0;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.modal .section .free-steps {
+    background-color: #f7fafc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+}
+
+.modal .section .free-steps .step {
+    padding: 15px 20px;
+}
+
+.modal .section .paid-steps {
+    background-color: #f7fafc;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    display: none;
+}
+
+.modal .section .paid-steps.active {
+    display: block;
+}
+
+#architect-modal .free-steps h3,
+#educator-modal .free-steps h3,
+#reformer-modal .free-steps h3,
+#builder-modal .free-steps h3,
+#consultant-modal .free-steps h3 {
+    color: white !important;
+}
+
+/* Remove all modal-specific color overrides */
+#architect-modal .free-steps,
+#builder-modal .free-steps,
+#consultant-modal .free-steps,
+#educator-modal .free-steps,
+#reformer-modal .free-steps {
+    background-color: #f7fafc !important;
+    border: none !important;
+}
+
+#architect-modal .free-steps h3,
+#builder-modal .free-steps h3,
+#consultant-modal .free-steps h3,
+#educator-modal .free-steps h3,
+#reformer-modal .free-steps h3 {
+    background-color: #2c5282 !important;
+    color: white !important;
+}
+
+.problem-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.problem-modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+.problem-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+    background: none;
+    border: none;
+    padding: 5px;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.problem-modal-close:hover {
+    color: #333;
+} 
