@@ -11078,7 +11078,7 @@ h2::after {
   max-width: 800px;
   padding: 0 0 40px 0;
   overflow-y: auto;
-  max-height: 90vh;
+  max-height: 50vh;
 }
 
 #owner-developer-modal h3 {

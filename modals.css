@@ -311,6 +311,7 @@
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.3s ease;
+    max-height: 80vh;
 }
 
 .problem-modal-overlay.active {

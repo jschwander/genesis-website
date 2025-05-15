@@ -766,10 +766,10 @@ function togglePaidSteps() {
     const toggleBtn = document.querySelector('.toggle-btn');
     if (paidSteps.classList.contains('active')) {
         paidSteps.classList.remove('active');
-        toggleBtn.textContent = 'Show Paid Steps';
+        toggleBtn.textContent = 'More...';
     } else {
         paidSteps.classList.add('active');
-        toggleBtn.textContent = 'Hide Paid Steps';
+        toggleBtn.textContent = 'Less...';
     }
 }
 
@@ -780,10 +780,10 @@ function togglePaidSteps(event) {
     
     if (paidSteps.classList.contains('active')) {
         paidSteps.classList.remove('active');
-        toggleBtn.textContent = 'Show Paid Steps';
+        toggleBtn.textContent = 'More...';
     } else {
         paidSteps.classList.add('active');
-        toggleBtn.textContent = 'Hide Paid Steps';
+        toggleBtn.textContent = 'Less...';
     }
 }
 
@@ -823,3 +823,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function toggleExpandableContent(linkElement) {
+    const content = linkElement.nextElementSibling;
+    if (content.classList.contains('expandable-content')) {
+        content.classList.toggle('show');
+        linkElement.textContent = content.classList.contains('show') ? 'Less...' : 'More...';
+    }
+}
