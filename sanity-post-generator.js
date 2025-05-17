@@ -35,6 +35,16 @@ function slugify(text) {
     .replace(/\-\-+/g, '-');     // Replace multiple - with single -
 }
 
+// Helper function to escape HTML content
+function escapeHtml(unsafe) {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 // Fetch all posts from Sanity
 function fetchAllPosts() {
   return new Promise((resolve, reject) => {
@@ -44,8 +54,16 @@ function fetchAllPosts() {
         title,
         slug,
         publishedAt,
+        _updatedAt,
+        excerpt,
         "categories": categories[]->title,
-        "author": author->name
+        "author": author->name,
+        "mainImage": mainImage.asset->url,
+        body[0] {
+          children[0] {
+            text
+          }
+        }
       }
     `);
     
@@ -101,16 +119,69 @@ function generatePostFile(post, template) {
     // Replace placeholder content with actual post data
     let fileContent = template;
     
-    // Replace title
+    // Get description from excerpt or first text block
+    const description = escapeHtml(
+      post.excerpt || 
+      (post.body?.[0]?.children?.[0]?.text) || 
+      'Read this article on Genesis Building Company'
+    ).trim();
+
+    // Get image URL and ensure it's absolute
+    const imageUrl = post.mainImage 
+      ? (post.mainImage.startsWith('http') ? post.mainImage : `https://cdn.sanity.io${post.mainImage}`)
+      : 'https://www.genesisbuildingco.com/images/default-blog-image.jpg';
+
+    // Replace meta tags with properly escaped values
+    const metaReplacements = {
+      title: escapeHtml(post.title),
+      description: description,
+      url: `https://www.genesisbuildingco.com/blog/${post.slug.current}`,
+      image: imageUrl,
+      publishDate: post.publishedAt || post._updatedAt,
+      author: escapeHtml(post.author || 'Genesis Building Company')
+    };
+
+    // Replace title tag
     fileContent = fileContent.replace(
       /<title>.*?<\/title>/,
-      `<title>${post.title} - Genesis Building Company</title>`
+      `<title>${metaReplacements.title} - Genesis Building Company</title>`
+    );
+
+    // Replace all Open Graph meta tags
+    fileContent = fileContent.replace(
+      /<meta property="og:title" content=".*?"/,
+      `<meta property="og:title" content="${metaReplacements.title}"`
     );
     
+    fileContent = fileContent.replace(
+      /<meta property="og:description" content=".*?"/,
+      `<meta property="og:description" content="${metaReplacements.description}"`
+    );
+    
+    fileContent = fileContent.replace(
+      /<meta property="og:url" content=".*?"/,
+      `<meta property="og:url" content="${metaReplacements.url}"`
+    );
+    
+    fileContent = fileContent.replace(
+      /<meta property="og:image" content=".*?"/,
+      `<meta property="og:image" content="${metaReplacements.image}"`
+    );
+    
+    fileContent = fileContent.replace(
+      /<meta property="article:published_time" content=".*?"/,
+      `<meta property="article:published_time" content="${metaReplacements.publishDate}"`
+    );
+    
+    fileContent = fileContent.replace(
+      /<meta property="article:author" content=".*?"/,
+      `<meta property="article:author" content="${metaReplacements.author}"`
+    );
+
     // Replace blog post title
     fileContent = fileContent.replace(
       /<h1 class="blog-post-title">.*?<\/h1>/,
-      `<h1 class="blog-post-title">${post.title}</h1>`
+      `<h1 class="blog-post-title">${metaReplacements.title}</h1>`
     );
     
     // Replace date if available
@@ -134,10 +205,10 @@ function generatePostFile(post, template) {
     if (post.categories && post.categories.length > 0) {
       fileContent = fileContent.replace(
         /<span>Construction Costs<\/span>/,
-        `<span>${post.categories[0]}</span>`
+        `<span>${escapeHtml(post.categories[0])}</span>`
       );
     }
-    
+
     // Write the file
     fs.writeFile(filePath, fileContent, 'utf8', (err) => {
       if (err) {
