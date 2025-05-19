@@ -109,7 +109,10 @@
             border-radius: 12px;
             padding: 0 !important;
             overflow: hidden;
-            margin: 20px auto;
+            margin: 0 auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         .architect-header {
@@ -156,9 +159,10 @@
         }
 
         .architect-content {
-            padding: 25px 45px;
-            max-height: calc(100vh - 65px);
+            flex: 1 1 auto;
             overflow-y: auto;
+            max-height: none;
+            padding: 25px 45px;
         }
 
         .bim-quote {
@@ -221,6 +225,25 @@
             color: #999;
             cursor: pointer;
             z-index: 1001;
+        }
+
+        .schedule-demo-btn {
+            background: #156082;
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 14px 36px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 32px auto 0 auto;
+            display: block;
+            box-shadow: 0 2px 8px rgba(21,96,130,0.08);
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .schedule-demo-btn:hover {
+            background: #1e3a8a;
+            box-shadow: 0 4px 16px rgba(21,96,130,0.15);
         }
     </style>
 </head>
@@ -868,35 +891,38 @@
                 </div>
                 <div class="title-section">
                     <h2>Architect</h2>
+                    
                 </div>
             </div>
             
             <div class="architect-content">
+                <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Making the original BIM vision possible</p>
                 <div class="bim-quote">
                     <blockquote>
-                        "Building Information Modeling (BIM) is a digital representation of physical and functional characteristics of a facility.
-                        <br><br>
+                       <br> "Building Information Modeling (BIM) is a digital representation of physical and functional characteristics of a facility.
+                        <br>
                         A BIM is a shared knowledge resource for information about a facility forming a reliable basis for decisions during its life-cycle; defined as existing from earliest conception to demolition."
                     </blockquote>
                     <cite>US National Building Information Modeling Standard</cite>
                 </div>
 
                 <div class="catalyst-description">
-                    <p>Autodesk REVIT provides part 1 to this BIM vision. Genesis technology affiliate, Building CATALYST, provides part 2. CATALYST and REVIT, combined with Value-driven PDC (Planning, Design, and Construction) provide many benefits to the architect and engineer:</p>
+                    <p>This knowledge oriented BIM vision, together with a dynamically integrated version of today's design oriented BIM is ready to  transform the PDC (Planning, Design, and Construction) process. Building CATALYST provides the knowledge oriented BIM and, when combined with a value-driven, win-win suite of contracting forms, will provide many benefits to the architect and engineer, including:
+                    </p>
                     
                     <ol>
-                        <li>Offer multiple, better program/design solutions, in a fraction of the time that it currently takes to produce just one.</li>
-                        <li>End the tedious, seemingly endless, meeting-laden cycle: present, discuss, price, review, re-present, re-discuss, re-price, and then repeat. Cut the monthly cycle times into days.</li>
-                        <li>Standardize, integrate, and automate within you company and across the project team to eliminate layers upon layers of waste in time and cost.</li>
-                        <li>Generate far greater return-on-effort.</li>
+                        <li><strong>RAPID SCENARIO PLANNING </strong>- Offer multiple, program/design solutions, in a fraction of the time that it currently takes to produce just one.</li>
+                        <li><strong>MORE OUTSTANDING DESIGN </strong>- As uncertainty and waste are removed, the opportunity to present and afford more beautiful and elegant designs are enhanced.</li>
+                        <li><strong>STREAMLINE DESIGN DEVELOPMENT </strong>- End the tedious, seemingly endless, meeting-laden cycle: present, discuss, price, review, re-present, re-discuss, re-price, and then repeat. Cut the monthly cycle times into days.</li>
+                        <li><strong>STREAMLINE DESIGN EXECUTION</strong>, integrate, and automate within your company and across the project team to eliminate layers upon layers of waste in time and cost.</li>
+                        <li><strong>INCREASE PROFIT</strong> - As value-driven, win-win design and construction grows, so will your return-on-effort.</li>
                     </ol>
 
                     <p>In the matter of a few days, you can experience the power of this BIM vision to transform the planning, design, and construction of buildings.</p>
                 </div>
 
                 <div class="action-section">
-                    <h3>The steps to get started></h3>
-                    <h3>Contact ></h3>
+                    <button class="schedule-demo-btn" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); document.getElementById('architect-modal').style.display='none'; document.getElementById('architect-modal').classList.remove('active');">Schedule a Demo</button>
                 </div>
             </div>
 
