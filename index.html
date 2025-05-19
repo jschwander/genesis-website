@@ -245,6 +245,38 @@
             background: #1e3a8a;
             box-shadow: 0 4px 16px rgba(21,96,130,0.15);
         }
+
+        .next-steps-btn {
+            background: #fff;
+            color: #156082;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 28px;
+            border: 2px solid #156082;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0 auto 18px auto;
+            display: block;
+            transition: background 0.2s, color 0.2s;
+        }
+        .next-steps-btn:hover {
+            background: #156082;
+            color: #fff;
+        }
+        #owner-next-steps h3 {
+            color: #1e3a8a;
+            margin-top: 18px;
+            margin-bottom: 10px;
+        }
+        #owner-next-steps ol {
+            margin-left: 1.2em;
+            margin-bottom: 18px;
+        }
+        #owner-next-steps li {
+            margin-bottom: 14px;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -662,221 +694,150 @@
 
     <!-- Owner/Developer Modal -->
     <div id="owner-developer-modal" class="problem-modal-overlay">
-        <div class="modal">
-            <div class="header">
-                
-                <h2 class="custom-serve-header">Owner /Developer</h2>
-                <p><strong>Transform the Building Process - Starting with Planning</strong></p>
-                <p>In just days, you'll experience how data can more reliably and objectively predict outcomes—especially on projects where budget, cost, and scope are out of balance. Within weeks, you can begin transforming your planning, design, and construction process. You'll even be able to simulate the impact of removing waste by shifting from cost-plus, billable-hour contracts to a value-driven, win-win system. 
-                </p>
-          </div>
-            <div class="pricing">
-                <p>We provide initial services and supporting technology at no cost. After the project assessment, we offer ongoing service and technology options based primarily on measurable value improvement.</p>
-                
-        </div>
-            <div class="progress">
-                <div class="free"></div>
-                <div class="paid"></div>
-            </div>
-            <div class="section">
-                <div class="free-steps">
-                    <h3>Initial Engagement Steps</h3>
-                    <div class="step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>1. Real Project Assessment and Example Process Improvement Map</strong><br>
-                            We will perform a detailed analysis of one of your ground-up projects—whether it's in early planning, schematic design, under construction, or recently completed. In either case, you'll gain insight into how it compares to current market conditions and where hidden variations—risks and opportunities—exist.<br>
-                            
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>2. Piloting Cost Certainty and Value Improvement Strategies</strong><br>
-                            If Step 1 involves a project in planning or schematic design, we propose recording and analyzing a second "benchmark" project to build confidence in the data. This could come from your historical records, a builder, or a designer. <span class="expand-link" onclick="toggleExpandableContent(this)"><strong>More...</strong></span>
-<div class="expandable-content">
-<br>If Step 1 involves a project under construction or recently completed, we recommend piloting the approach on a proposed or preconstruction-stage project. If both steps demonstrate value—and as the benefits of a value-driven, win-win approach to planning, design, and construction (PDC) become clearer—we'll propose an ongoing engagement supported by a customized contracting and technology framework. The following outlines a sample plan.
-</div>
-                        </div>
-                    </div>
+        <div class="modal architect-modal">
+            <div class="architect-header">
+                <div class="logo-section">
+                    <img src="images/GenesisLogo.png" alt="Genesis Logo" class="modal-logo">
                 </div>
-                <div class="paid-steps">
-                    <h3 style="color: #1e3a8a">Show Process Development and Ongoing Improvement Steps
-                    </h3>
-                    <div class="step paid-step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>3. Continue Piloting Cost Optimization Using the Value-Driven PDC Approach</strong><br>
-                            ​​Based on the first two steps, we'll continue piloting the process improvement features that offer the most value to you and your team. We'll also propose a comprehensive roadmap with alternative options—and the ability to simulate and compare those alternatives.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>4. Innovation Vision Casting & Strategic Plan</strong><br>
-                            Drawing from the specific project experience—and ideally in collaboration with other engaged teams—we'll apply what we learn to help shape the vision for future development. This will support the creation of a strategic plan and a "next-project" implementation roadmap.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>5. Value-Driven PDC Design, Training, and Implementation</strong><br>
-                            We'll support the ongoing design and rollout of the Value-Driven PDC system, providing training and hands-on implementation for your core team.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>6. Continuous Improvement Process</strong><br>
-                            We'll help implement and scale a continuous, measurable improvement process—grounded in the proven principles and methods of Deming.
-                        </div>
-                    </div>
+                <div class="title-section">
+                    <h2>Owner / Developer</h2>
                 </div>
-                <button class="toggle-btn" onclick="togglePaidSteps()">More...</button>
             </div>
-            <div class="cta">
-                <button onclick="window.location.href='#contact'">Contact Us to Learn More</button>
+            <div class="architect-content">
+                <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Making the original BIM vision possible</p>
+                <div class="bim-quote">
+                    <blockquote>
+                       <br> Construction is in an 80-year time warp - so says McKinsey in their 2017 Report - Reinventing Construction
+
+                        </blockquote>
+                    
+                </div>
+                <div class="catalyst-description">
+                    <p>In just days, you'll experience the difference in the now 88 year time-warped construction process - and one that has been transformed. Today, you can start eliminating layers of waste in time and cost. Here are a few of the many benefits that a value-driven, win-win system provides you:
+                    </p>
+                    <ol>
+                        <li><strong>TRANSFORMED PLANNING  </strong>- Rather than the weeks long cycle time it takes for feasibility studies, scope / program studies, and related budgeting - these cycles can be performed collaboratively and in real time. </li>
+                        <li><strong>TRANSFORMED PROGRAMMING</strong>- Replace one-off, Excel spread sheet space programs based on erroneous grossing factors with impartial data-informed and computerized programming models.</li>
+                        <li><strong>TRANSFORMED BUDGETING </strong>- Replace the "fox in the hen house" budgeting process with impartial, real world, data-informed time and cost models.</li>
+                        <li><strong>VARIATION (RISK and OPPORTUNITY) ANALYSIS</strong>- Apply data and the Pareto (critical few) analysis to resolve variation to better manage uncertainty, and make better informed decisions.
+                        </li>
+                        <li><strong>STREAMLINING, PROCESS and VALUE IMPROVEMENT</strong> - Apply the Toyota 5S approach experienced in transformed planning, programming, and budgeting throughout the design and construction process.
+                        </li>
+                        <li><strong>MEASURABLE WASTE REMOVAL in TIME and COST</strong> - Replace unconstrained billable-hour, allowances, contingencies, and other embedded waste with an object, computer-aided, measurement system.  
+                        </li>
+                        <li><strong>ENJOYMENT and FREEDOM</strong> - Experience the difference between a value-driven, win-win approach compared to our current tedious, oppressive, abusive, archaic, cost-driven approach.
+                        </li>
+
+                    </ol>
+                    <p>We provide initial services and supporting technology at no cost. After the project assessment, we offer ongoing service and technology options based primarily on measurable value improvement.</p>
+                </div>
+                <div class="action-section">
+                    <button class="next-steps-btn" onclick="toggleOwnerNextSteps()">Next Steps</button>
+                    <div id="owner-next-steps" style="display:none; margin-top:24px; text-align:left;">
+                        <h3>Initial Engagement Steps</h3>
+                        <ol>
+                            <li><strong>Real Project Assessment and Example Process Improvement Map</strong><br>
+                            We will perform a detailed analysis of one of your ground-up projects—whether it's in early planning, schematic design, under construction, or recently completed. In either case, you'll gain insight into how it compares to current market conditions and where hidden variations—risks and opportunities—exist.</li>
+                            <li><strong>Piloting Cost Certainty and Value Improvement Strategies</strong><br>
+                            If Step 1 involves a project in planning or schematic design, we propose recording and analyzing a second "benchmark" project to build confidence in the data. This could come from your historical records, a builder, or a designer. If Step 1 involves a project under construction or recently completed, we recommend piloting the approach on a proposed or preconstruction-stage project.<br>
+                            If both steps demonstrate value—and as the benefits of a value-driven, win-win approach to planning, design, and construction (PDC) become clearer—we'll propose an ongoing engagement supported by a customized contracting and technology framework. The following outlines a sample plan.</li>
+                        </ol>
+                        <h3>Show Process Development and Ongoing Improvement Steps</h3>
+                        <ol start="3">
+                            <li><strong>Continue Piloting Cost Optimization Using the Value-Driven PDC Approach</strong><br>
+                            ​​Based on the first two steps, we'll continue piloting the process improvement features that offer the most value to you and your team. We'll also propose a comprehensive roadmap with alternative options—and the ability to simulate and compare those alternatives.</li>
+                            <li><strong>Innovation Vision Casting & Strategic Plan</strong><br>
+                            Drawing from the specific project experience—and ideally in collaboration with other engaged teams—we'll apply what we learn to help shape the vision for future development. This will support the creation of a strategic plan and a "next-project" implementation roadmap.</li>
+                            <li><strong>Value-Driven PDC Design, Training, and Implementation</strong><br>
+                            We'll support the ongoing design and rollout of the Value-Driven PDC system, providing training and hands-on implementation for your core team.</li>
+                            <li><strong>Continuous Improvement Process</strong><br>
+                            We'll help implement and scale a continuous, measurable improvement process—grounded in the proven principles and methods of Deming.</li>
+                        </ol>
+                    </div>
+                    <button class="schedule-demo-btn" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); document.getElementById('owner-developer-modal').style.display='none'; document.getElementById('owner-developer-modal').classList.remove('active');">Schedule a Demo</button>
+                </div>
             </div>
             <span class="problem-modal-close" data-close="owner-developer-modal">&times;</span>
-      </div>
+        </div>
     </div>
 
     <!-- Consultant Modal -->
     <div id="consultant-modal" class="problem-modal-overlay">
-        <div class="modal">
-            <div class="header">
-                <p><strong>Consultant / Owner's Rep</strong></p>
-                <h2 class="custom-serve-header">Value-Driven PDC Discovery Map</h2>
-                <p>Transform your consulting practice by integrating data-driven cost modeling with strategic advisory services. Help your clients achieve significantly better outcomes through our proven system.</p>
-          </div>
-            <div class="pricing">
-                <p>Steps 1–2 are free, while steps 3–6 are available at a charge.</p>
-                <button onclick="window.location.href='#contact'">Contact Us for Pricing Details</button>
-        </div>
-            <div class="progress">
-                <div class="free"></div>
-                <div class="paid"></div>
-            </div>
-            <div class="section">
-                <div class="free-steps">
-                    <h3>Free Steps (1–2)</h3>
-                    <div class="step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>1. Planning, Design, and Construction Survey & Assessment</strong><br>
-                            We'll provide an intake form to assess your current practices and develop a tailored discovery plan.
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>2. Piloting Cost Certainty and Value Potential Assessment</strong><br>
-                            Using Building Catalyst, we'll model your projects impartially and propose a multi-stage value optimization strategy.
-                        </div>
-                    </div>
+        <div class="modal architect-modal">
+            <div class="architect-header">
+                <div class="logo-section">
+                    <img src="images/GenesisLogo.png" alt="Genesis Logo" class="modal-logo">
                 </div>
-                <div class="paid-steps">
-                    <h3 style="color: #1e3a8a">Paid Steps (3–6)</h3>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>3.</strong> Piloting Cost Optimization Using the VPDC Approach<br>
-                            We'll analyze recent or current projects in greater depth and pilot value-based strategies.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>4.</strong> VPDC Innovation Vision Casting & Strategic Plan<br>
-                            Following the pilot, we'll lead a strategic planning process to reduce waste and improve quality.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>5.</strong> VPDC Design, Training, and Implementation<br>
-                            We'll support the full system design and provide hands-on education for your core team.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>6.</strong> VPDC Continuous Improvement Process<br>
-                            Finally, we'll assist with rolling out a measurable, continuous improvement system.
-                        </div>
-                    </div>
+                <div class="title-section">
+                    <h2>Consultant</h2>
                 </div>
-                <button class="toggle-btn" onclick="togglePaidSteps()">Show Paid Steps</button>
             </div>
-            <div class="cta">
-                <button>Contact Us to Learn More</button>
+            <div class="architect-content">
+                <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Making the original BIM vision possible</p>
+                <div class="bim-quote">
+                    <blockquote>
+                       <br> "Building Information Modeling (BIM) is a digital representation of physical and functional characteristics of a facility.
+                        <br>
+                        A BIM is a shared knowledge resource for information about a facility forming a reliable basis for decisions during its life-cycle; defined as existing from earliest conception to demolition."
+                    </blockquote>
+                    <cite>US National Building Information Modeling Standard</cite>
+                </div>
+                <div class="catalyst-description">
+                    <p>This knowledge oriented BIM vision, together with a dynamically integrated version of today's design oriented BIM is ready to  transform the PDC (Planning, Design, and Construction) process. Building CATALYST provides the knowledge oriented BIM and, when combined with a value-driven, win-win suite of contracting forms, will provide many benefits to the consultant, including:
+                    </p>
+                    <ol>
+                        <li><strong>RAPID SCENARIO PLANNING </strong>- Offer multiple, program/design solutions, in a fraction of the time that it currently takes to produce just one.</li>
+                        <li><strong>MORE OUTSTANDING DESIGN </strong>- As uncertainty and waste are removed, the opportunity to present and afford more beautiful and elegant designs are enhanced.</li>
+                        <li><strong>STREAMLINE DESIGN DEVELOPMENT </strong>- End the tedious, seemingly endless, meeting-laden cycle: present, discuss, price, review, re-present, re-discuss, re-price, and then repeat. Cut the monthly cycle times into days.</li>
+                        <li><strong>STREAMLINE DESIGN EXECUTION</strong>, integrate, and automate within your company and across the project team to eliminate layers upon layers of waste in time and cost.</li>
+                        <li><strong>INCREASE PROFIT</strong> - As value-driven, win-win design and construction grows, so will your return-on-effort.</li>
+                    </ol>
+                    <p>In the matter of a few days, you can experience the power of this BIM vision to transform the planning, design, and construction of buildings.</p>
+                </div>
+                <div class="action-section">
+                    <button class="schedule-demo-btn" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); document.getElementById('consultant-modal').style.display='none'; document.getElementById('consultant-modal').classList.remove('active');">Schedule a Demo</button>
+                </div>
             </div>
             <span class="problem-modal-close" data-close="consultant-modal">&times;</span>
-      </div>
+        </div>
     </div>
 
     <!-- Builder Modal -->
     <div id="builder-modal" class="problem-modal-overlay">
-        <div class="modal">
-            <div class="header">
-                <p><strong>Builder</strong></p>
-                <h2 class="custom-serve-header">Value-Driven PDC Discovery Map</h2>
-                <p>Transform your construction business by integrating data-driven cost modeling with proven value-based delivery methods. Stand out in the market with superior results for your clients.</p>
-            </div>
-            <div class="pricing">
-                <p>Steps 1–2 are free, while steps 3–5 are available at a charge.</p>
-                <button>Contact Us for Pricing Details</button>
-            </div>
-            <div class="progress">
-                <div class="free"></div>
-                <div class="paid"></div>
-            </div>
-            <div class="section">
-                <div class="free-steps">
-                    <h3>Free Steps (1–2)</h3>
-                    <div class="step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>1. Seed a Historical Project Database</strong><br>
-                            We'll help you record one or two of your recent real-world projects in Building Catalyst.
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>2. Piloting Cost Certainty and Value Potential Assessment</strong><br>
-                            We'll hand you the controls to Building Catalyst through a free pilot.
-                        </div>
-                    </div>
+        <div class="modal architect-modal">
+            <div class="architect-header">
+                <div class="logo-section">
+                    <img src="images/GenesisLogo.png" alt="Genesis Logo" class="modal-logo">
                 </div>
-                <div class="paid-steps">
-                    <h3>Paid Steps (3–5)</h3>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>3.</strong> Vision, Strategic Plan, and Optimization Pilot<br>
-                            We'll work with you to craft and present a vision using the Value-Driven PDC model.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>4.</strong> Piloting Cost Optimization on a Real Project<br>
-                            With owner buy-in, we'll help implement and measure the Win-Win benefits on a live project.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>5.</strong> Action Plan, Training, and Rollout<br>
-                            We'll support you in designing and rolling out the system, including core team training.
-                        </div>
-                    </div>
+                <div class="title-section">
+                    <h2>Builder</h2>
                 </div>
-                <button class="toggle-btn" onclick="togglePaidSteps()">Show Paid Steps</button>
             </div>
-            <div class="cta">
-                <button>Contact Us to Learn More</button>
+            <div class="architect-content">
+                <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Making the original BIM vision possible</p>
+                <div class="bim-quote">
+                    <blockquote>
+                       <br> "Building Information Modeling (BIM) is a digital representation of physical and functional characteristics of a facility.
+                        <br>
+                        A BIM is a shared knowledge resource for information about a facility forming a reliable basis for decisions during its life-cycle; defined as existing from earliest conception to demolition."
+                    </blockquote>
+                    <cite>US National Building Information Modeling Standard</cite>
+                </div>
+                <div class="catalyst-description">
+                    <p>This knowledge oriented BIM vision, together with a dynamically integrated version of today's design oriented BIM is ready to  transform the PDC (Planning, Design, and Construction) process. Building CATALYST provides the knowledge oriented BIM and, when combined with a value-driven, win-win suite of contracting forms, will provide many benefits to the builder, including:
+                    </p>
+                    <ol>
+                        <li><strong>RAPID SCENARIO PLANNING </strong>- Offer multiple, program/design solutions, in a fraction of the time that it currently takes to produce just one.</li>
+                        <li><strong>MORE OUTSTANDING DESIGN </strong>- As uncertainty and waste are removed, the opportunity to present and afford more beautiful and elegant designs are enhanced.</li>
+                        <li><strong>STREAMLINE DESIGN DEVELOPMENT </strong>- End the tedious, seemingly endless, meeting-laden cycle: present, discuss, price, review, re-present, re-discuss, re-price, and then repeat. Cut the monthly cycle times into days.</li>
+                        <li><strong>STREAMLINE DESIGN EXECUTION</strong>, integrate, and automate within your company and across the project team to eliminate layers upon layers of waste in time and cost.</li>
+                        <li><strong>INCREASE PROFIT</strong> - As value-driven, win-win design and construction grows, so will your return-on-effort.</li>
+                    </ol>
+                    <p>In the matter of a few days, you can experience the power of this BIM vision to transform the planning, design, and construction of buildings.</p>
+                </div>
+                <div class="action-section">
+                    <button class="schedule-demo-btn" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); document.getElementById('builder-modal').style.display='none'; document.getElementById('builder-modal').classList.remove('active');">Schedule a Demo</button>
+                </div>
             </div>
             <span class="problem-modal-close" data-close="builder-modal">&times;</span>
         </div>
@@ -932,72 +893,40 @@
 
     <!-- Educator/Researcher Modal -->
     <div id="educator-modal" class="problem-modal-overlay">
-        <div class="modal">
-            <div class="header">
-                <h2>Construction Education Innovation Program</h2>
-                <p>Join us in revolutionizing construction education by integrating Deming's principles with modern technology and data-driven methodologies.</p>
-            </div>
-            <div class="pricing">
-                <p>Steps 1–2 are free, while steps 3–6 are available at a charge.</p>
-                <button>Contact Us for Pricing Details</button>
-            </div>
-            <div class="progress">
-                <div class="free"></div>
-                <div class="paid"></div>
-            </div>
-            <div class="section">
-                <div class="free-steps">
-                    <h3>Free Steps (1–2)</h3>
-                    <div class="step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>1.</strong> Current Curriculum Assessment<br>
-                            We'll review your existing construction education program and identify opportunities for integration.
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>2.</strong> Research Opportunity Analysis<br>
-                            Explore potential research areas and funding opportunities in construction innovation.
-                        </div>
-                    </div>
+        <div class="modal architect-modal">
+            <div class="architect-header">
+                <div class="logo-section">
+                    <img src="images/GenesisLogo.png" alt="Genesis Logo" class="modal-logo">
                 </div>
-                <div class="paid-steps">
-                    <h3>Paid Steps (3–6)</h3>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>3.</strong> Curriculum Development<br>
-                            Create integrated modules combining Deming principles with construction management.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>4.</strong> Technology Integration<br>
-                            Implement Building Catalyst and other tools in your educational program.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>5.</strong> Research Program Development<br>
-                            Establish a comprehensive research program focused on construction innovation.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>6.</strong> Industry Partnership Program<br>
-                            Create sustainable industry partnerships for research and education.
-                        </div>
-                    </div>
+                <div class="title-section">
+                    <h2>Educator / Researcher</h2>
                 </div>
-                <button class="toggle-btn" onclick="togglePaidSteps()">Show Paid Steps</button>
             </div>
-            <div class="cta">
-                <button>Contact Us to Learn More</button>
+            <div class="architect-content">
+                <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Making the original BIM vision possible</p>
+                <div class="bim-quote">
+                    <blockquote>
+                       <br> "Building Information Modeling (BIM) is a digital representation of physical and functional characteristics of a facility.
+                        <br>
+                        A BIM is a shared knowledge resource for information about a facility forming a reliable basis for decisions during its life-cycle; defined as existing from earliest conception to demolition."
+                    </blockquote>
+                    <cite>US National Building Information Modeling Standard</cite>
+                </div>
+                <div class="catalyst-description">
+                    <p>This knowledge oriented BIM vision, together with a dynamically integrated version of today's design oriented BIM is ready to  transform the PDC (Planning, Design, and Construction) process. Building CATALYST provides the knowledge oriented BIM and, when combined with a value-driven, win-win suite of contracting forms, will provide many benefits to the educator/researcher, including:
+                    </p>
+                    <ol>
+                        <li><strong>RAPID SCENARIO PLANNING </strong>- Offer multiple, program/design solutions, in a fraction of the time that it currently takes to produce just one.</li>
+                        <li><strong>MORE OUTSTANDING DESIGN </strong>- As uncertainty and waste are removed, the opportunity to present and afford more beautiful and elegant designs are enhanced.</li>
+                        <li><strong>STREAMLINE DESIGN DEVELOPMENT </strong>- End the tedious, seemingly endless, meeting-laden cycle: present, discuss, price, review, re-present, re-discuss, re-price, and then repeat. Cut the monthly cycle times into days.</li>
+                        <li><strong>STREAMLINE DESIGN EXECUTION</strong>, integrate, and automate within your company and across the project team to eliminate layers upon layers of waste in time and cost.</li>
+                        <li><strong>INCREASE PROFIT</strong> - As value-driven, win-win design and construction grows, so will your return-on-effort.</li>
+                    </ol>
+                    <p>In the matter of a few days, you can experience the power of this BIM vision to transform the planning, design, and construction of buildings.</p>
+                </div>
+                <div class="action-section">
+                    <button class="schedule-demo-btn" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); document.getElementById('educator-modal').style.display='none'; document.getElementById('educator-modal').classList.remove('active');">Schedule a Demo</button>
+                </div>
             </div>
             <span class="problem-modal-close" data-close="educator-modal">&times;</span>
         </div>
@@ -1005,75 +934,43 @@
 
     <!-- Reformer Modal -->
     <div id="reformer-modal" class="problem-modal-overlay">
-        <div class="modal">
-            <div class="header">
-                <h2>Construction Industry Reform Initiative</h2>
-                <p>Join a network of industry leaders committed to transforming construction through data-driven, value-based approaches.</p>
-          </div>
-            <div class="pricing">
-                <p>Steps 1–2 are free, while steps 3–6 are available at a charge.</p>
-                <button>Contact Us for Pricing Details</button>
-        </div>
-            <div class="progress">
-                <div class="free"></div>
-                <div class="paid"></div>
-            </div>
-            <div class="section">
-                <div class="free-steps">
-                    <h3>Free Steps (1–2)</h3>
-                    <div class="step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>1.</strong> Industry Impact Assessment<br>
-                            Analyze your potential role in driving industry-wide transformation.
-                        </div>
-                    </div>
-                    <div class="step">
-                        <span class="icon">✔️</span>
-                        <div>
-                            <strong>2.</strong> Reform Strategy Workshop<br>
-                            Participate in a collaborative session to develop reform initiatives.
-                        </div>
-                    </div>
+        <div class="modal architect-modal">
+            <div class="architect-header">
+                <div class="logo-section">
+                    <img src="images/GenesisLogo.png" alt="Genesis Logo" class="modal-logo">
                 </div>
-                <div class="paid-steps">
-                    <h3>Paid Steps (3–6)</h3>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>3.</strong> Leadership Coalition Building<br>
-                            Help form and lead industry coalitions for systemic change.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>4.</strong> Policy Development<br>
-                            Contribute to developing new industry standards and practices.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>5.</strong> Implementation Framework<br>
-                            Create practical frameworks for industry-wide adoption.
-                        </div>
-                    </div>
-                    <div class="step paid-step">
-                        <span class="icon">$</span>
-                        <div>
-                            <strong>6.</strong> Measurement and Validation<br>
-                            Establish metrics and processes for tracking industry transformation.
-                        </div>
-                    </div>
+                <div class="title-section">
+                    <h2>Reformer</h2>
                 </div>
-                <button class="toggle-btn" onclick="togglePaidSteps()">Show Paid Steps</button>
             </div>
-            <div class="cta">
-                <button>Contact Us to Learn More</button>
+            <div class="architect-content">
+                <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Making the original BIM vision possible</p>
+                <div class="bim-quote">
+                    <blockquote>
+                       <br> "Building Information Modeling (BIM) is a digital representation of physical and functional characteristics of a facility.
+                        <br>
+                        A BIM is a shared knowledge resource for information about a facility forming a reliable basis for decisions during its life-cycle; defined as existing from earliest conception to demolition."
+                    </blockquote>
+                    <cite>US National Building Information Modeling Standard</cite>
+                </div>
+                <div class="catalyst-description">
+                    <p>This knowledge oriented BIM vision, together with a dynamically integrated version of today's design oriented BIM is ready to  transform the PDC (Planning, Design, and Construction) process. Building CATALYST provides the knowledge oriented BIM and, when combined with a value-driven, win-win suite of contracting forms, will provide many benefits to the reformer, including:
+                    </p>
+                    <ol>
+                        <li><strong>RAPID SCENARIO PLANNING </strong>- Offer multiple, program/design solutions, in a fraction of the time that it currently takes to produce just one.</li>
+                        <li><strong>MORE OUTSTANDING DESIGN </strong>- As uncertainty and waste are removed, the opportunity to present and afford more beautiful and elegant designs are enhanced.</li>
+                        <li><strong>STREAMLINE DESIGN DEVELOPMENT </strong>- End the tedious, seemingly endless, meeting-laden cycle: present, discuss, price, review, re-present, re-discuss, re-price, and then repeat. Cut the monthly cycle times into days.</li>
+                        <li><strong>STREAMLINE DESIGN EXECUTION</strong>, integrate, and automate within your company and across the project team to eliminate layers upon layers of waste in time and cost.</li>
+                        <li><strong>INCREASE PROFIT</strong> - As value-driven, win-win design and construction grows, so will your return-on-effort.</li>
+                    </ol>
+                    <p>In the matter of a few days, you can experience the power of this BIM vision to transform the planning, design, and construction of buildings.</p>
+                </div>
+                <div class="action-section">
+                    <button class="schedule-demo-btn" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); document.getElementById('reformer-modal').style.display='none'; document.getElementById('reformer-modal').classList.remove('active');">Schedule a Demo</button>
+                </div>
             </div>
             <span class="problem-modal-close" data-close="reformer-modal">&times;</span>
-      </div>
+        </div>
     </div>
 
     <section id="philosophy" class="section scroll-animation fade-in-left">
@@ -1376,6 +1273,15 @@
             console.error('Architect link or modal not found');
         }
     });
+
+    function toggleOwnerNextSteps() {
+        var el = document.getElementById('owner-next-steps');
+        if (el.style.display === 'none') {
+            el.style.display = 'block';
+        } else {
+            el.style.display = 'none';
+        }
+    }
     </script>
 </body>
 </html> 
