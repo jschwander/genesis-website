@@ -11281,6 +11281,7 @@ h2::after {
   font-size: 1.1rem;
 }
 
+
 #consultant-modal li p {
   margin: 0 0 10px 0;
 }
@@ -11332,7 +11333,18 @@ h2::after {
   color: #f0f0f0;
   text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
-
+#builder-modal li strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #156082;
+    font-size: 1.1rem;
+  }
+  #architect-modal li strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #156082;
+    font-size: 1.1rem;
+  }
 #owner-developer-modal .problem-modal-content,
 #consultant-modal .problem-modal-content {
   max-width: 1000px;
@@ -11344,7 +11356,7 @@ h2::after {
 
 #owner-developer-modal h3,
 #consultant-modal h3 {
-  color: #166534;
+  color: rgb(21, 96, 130);
   margin: 0;
   padding: 10px 10px;
   
