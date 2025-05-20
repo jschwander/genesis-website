@@ -1027,7 +1027,7 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
     </div>
 
     <!-- Reformer Modal -->
-    <div id="reformer-modal" class="problem-modal-overlay">
+    <div id="thought-leader-modal" class="problem-modal-overlay">
         <div class="modal architect-modal">
             <div class="architect-header">
                 <div class="logo-section">
@@ -1060,10 +1060,10 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
                     <p>If so, please reach out. We'd love to start the conversation.</p>
                 </div>
                 <div class="action-section">
-                    <button class="schedule-demo-btn" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); document.getElementById('reformer-modal').style.display='none'; document.getElementById('reformer-modal').classList.remove('active');">Join Our Movement Today!</button>
+                    <button class="schedule-demo-btn" onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); document.getElementById('thought-leader-modal').style.display='none'; document.getElementById('thought-leader-modal').classList.remove('active');">Join Our Movement Today!</button>
                 </div>
             </div>
-            <span class="problem-modal-close" data-close="reformer-modal">&times;</span>
+            <span class="problem-modal-close" data-close="thought-leader-modal">&times;</span>
         </div>
     </div>
 
@@ -1357,6 +1357,43 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
             });
         } else {
             console.error('Architect link or modal not found');
+        }
+
+        // Handle Thought Leader modal
+        const thoughtLeaderLink = document.querySelector('.roles-grid .role-card:nth-child(6) .learn-more');
+        const thoughtLeaderModal = document.getElementById('thought-leader-modal');
+        
+        if (thoughtLeaderLink && thoughtLeaderModal) {
+            console.log('Found link and modal for Thought Leader');
+            
+            thoughtLeaderLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Thought Leader link clicked');
+                thoughtLeaderModal.style.display = 'flex';
+                thoughtLeaderModal.classList.add('active');
+                return false;
+            });
+            
+            const closeButton = thoughtLeaderModal.querySelector('.problem-modal-close');
+            if (closeButton) {
+                closeButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Close button clicked');
+                    thoughtLeaderModal.style.display = 'none';
+                    thoughtLeaderModal.classList.remove('active');
+                });
+            }
+            
+            // Close modal when clicking outside of modal content
+            window.addEventListener('click', function(e) {
+                if (e.target === thoughtLeaderModal) {
+                    console.log('Clicked outside modal');
+                    thoughtLeaderModal.style.display = 'none';
+                    thoughtLeaderModal.classList.remove('active');
+                }
+            });
+        } else {
+            console.error('Thought Leader link or modal not found');
         }
     });
 
