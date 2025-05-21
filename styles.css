@@ -502,13 +502,13 @@ margin: 0 auto 25px
 }
 
 blockquote::before {
-    content: '"';
+    /*content: '"';
     font-size: 4rem;
     color: #156082;
     opacity: 0.2;
     position: absolute;
     top: -20px;
-    left: 20px;
+    left: 20px;*/
 }
 
 cite {
@@ -1934,15 +1934,7 @@ margin: 0 auto 25px
     position: relative;
 }
 
-blockquote::before {
-    content: '"';
-    font-size: 4rem;
-    color: #156082;
-    opacity: 0.2;
-    position: absolute;
-    top: -20px;
-    left: 20px;
-}
+
 
 cite {
     display: block;
@@ -8400,15 +8392,7 @@ margin: 0 auto 25px
     position: relative;
 }
 
-blockquote::before {
-    content: '"';
-    font-size: 4rem;
-    color: #156082;
-    opacity: 0.2;
-    position: absolute;
-    top: -20px;
-    left: 20px;
-}
+
 
 cite {
     display: block;

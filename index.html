@@ -318,6 +318,43 @@
             border: none;
             box-shadow: none;
         }
+        .problem-modal-content img {
+            cursor: zoom-in;
+        }
+        #image-lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        #image-lightbox.active {
+            display: flex;
+        }
+        #image-lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            border-radius: 12px;
+        }
+        #lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            z-index: 10001;
+            text-shadow: 0 2px 8px #000;
+        }
+        #lightbox-close:hover {
+            color: #ed3d00;
+        }
     </style>
 </head>
 <body>
@@ -527,7 +564,7 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
         <!-- Card 3 -->
         <div class="problem-modal-card" data-modal="modal3">
           <div class="icon-bg icon-bg-yellow"><i class="fas fa-sitemap"></i></div>
-          <h3>80-Year Time Warp</h3>
+          <h3>Time Warp</h3>
           <p>Construction's archaic system, unchanged for 80 years, keeps winning over progress.</p>
           <span class="card-cta">Uncover the Reality<i class="fas fa-arrow-right"></i></span>
         </div>
@@ -749,9 +786,14 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
             <div class="architect-content">
                 <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Transformation Starts with Planning</p>
                 <div class="bim-quote">
-                    <blockquote>
-                       <br> Construction is in an 80-year time warp - so says McKinsey in their 2017 Report - Reinventing Construction
-
+                    <blockquote style="border-left: 4px solid #003366; 
+                    background-color: #f4f6f9; 
+                    margin: 1.5em 0; 
+                    padding: 1em 1.5em; 
+                    font-style: italic; 
+                    font-size: 1.05em; 
+                    color: #333;">Even while other sectors from retail to manufacturing have transformed their efficiency, boosted their productivity, and embraced the digital age, construction appears to be stuck in a time warp. 
+                    <cite>McKinsey Global Institute's 2017 report</cite>
                         </blockquote>
                     
                 </div>
@@ -779,21 +821,21 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
                     <div id="owner-next-steps" style="display:none; margin-top:24px; text-align:left;">
                         <h3 class="modal-section-title">Initial Engagement Steps</h3>
                         <ol>
-                            <li><strong>Real Project Assessment and Example Process Improvement Map</strong><br>
+                            <li><strong>Real Project Assessment and Example Process Improvement Map</strong>
                             We will perform a detailed analysis of one of your ground-up projects—whether it's in early planning, schematic design, under construction, or recently completed. In either case, you'll gain insight into how it compares to current market conditions and where hidden variations—risks and opportunities—exist.</li>
-                            <li><strong>Piloting Cost Certainty and Value Improvement Strategies</strong><br>
+                            <li><strong>Piloting Cost Certainty and Value Improvement Strategies</strong>
                             If Step 1 involves a project in planning or schematic design, we propose recording and analyzing a second "benchmark" project to build confidence in the data. This could come from your historical records, a builder, or a designer. If Step 1 involves a project under construction or recently completed, we recommend piloting the approach on a proposed or preconstruction-stage project.<br>
                             If both steps demonstrate value—and as the benefits of a value-driven, win-win approach to planning, design, and construction (PDC) become clearer—we'll propose an ongoing engagement supported by a customized contracting and technology framework. The following outlines a sample plan.</li>
                         </ol>
                         <h3 class="modal-section-title">Show Process Development and Ongoing Improvement Steps</h3>
                         <ol start="3">
-                            <li><strong>Continue Piloting Cost Optimization Using the Value-Driven PDC Approach</strong><br>
+                            <li><strong>Continue Piloting Cost Optimization Using the Value-Driven PDC Approach</strong>
                             ​​Based on the first two steps, we'll continue piloting the process improvement features that offer the most value to you and your team. We'll also propose a comprehensive roadmap with alternative options—and the ability to simulate and compare those alternatives.</li>
-                            <li><strong>Innovation Vision Casting & Strategic Plan</strong><br>
+                            <li><strong>Innovation Vision Casting & Strategic Plan</strong>
                             Drawing from the specific project experience—and ideally in collaboration with other engaged teams—we'll apply what we learn to help shape the vision for future development. This will support the creation of a strategic plan and a "next-project" implementation roadmap.</li>
-                            <li><strong>Value-Driven PDC Design, Training, and Implementation</strong><br>
+                            <li><strong>Value-Driven PDC Design, Training, and Implementation</strong>
                             We'll support the ongoing design and rollout of the Value-Driven PDC system, providing training and hands-on implementation for your core team.</li>
-                            <li><strong>Continuous Improvement Process</strong><br>
+                            <li><strong>Continuous Improvement Process</strong>
                             We'll help implement and scale a continuous, measurable improvement process—grounded in the proven principles and methods of Deming.</li>
                         </ol>
                     </div>
@@ -818,12 +860,17 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
             <div class="architect-content">
                 <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Transformation Requires a System</p>
                 <div class="bim-quote">
-                    <blockquote>
-                       <br> What we need to do is learn to work in the system, by which I mean that everybody, every team, every platform, every division, every component is there not for individual competitive profit or recognition, but for contribution to the system as a whole on a win-win basis.
+                    <blockquote style="border-left: 4px solid #003366; 
+                    background-color: #f4f6f9; 
+                    margin: 1.5em 0; 
+                    padding: 1em 1.5em; 
+                    font-style: italic; 
+                    font-size: 1.05em; 
+                    color: #333;">
+                       What we need to do is learn to work in the system, by which I mean that everybody, every team, every platform, every division, every component is there not for individual competitive profit or recognition, but for contribution to the system as a whole on a win-win basis.
                         
-                    
-                    </blockquote>
                     <cite>W. Edwards Deming</cite>
+                    </blockquote>
                 </div>
                 <div class="catalyst-description">
                     <p>Our goal is to partner with you to provide a win-win alternative where your client benefits from a more certain and much lower cost, and everyone else - including you - can generate a significantly higher return on effort - by working together as a system. <br><br>The waste has become so enormous and the solution so ready - that this goal is easily attained. <strong>Today, you can start eliminating layers of waste in time and cost.</strong> Here are a few of the many benefits that a value-driven, win-win system provides your client:
@@ -851,21 +898,21 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
                     <div id="consultant-next-steps" style="display:none; margin-top:24px; text-align:left;">
                         <h3 class="modal-section-title">Initial Engagement Steps</h3>
                         <ol>
-                            <li><strong>Real Project Assessment and Example Process Improvement Map</strong><br>
+                            <li><strong>Real Project Assessment and Example Process Improvement Map</strong>
                             We will perform a detailed analysis of one of your ground-up projects—whether it's in early planning, schematic design, under construction, or recently completed. In either case, you'll gain insight into how it compares to current market conditions and where hidden variations—risks and opportunities—exist.</li>
-                            <li><strong>Piloting Cost Certainty and Value Improvement Strategies</strong><br>
+                            <li><strong>Piloting Cost Certainty and Value Improvement Strategies</strong>
                             If Step 1 involves a project in planning or schematic design, we propose recording and analyzing a second "benchmark" project to build confidence in the data. This could come from your historical records, a builder, or a designer. If Step 1 involves a project under construction or recently completed, we recommend piloting the approach on a proposed or preconstruction-stage project.<br>
                             If both steps demonstrate value—and as the benefits of a value-driven, win-win approach to planning, design, and construction (PDC) become clearer—we'll propose an ongoing engagement supported by a customized contracting and technology framework. The following outlines a sample plan.</li>
                         </ol>
                         <h3 class="modal-section-title">Show Process Development and Ongoing Improvement Steps</h3>
                         <ol start="3">
-                            <li><strong>Continue Piloting Cost Optimization Using the Value-Driven PDC Approach</strong><br>
+                            <li><strong>Continue Piloting Cost Optimization Using the Value-Driven PDC Approach</strong>
                             ​​Based on the first two steps, we'll continue piloting the process improvement features that offer the most value to you and your team. We'll also propose a comprehensive roadmap with alternative options—and the ability to simulate and compare those alternatives.</li>
-                            <li><strong>Innovation Vision Casting & Strategic Plan</strong><br>
+                            <li><strong>Innovation Vision Casting & Strategic Plan</strong>
                             Drawing from the specific project experience—and ideally in collaboration with other engaged teams—we'll apply what we learn to help shape the vision for future development. This will support the creation of a strategic plan and a "next-project" implementation roadmap.</li>
-                            <li><strong>Value-Driven PDC Design, Training, and Implementation</strong><br>
+                            <li><strong>Value-Driven PDC Design, Training, and Implementation</strong>
                             We'll support the ongoing design and rollout of the Value-Driven PDC system, providing training and hands-on implementation for your core team.</li>
-                            <li><strong>Continuous Improvement Process</strong><br>
+                            <li><strong>Continuous Improvement Process</strong>
                             We'll help implement and scale a continuous, measurable improvement process—grounded in the proven principles and methods of Deming.</li>
                         </ol>
                     </div>
@@ -890,9 +937,16 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
             <div class="architect-content">
                 <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Transformation Requires a Change in Philosophy</p>
                 <div class="bim-quote">
-                    <blockquote>A change in philosophy requires unlearning industrial thinking evident in departmentalization, scarcity of knowledge and information competitiveness.
-                       </blockquote>
-                    <cite>W. Edwards Deming</cite>
+                    <blockquote style="border-left: 4px solid #003366; 
+                    background-color: #f4f6f9; 
+                    margin: 1.5em 0; 
+                    padding: 1em 1.5em; 
+                    font-style: italic; 
+                    font-size: 1.05em; 
+                    color: #333;">A change in philosophy requires unlearning industrial thinking evident in departmentalization, scarcity of knowledge and information competitiveness.
+                    <cite>W. Edwards Deming</cite>   
+                    </blockquote>
+                    
                 </div>
                 <div class="catalyst-description">
                     <p>Our goal is to help you start removing layers of accumulated waste - turning it into lower cost for your customers, and higher profit and return-on-effort for you, This requires a change in management philosophy described throughout this site.
@@ -917,18 +971,18 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
                     <div id="builder-next-steps" style="display:none; margin-top:24px; text-align:left;">
                         <h3 class="modal-section-title">Initial Engagement Steps</h3>
                         <ol>
-                            <li><strong>Seed a Historical Project Database</strong><br>
+                            <li><strong>Seed a Historical Project Database</strong>
                                 We'll record one or two of your recent real-world projects in Building Catalyst to seed your historical data system, and gain the confidence that comes from good data and processing systems.</li>
-                            <li><strong>Piloting Cost Certainty and Value Potential Assessment</strong><br>
+                            <li><strong>Piloting Cost Certainty and Value Potential Assessment</strong>
                                 We'll work together with you in the pursuit of a new project and/or piloting Catalyst on one of your current projects. We'll train you on the use of Catalyst and transition the operation to your cost professionals.</li>
                         </ol>
                         <h3 class="modal-section-title">Show Process Development and Ongoing Improvement Steps</h3>
                         <ol start="3">
-                            <li><strong>Vision, Strategic Plan, and Optimization Pilot</strong><br>
+                            <li><strong>Vision, Strategic Plan, and Optimization Pilot</strong>
                                 We'll work with you to craft and present a vision using the Value-Driven PDC model.</li>
-                            <li><strong>Piloting Cost Optimization on a Real Project</strong><br>
+                            <li><strong>Piloting Cost Optimization on a Real Project</strong>
                                 With owner buy-in, we'll help implement and measure the Win-Win benefits on a live project.</li>
-                            <li><strong>Action Plan, Training, and Rollout</strong><br>
+                            <li><strong>Action Plan, Training, and Rollout</strong>
                                 We'll support you in designing and rolling out the system, including continued core team training.</li>
                            </ol>
                     </div>
@@ -955,12 +1009,17 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
             <div class="architect-content">
                 <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Making the original BIM vision possible</p>
                 <div class="bim-quote">
-                    <blockquote>
-                       <br> "Building Information Modeling (BIM) is a digital representation of physical and functional characteristics of a facility.
-                        <br>
-                        A BIM is a shared knowledge resource for information about a facility forming a reliable basis for decisions during its life-cycle; defined as existing from earliest conception to demolition."
+                    <blockquote style="border-left: 4px solid #003366; 
+                    background-color: #f4f6f9; 
+                    margin: 1.5em 0; 
+                    padding: 1em 1.5em; 
+                    font-style: italic; 
+                    font-size: 1.05em; 
+                    color: #333;">
+                       Building Information Modeling (BIM) is a digital representation of physical and functional characteristics of a facility. A BIM is a shared knowledge resource for information about a facility forming a reliable basis for decisions during its life-cycle; defined as existing from earliest conception to demolition.
+                        <cite>US National Building Information Modeling Standard</cite>
                     </blockquote>
-                    <cite>US National Building Information Modeling Standard</cite>
+                    
                 </div>
 
                 <div class="catalyst-description">
@@ -1001,10 +1060,17 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
             <div class="architect-content">
                 <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Transformation Requires a Knowledge System</p>
                 <div class="bim-quote">
-                    <blockquote>
-                       <br> Lack of knowledge…that is the problem…Information is not knowledge. Let's not confuse the two…The world is drowning in information but is slow in acquisition of knowledge. There is no substitute for knowledge…We are here to learn, to make a difference and to have fun.
+                    <blockquote style="border-left: 4px solid #003366; 
+                    background-color: #f4f6f9; 
+                    margin: 1.5em 0; 
+                    padding: 1em 1.5em; 
+                    font-style: italic; 
+                    font-size: 1.05em; 
+                    color: #333;">
+                       Lack of knowledge…that is the problem…Information is not knowledge. Let's not confuse the two…The world is drowning in information but is slow in acquisition of knowledge. There is no substitute for knowledge…We are here to learn, to make a difference and to have fun.
+                       <cite>W. Edwards Deming</cite>
                     </blockquote>
-                    <cite>W. Edwards Deming</cite>
+                    
                 </div>
                 <div class="catalyst-description">
                     <p>Data discoveries over the past few years call for a broader and deeper research, pursuit of knowledge, application of the scientific method for innovation, and then educating future architects, engineers, and builders.
@@ -1012,8 +1078,8 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
                         </p>
                     <ol>
                         <li><strong>DATA RESEARCH :</strong>Has the data on this site inspired you toward further data research to test the Genesis/Deming hypotheses?  </li>
-                        <li><strong>SCIENTIFIC APPROACH:</strong>Is there a credible case that Deming’s management philosophy, and scientific approach, can transform facility planning, design, and cost management?</li>
-                        <li><strong>COURSEWORK:</strong>Would you be interested in exploring the development of coursework based on the application of Deming’s management philosophy with other construction science programs and industry leaders?</li>
+                        <li><strong>SCIENTIFIC APPROACH:</strong>Is there a credible case that Deming's management philosophy, and scientific approach, can transform facility planning, design, and cost management?</li>
+                        <li><strong>COURSEWORK:</strong>Would you be interested in exploring the development of coursework based on the application of Deming's management philosophy with other construction science programs and industry leaders?</li>
                         <li><strong>APPLIED RESEARCH: </strong>Would your campus planning and facilities department be interested in piloting the alternative to cost-plus contracting, and trying out features of a Deming-based, value-driven planning, design, and delivery process?
                         </li>
                     </ol>
@@ -1041,10 +1107,17 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
             <div class="architect-content">
                 <p style="font-size: 28px; color:#1e3a8a; font-weight: bold;">Transformation Requires a Bold Leadership</p>
                 <div class="bim-quote">
-                    <blockquote>
-                       <br> The source of innovation is freedom. All we have - new knowledge, invention - comes from freedom. Discoveries and new knowledge come from freedom…Long-term commitment to new learning and new philosophy is required of any management that seeks transformation.…Our prevailing system of management has destroyed our people. People are born with intrinsic motivation, self-respect, dignity, curiosity to learn, joy in learning.
+                    <blockquote style="border-left: 4px solid #003366; 
+                    background-color: #f4f6f9; 
+                    margin: 1.5em 0; 
+                    padding: 1em 1.5em; 
+                    font-style: italic; 
+                    font-size: 1.05em; 
+                    color: #333;">
+                       The source of innovation is freedom. All we have - new knowledge, invention - comes from freedom. Discoveries and new knowledge come from freedom…Long-term commitment to new learning and new philosophy is required of any management that seeks transformation.…Our prevailing system of management has destroyed our people. People are born with intrinsic motivation, self-respect, dignity, curiosity to learn, joy in learning.
+                       <cite>W. Edwards Deming</cite>
                     </blockquote>
-                    <cite>W. Edwards Deming</cite>
+                    
                 </div>
                 <div class="catalyst-description">
                     <p>In 2003/4 the Construction Industry Institute (CII) and the Department of Commerce Bureau of Labor Statistics (BLS) released data studies comparing construction and manufacturing productivity. Then, in 2017 the McKinsey Global Institute (MGI) released a report Reinventing Construction from an exhaustive study, best captured by this quote: </p>
@@ -1119,32 +1192,32 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
 
           Do these challenges sound familiar? Or are you facing another obstacle we can help you overcome?</p>
         <div class="roles-grid">
-            <div class="role-card">
+            <div class="role-card" data-modal="owner-developer-modal">
                 <h3>Owner / Developer</h3>
                 <p>You are struggling with the budget estimates from your cost consultant or builder. You'd like an impartial valuation of the program, design, and/or cost, and options to optimize outcomes.</p>
                 <a href="#" class="learn-more" id="owner-developer-link">Learn more></a>
             </div>
-            <div class="role-card">
+            <div class="role-card" data-modal="consultant-modal">
                 <h3>Owner's Rep</h3>
                 <p>You question the builder's budget estimate or have a client that's facing a significant budget problem. You'd like either a second opinion, or to propose an alternative design and delivery method.</p>
                 <a href="#" class="learn-more">Learn more></a>
             </div>
-            <div class="role-card">
+            <div class="role-card" data-modal="architect-modal">
                 <h3>Architect</h3>
                 <p>You are providing a feasibility study with multiple building solution options that need to be considered. You'd like an impartial and credible comparative program and cost analysis for each.</p>
                 <a href="#" class="learn-more">Learn more></a>
             </div>
-            <div class="role-card">
+            <div class="role-card" data-modal="builder-modal">
                 <h3>Builder</h3>
                 <p>You have studied the data and can see that something must be done about runaway construction costs. Nothing, including lean construction as worked. A Catalyst-enabled, Systems Approach is worth considering.</p>
                 <a href="#" class="learn-more">Learn more></a>
             </div>
-            <div class="role-card">
+            <div class="role-card" data-modal="educator-modal">
                 <h3>Educator / Researcher</h3>
                 <p>You recognize that research is essential to validate Deming's principles for construction, addressing a long-standing need for innovation. A new approach to educate designers and builders is required, rooted in the philosophies and scientific methods proven in manufacturing.</p>
                 <a href="#" class="learn-more">Learn more></a>
             </div>
-            <div class="role-card">
+            <div class="role-card" data-modal="thought-leader-modal">
                 <h3>Thought Leader</h3>
                 <p>You are a thought leader in the AEC realm and would like to join other leaders to help reform the PDC process based on the proven management approaches in other sectors.</p>
                 <a href="#" class="learn-more">Learn more></a>
@@ -1188,9 +1261,14 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
         <div class="modal-content">
             <span class="close-modal" onclick="closeDataSourcesModal()">&times;</span>
             <h3>Data Sources</h3>
-            <p>The national inflation rate data can be accessed <a href="https://www.usinflationcalculator.com" target="_blank">here</a>. It provides historical inflation rates with annual figures from 1914 to present. These inflation rates are calculated using the Consumer Price Index, which is published monthly by the Bureau of Labor Statistics (BLS) of the U.S. Department of Labor.</p>
-            <p>Also shown in figure 1, is the combined building materials escalation and construction industry wage rate growth. The produce price index data is provided <a href="https://www.statista.com/statistics/195382/us-producer-price-index-for-construction-materials-and-components/" target="_blank">here</a> on the Statistica website. Wage rate growth data is provided <a href="https://fred.stlouisfed.org/series/CES2000000003" target="_blank">here</a> on the Federal Reserve Bank website.</p>
+            <p>The US Inflation Rate data can be accessed <a href="https://www.usinflationcalculator.com" target="_blank">here</a>. It provides historical inflation rates with annual figures from 1914 to present. These inflation rates are calculated using the Consumer Price Index, which is published monthly by the Bureau of Labor Statistics (BLS) of the U.S. Department of Labor.</p>
+            <p>Also shown in figure 1, is the combined building materials escalation and construction industry wage rate growth. The produce price index data is provided <a href="https://www.statista.com/statistics/195382/us-producer-price-index-for-construction-materials-and-components/" target="_blank">here</a> on the Statistica website. Wage rate growth data is provided <a href="https://fred.stlouisfed.org/series/CES2000000003" target="_blank">here</a> on the Federal Reserve Bank website.</p> Construction Analytics forms the basis of the Owner's Building Cost data and can be accessed <a href="https://edzarenski.com/" target="_blank">here</a>.
         </div>
+    </div>
+
+    <div id="image-lightbox">
+      <span id="lightbox-close">&times;</span>
+      <img id="lightbox-img" src="" alt="Full Size">
     </div>
 
     <script src="script.js?v=1.0.2"></script>
@@ -1424,6 +1502,83 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
             el.style.display = 'none';
         }
     }
+
+    // Make entire role-card clickable to open modal
+    document.querySelectorAll('.roles-grid .role-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Prevent if the click was on a link (so the link handler works)
+            if (e.target.closest('.learn-more')) return;
+            const modalId = card.getAttribute('data-modal');
+            if (modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'flex';
+                    modal.classList.add('active');
+                }
+            }
+        });
+    });
+    // Prevent double event firing for learn-more links
+    document.querySelectorAll('.roles-grid .role-card .learn-more').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    });
+    // Click-to-enlarge for images in problem modals
+    document.querySelectorAll('.problem-modal-content img').forEach(img => {
+        img.style.cursor = 'zoom-in';
+        img.addEventListener('click', function() {
+            const lightbox = document.getElementById('image-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+        });
+    });
+    document.getElementById('lightbox-close').addEventListener('click', function() {
+        const lightbox = document.getElementById('image-lightbox');
+        lightbox.classList.remove('active');
+        document.getElementById('lightbox-img').src = '';
+    });
+    document.getElementById('image-lightbox').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.remove('active');
+            document.getElementById('lightbox-img').src = '';
+        }
+    });
+    // Problem modal navigation (Next/Previous)
+    document.querySelectorAll('.problem-modal-content .modal-next, .problem-modal-content .modal-prev').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation(); // Prevent global close logic
+            // Find the current open modal
+            const currentModal = btn.closest('.problem-modal-overlay');
+            if (currentModal) {
+                currentModal.style.display = 'none';
+                currentModal.classList.remove('active');
+                console.log('Closed current modal:', currentModal.id);
+            }
+            // Open the target modal after the event loop
+            const targetId = btn.getAttribute('data-nav');
+            if (targetId) {
+                setTimeout(() => {
+                    const targetModal = document.getElementById(targetId);
+                    if (targetModal) {
+                        targetModal.style.display = 'flex';
+                        targetModal.classList.add('active');
+                        console.log('Opened target modal:', targetId);
+                    } else {
+                        console.log('Target modal not found:', targetId);
+                    }
+                }, 0);
+            }
+        });
+    });
+    // Prevent clicks inside .modal-nav from bubbling up to the overlay and closing the modal
+    document.querySelectorAll('.modal-nav').forEach(nav => {
+        nav.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    });
     </script>
 </body>
 </html> 
