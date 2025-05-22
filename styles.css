@@ -8209,7 +8209,29 @@ nav {
     background-attachment: scroll, fixed;
     box-sizing: border-box;
 }
-
+.heroblog {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(26,31,44,0.92), rgba(26,31,44,0.92)),
+        url('images/BUILDINGBACK.jpg') center center / cover no-repeat;
+    background-attachment: scroll, fixed;
+    padding: 80px 20px 0;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 200vw;
+    max-width: 100%;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    background:
+        linear-gradient(rgba(26, 31, 44, 0.92), rgba(26, 31, 44, 0.92)),
+        url('images/BUILDINGBACK.jpg') center center / cover no-repeat;
+    background-attachment: scroll, fixed;
+    box-sizing: border-box;
+}
 .hero-content {
     max-width: 1400px;
     margin: 0 auto;

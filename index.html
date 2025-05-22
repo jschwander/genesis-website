@@ -713,8 +713,9 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
           <li>But both CSI and ASTM versions are inconsistent, error-prone, and incomplete</li>
           <li>Most issues could be resolved through a consensus-building effort across owners, designers, builders, and data professionals</li>
         </ul>
-        <p>Yet when asked to collaborate, none of the builders agreed to participate. Why?<br>
-            Because any solution that creates transparency also threatens the estimator’s role and builder’s profit sources.</p>
+        <p>Yet when asked to collaborate, none of the builders agreed to participate. Why?</p>
+          <ul> <li>Uniformat has potential to set consensus data standards to integrate and automate across processes and technologies.</li></ul>
+            <p>Because any solution that creates transparency also threatens the estimator's role and builder's profit sources.
         <p>That brings us directly to Problem 4 – Cost-Based Compensation, the core driver behind construction's resistance to change.</p>
         <div class="modal-nav">
           <button class="modal-prev" data-nav="modal2">&larr; Previous</button>
@@ -728,30 +729,19 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
         <h3>Problem 4 – Cost-Based Compensation Drives Waste <span class="problem-modal-close" data-close="modal4">&times;</span></h3>
         <div class="modal-body">
         <p>A typical exam room built today in St. Louis costs about $200,000—nearly double what national inflation would justify. This isn't an anomaly—it's the result of a system where the entire supply chain profits from higher costs and more time.</p>
-        <p><strong>The root cause? Cost-plus and billable-hour compensation models.</strong><br>
-        From owner reps and architects to builders and subcontractors, everyone's revenue increases when a project takes longer or costs more.</p>
+        <p><strong>The root cause? Cost-plus and billable-hour compensation structures.</strong><br>
+            From owner reps and architects to builders and subcontractors, everyone's profit increases when a project costs more and enables more hours to be billed.</p>
         <p>This financial model is the common thread behind the other problems:</p>
-        <ul>
-          <li>There's no incentive to fix fragmentation</li>
-          <li>No urgency to eliminate waste</li>
-          <li>No motivation to standardize or improve data</li>
-        </ul>
-        <p>Instead of rewarding value, we reward volume.</p>
+       <p>Many professionals—and their companies—are trapped in a growing conflict between their intrinsic motivation to serve clients and the financial incentives that push them toward short-term profit. The result? Trailer villages of billable workers on-site, generating work for one another in a highly manual process (see Problem 3), while keeping owner reps and facility staff constantly engaged with layers of "customer service."
+
+        It's madness: cost-plus and billable-hour compensation reward inefficiency and busyness over value, fiscal responsibility, and meaningful outcomes.</p>
         <h4>A Broken Promise</h4>
         <p>Construction Management (CM) emerged in the 1970s to help owners control cost and schedule. More recently, Integrated Project Delivery (IPD) and other negotiated delivery models aimed to improve collaboration. But instead of increasing productivity, they've simply normalized inflated budgets and timelines.</p>
         <p>Builders now "solve" cost and schedule issues by inflating the baseline—padding estimates with allowances and contingencies, often shaped more by what an owner can tolerate than by real material and labor costs.</p>
         <p>Subcontractors follow suit, especially when brought on early as "trade partners." Architects, too, are financially motivated to overdesign. The result? A cooperative—but costly—project.</p>
         <p>Facility managers often accept this because they're treated well. Claims and disputes are easier to manage under bloated budgets. But behind the customer service smiles, waste has become systemic.</p>
-        <h4>A Win-Lose Game That Everyone Plays</h4>
-        <p>This system rewards the wrong outcomes:</p>
-        <ul>
-          <li>More design hours? More fees.</li>
-          <li>More scope? More markup.</li>
-          <li>Higher risk? Add allowances.</li>
-          <li>More cost? More profit.</li>
-        </ul>
-        <p>Even the most sophisticated builders can't analyze past project performance in context. There's no reliable feedback loop to improve future predictions. Yet they can produce a 1,000-line estimate from a napkin sketch—and no one questions it.</p>
-        <p>Owner reps and consultants don't have better data. So owners are left guessing, blindfolded by the same opaque system that creates the waste.</p>
+        
+        
         <h4>Deming Warned Us</h4>
         <p>"If they remember me at all," Deming once said, "I hope it's as someone who tried to prevent America from committing suicide."</p>
         <p>The construction industry is doing just that—burying value under bloated budgets, inflated designs, and misaligned incentives. With national debt surpassing $36 trillion, continuing down this path isn't just irresponsible—it's self-destructive.</p>
@@ -762,7 +752,8 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
           <li>From guesswork to data-driven planning</li>
           <li>From hidden cost to transparent value</li>
         </ul>
-        <p><strong>The only question is:<br>Who will lead the change?</strong></p>
+        <p><strong>The only question is:</strong></p>
+        <p style="text-align:center; font-size:  28px;"><strong>Who will lead the change?</strong></p>
         <div class="modal-nav">
           <button class="modal-prev" data-nav="modal3">&larr; Previous</button>
           <button class="modal-next" data-nav="modal1">Next &rarr;</button>
@@ -1571,39 +1562,6 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
         nav.addEventListener('click', function(e) {
             e.stopPropagation();
         });
-    });
-
-    document.getElementById('custom-hubspot-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const form = e.target;
-      const data = {
-        fields: [
-          { name: "firstname", value: form.firstname.value },
-          { name: "lastname", value: form.lastname.value },
-          { name: "email", value: form.email.value },
-          { name: "company", value: form.company.value }
-        ]
-      };
-
-      fetch("https://api.hsforms.com/submissions/v3/integration/submit/46701531/8bb9b57a-b3b8-440e-9a49-f20ca667e86c", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        if (response.ok) {
-          document.getElementById('form-success').style.display = 'block';
-          form.reset();
-        } else {
-          alert('There was a problem submitting the form. Please try again.');
-        }
-      })
-      .catch(() => {
-        alert('There was a problem submitting the form. Please try again.');
-      });
     });
 
     // Video Modal Functionality
