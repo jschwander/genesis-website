@@ -1227,13 +1227,16 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
 
     <section id="contact" class="section scroll-animation fade-in">
         <h2>Start your journey—connect with us today.</h2>
-        <form class="contact-form">
-            <input type="text" placeholder="Name" required>
-            <input type="text" placeholder="Role" required>
-            <input type="text" placeholder="Company" required>
-            <input type="email" placeholder="Email" required>
+        <form id="custom-hubspot-form" class="contact-form">
+            <div style="display: flex; gap: 20px;">
+                <input type="text" name="firstname" placeholder="First Name" required style="flex:1;">
+                <input type="text" name="lastname" placeholder="Last Name" required style="flex:1;">
+            </div>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="company" placeholder="Organization" required>
             <button type="submit" class="btn primary">Schedule a Free Engagement</button>
         </form>
+        <div id="form-success" style="display:none;color:green;font-size:1.2rem;margin-top:20px;">Thank you! We'll be in touch soon.</div>
     </section>
 
     <footer>
@@ -1247,15 +1250,6 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
             <p>&copy; 2025 Genesis Building Company. All rights reserved.</p>
         </div>
     </footer>
-
-    <div class="video-modal" id="videoModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <div class="video-container">
-                <iframe id="videoFrame" width="960" height="540" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
 
     <div id="dataSourcesModal" class="data-sources-modal">
         <div class="modal-content">
@@ -1578,6 +1572,80 @@ L3185 1928 L3180.3044 1943.06 L3136.4044 1958.06 L3092.4901 1978.06 L3047.1601 2
         nav.addEventListener('click', function(e) {
             e.stopPropagation();
         });
+    });
+
+    document.getElementById('custom-hubspot-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const data = {
+        fields: [
+          { name: "firstname", value: form.firstname.value },
+          { name: "lastname", value: form.lastname.value },
+          { name: "email", value: form.email.value },
+          { name: "company", value: form.company.value }
+        ]
+      };
+
+      fetch("https://api.hsforms.com/submissions/v3/integration/submit/46701531/8bb9b57a-b3b8-440e-9a49-f20ca667e86c", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (response.ok) {
+          document.getElementById('form-success').style.display = 'block';
+          form.reset();
+        } else {
+          alert('There was a problem submitting the form. Please try again.');
+        }
+      })
+      .catch(() => {
+        alert('There was a problem submitting the form. Please try again.');
+      });
+    });
+
+    // Video Modal Functionality
+    // Replace this block:
+    // const watchButton = document.querySelector('.btn.primary');
+    // With:
+    const watchButton = document.getElementById('watch-video-btn');
+    const videoModal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    const closeModal = document.querySelector('.close-modal');
+    const videoUrl = 'https://www.youtube.com/embed/tDu47czfwiI';
+    if (watchButton) {
+        watchButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            videoFrame.src = videoUrl;
+            videoModal.style.display = 'flex';
+            setTimeout(() => {
+                videoModal.classList.add('show');
+            }, 10);
+        });
+    }
+    if (closeModal) {
+        closeModal.addEventListener('click', () => {
+            videoModal.classList.remove('show');
+            setTimeout(() => {
+                videoModal.style.display = 'none';
+                videoFrame.src = '';
+            }, 300);
+        });
+    }
+    if (videoModal) {
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeModal.click();
+            }
+        });
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && videoModal?.classList.contains('show')) {
+            closeModal.click();
+        }
     });
     </script>
 </body>

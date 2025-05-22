@@ -10,22 +10,39 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form submission handling
-const contactForm = document.querySelector('.contact-form');
+// Form submission handling for HubSpot
+const contactForm = document.getElementById('custom-hubspot-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const data = Object.fromEntries(formData);
-        
-        // Here you would typically send the data to your server
-        console.log('Form submitted:', data);
-        
-        // Show success message
-        alert('Thank you for your interest! We will contact you shortly.');
-        this.reset();
+        const form = e.target;
+        const data = {
+            fields: [
+                { name: "firstname", value: form.firstname.value },
+                { name: "lastname", value: form.lastname.value },
+                { name: "email", value: form.email.value },
+                { name: "company", value: form.company.value }
+            ]
+        };
+        fetch("https://api.hsforms.com/submissions/v3/integration/submit/46701531/8bb9b57a-b3b8-440e-9a49-f20ca667e86c", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                document.getElementById('form-success').textContent = 'Thank you for reaching out! We will contact you soon.';
+                document.getElementById('form-success').style.display = 'block';
+                form.reset();
+            } else {
+                alert('There was a problem submitting the form. Please try again.');
+            }
+        })
+        .catch(() => {
+            alert('There was a problem submitting the form. Please try again.');
+        });
     });
 }
 
@@ -447,54 +464,6 @@ window.addEventListener('scroll', () => {
         if (element.getBoundingClientRect().top < window.innerHeight) {
             element.classList.add('visible');
         }
-    });
-});
-
-// Video Modal Functionality
-document.addEventListener('DOMContentLoaded', () => {
-const videoModal = document.getElementById('videoModal');
-const videoFrame = document.getElementById('videoFrame');
-const closeModal = document.querySelector('.close-modal');
-const watchButton = document.querySelector('.btn.primary');
-
-// Replace this URL with your YouTube video URL
-const videoUrl = 'https://www.youtube.com/embed/tDu47czfwiI';
-
-    if (watchButton) {
-watchButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    videoFrame.src = videoUrl;
-    videoModal.style.display = 'flex';
-    setTimeout(() => {
-        videoModal.classList.add('show');
-    }, 10);
-});
-    }
-
-    if (closeModal) {
-closeModal.addEventListener('click', () => {
-    videoModal.classList.remove('show');
-    setTimeout(() => {
-        videoModal.style.display = 'none';
-        videoFrame.src = '';
-    }, 300);
-});
-    }
-
-// Close modal when clicking outside the video
-    if (videoModal) {
-videoModal.addEventListener('click', (e) => {
-    if (e.target === videoModal) {
-        closeModal.click();
-    }
-});
-    }
-
-// Close modal with escape key
-document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && videoModal?.classList.contains('show')) {
-        closeModal.click();
-    }
     });
 });
 
