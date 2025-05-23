@@ -35,15 +35,25 @@ function portableTextToHtml(blocks) {
           // Apply marks (bold, italic, etc.)
           if (child.marks && child.marks.length > 0) {
             child.marks.forEach(mark => {
+              // Handle basic text formatting marks
               if (mark === 'strong') text = `<strong>${text}</strong>`;
               if (mark === 'em') text = `<em>${text}</em>`;
               if (mark === 'code') text = `<code>${text}</code>`;
-              // Handle link marks
-              if (mark.startsWith('link-')) {
-                const linkKey = mark.replace('link-', '');
-                const linkObj = block.markDefs.find(def => def._key === linkKey);
-                if (linkObj && linkObj.href) {
-                  text = `<a href="${linkObj.href}" target="_blank">${text}</a>`;
+              if (mark === 'sup') text = `<sup>${text}</sup>`;
+              if (mark === 'sub') text = `<sub>${text}</sub>`;
+              
+              // Handle annotations (links, colors) by checking markDefs
+              if (block.markDefs && block.markDefs.length > 0) {
+                const markDef = block.markDefs.find(def => def._key === mark);
+                if (markDef) {
+                  // Handle links
+                  if (markDef._type === 'link' && markDef.href) {
+                    text = `<a href="${markDef.href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+                  }
+                  // Handle colors
+                  if (markDef._type === 'color' && markDef.hex) {
+                    text = `<span style="color:${markDef.hex}">${text}</span>`;
+                  }
                 }
               }
             });
@@ -60,6 +70,7 @@ function portableTextToHtml(blocks) {
         case 'h3': return `<h3>${text}</h3>`;
         case 'h4': return `<h4>${text}</h4>`;
         case 'blockquote': return `<blockquote><p>${text}</p></blockquote>`;
+        case 'center': return `<div style="text-align:center">${text}</div>`;
         default: return `<p>${text}</p>`;
       }
     }

@@ -24,6 +24,7 @@ export default defineType({
         {title: 'H3', value: 'h3'},
         {title: 'H4', value: 'h4'},
         {title: 'Quote', value: 'blockquote'},
+        {title: 'Center', value: 'center'}, // Center-aligned text
       ],
       lists: [{title: 'Bullet', value: 'bullet'}, {title: 'Number', value: 'number'}],
       // Marks let you mark up inline text in the block editor
@@ -34,6 +35,8 @@ export default defineType({
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
           {title: 'Code', value: 'code'},
+          {title: 'Superscript', value: 'sup'}, // Superscript
+          {title: 'Subscript', value: 'sub'},   // Subscript
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -48,6 +51,12 @@ export default defineType({
                 type: 'url',
               },
             ],
+          },
+          // Text color annotation (requires @sanity/color-input)
+          {
+            title: 'Color',
+            name: 'color',
+            type: 'color',
           },
         ],
       },
