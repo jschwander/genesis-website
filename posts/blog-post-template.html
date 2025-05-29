@@ -544,19 +544,14 @@
                 <a class="email-preview-url" id="emailPreviewUrl" href="#">https://genesisbc.build/posts/blog-post-slug.html</a>
             </div>
             <div class="copy-buttons">
-                <button class="copy-btn" onclick="copyEmailContent('email')">
-                    <i class="far fa-envelope"></i>
-                    Copy for Email
-                </button>
-                <button class="copy-btn" onclick="copyEmailContent('text')">
-                    <i class="fas fa-align-left"></i>
-                    Copy Text Only
-                </button>
-                <button class="copy-btn" onclick="copyEmailContent('url')">
-                    <i class="fas fa-link"></i>
-                    Copy URL Only
+                <button class="copy-btn" onclick="copyRichPreview()">
+                    <i class="far fa-copy"></i>
+                    Copy Rich Preview
                 </button>
             </div>
+            <p style="margin-top: 15px; font-size: 12px; color: #666; line-height: 1.4;">
+                <strong>💡 Perfect!</strong> This button copies the image and text above exactly as you see it - ready to paste into any email! 
+            </p>
         </div>
     </div>
 
@@ -621,140 +616,45 @@
             });
         }
         
-        async function copyEmailContent(type) {
-            const title = document.getElementById('emailPreviewTitle').textContent;
-            const description = document.getElementById('emailPreviewDescription').textContent;
-            const url = document.getElementById('emailPreviewUrl').textContent;
-            const imageUrl = document.getElementById('emailPreviewImage').src;
+        function copyRichPreview() {
+            // Get the preview content area
+            const previewContent = document.getElementById('emailPreviewContent');
             
-            let content = '';
-            let buttonText = '';
-            
-            if (type === 'email') {
-                // Create a nicely formatted email-friendly version
-                content = `📖 ${title}
-
-${description}
-
-🔗 Read the full article: ${url}
-
----
-Shared from Genesis Building Company`;
-                buttonText = 'Copied for Email!';
-            } else if (type === 'text') {
-                content = `${title}\n\n${description}\n\n${url}`;
-                buttonText = 'Copied Text!';
-            } else if (type === 'url') {
-                content = url;
-                buttonText = 'Copied URL!';
-            }
-            
-            // Try modern clipboard API first
             try {
-                await navigator.clipboard.writeText(content);
+                // Create a selection range
+                const range = document.createRange();
+                range.selectNodeContents(previewContent);
                 
-                // Update button to show success
-                const button = event.target.closest('.copy-btn');
-                button.classList.add('copied');
-                const originalText = button.innerHTML;
-                button.innerHTML = `<i class="fas fa-check"></i> ${buttonText}`;
+                // Clear any existing selection
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
                 
-                // Reset after 2 seconds
-                setTimeout(() => {
-                    button.classList.remove('copied');
-                    button.innerHTML = originalText;
-                }, 2000);
+                // Try to copy the selection (this includes images and formatting)
+                const successful = document.execCommand('copy');
                 
-            } catch (err) {
-                console.log('Clipboard API failed, using fallback method');
+                // Clear the selection
+                selection.removeAllRanges();
                 
-                // Fallback method: create a textarea and use execCommand
-                const textArea = document.createElement('textarea');
-                textArea.value = content;
-                textArea.style.position = 'fixed';
-                textArea.style.left = '-999999px';
-                textArea.style.top = '-999999px';
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                
-                try {
-                    const successful = document.execCommand('copy');
-                    document.body.removeChild(textArea);
+                if (successful) {
+                    // Show success feedback
+                    const button = event.target.closest('.copy-btn');
+                    button.classList.add('copied');
+                    const originalText = button.innerHTML;
+                    button.innerHTML = `<i class="fas fa-check"></i> Copied Rich Preview!`;
                     
-                    if (successful) {
-                        // Update button to show success
-                        const button = event.target.closest('.copy-btn');
-                        button.classList.add('copied');
-                        const originalText = button.innerHTML;
-                        button.innerHTML = `<i class="fas fa-check"></i> ${buttonText}`;
-                        
-                        // Reset after 2 seconds
-                        setTimeout(() => {
-                            button.classList.remove('copied');
-                            button.innerHTML = originalText;
-                        }, 2000);
-                    } else {
-                        throw new Error('execCommand failed');
-                    }
-                } catch (fallbackErr) {
-                    document.body.removeChild(textArea);
-                    
-                    // Final fallback: show content in a text area for manual selection
-                    showManualCopyModal(content, type);
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        button.classList.remove('copied');
+                        button.innerHTML = originalText;
+                    }, 2000);
+                } else {
+                    throw new Error('Copy command failed');
                 }
+            } catch (err) {
+                console.error('Rich copy failed:', err);
+                alert('Rich copy failed. Please try manually selecting the preview and copying (Ctrl+C/Cmd+C).');
             }
-        }
-        
-        function showManualCopyModal(content, type) {
-            // Create a manual copy modal
-            const manualModal = document.createElement('div');
-            manualModal.id = 'manualCopyModal';
-            manualModal.style.cssText = `
-                position: fixed;
-                z-index: 1001;
-                left: 0;
-                top: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.7);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            `;
-            
-            const modalContent = document.createElement('div');
-            modalContent.style.cssText = `
-                background-color: white;
-                padding: 30px;
-                border-radius: 10px;
-                width: 90%;
-                max-width: 600px;
-                max-height: 80vh;
-                overflow-y: auto;
-            `;
-            
-            const typeLabel = type === 'html' ? 'Rich Content' : type === 'text' ? 'Text' : type === 'email' ? 'Email Format' : 'URL';
-            
-            modalContent.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h3 style="margin: 0; color: #333;">Manual Copy - ${typeLabel}</h3>
-                    <button onclick="document.body.removeChild(document.getElementById('manualCopyModal'))" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #666; width: 30px; height: 30px;">&times;</button>
-                </div>
-                <p style="color: #666; margin-bottom: 15px;">Please select all the content below and copy it manually (Ctrl+C or Cmd+C):</p>
-                <textarea readonly style="width: 100%; min-height: 200px; padding: 15px; border: 2px solid #e5e7eb; border-radius: 6px; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.4; resize: vertical;" onclick="this.select()">${content}</textarea>
-                <p style="color: #666; font-size: 12px; margin-top: 10px; margin-bottom: 0;">Click in the text area above, then press Ctrl+A (or Cmd+A) to select all, then Ctrl+C (or Cmd+C) to copy.</p>
-            `;
-            
-            manualModal.appendChild(modalContent);
-            document.body.appendChild(manualModal);
-            
-            // Auto-select the content
-            const textarea = modalContent.querySelector('textarea');
-            setTimeout(() => {
-                textarea.focus();
-                textarea.select();
-            }, 100);
         }
         
         // Close modal when clicking outside
