@@ -280,6 +280,144 @@
             font-family: Arial, sans-serif;
         }
         
+        /* Email share modal styles */
+        .email-share-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .email-share-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .email-share-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .email-share-header h3 {
+            margin: 0;
+            color: #333;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .email-preview {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f9fafb;
+        }
+        
+        .email-preview-image {
+            width: 100%;
+            max-width: 300px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        
+        .email-preview-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .email-preview-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        
+        .email-preview-url {
+            color: #156082;
+            font-size: 14px;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .copy-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-btn {
+            background-color: #156082;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .copy-btn:hover {
+            background-color: #134566;
+        }
+        
+        .copy-btn.copied {
+            background-color: #10b981;
+        }
+        
+        .copy-btn.copied:hover {
+            background-color: #059669;
+        }
+        
+        @media (max-width: 768px) {
+            .email-share-content {
+                margin: 10% auto;
+                padding: 20px;
+                width: 95%;
+            }
+            
+            .copy-buttons {
+                flex-direction: column;
+            }
+        }
+        
         .related-posts {
             margin-top: 60px;
             padding-top: 40px;
@@ -374,7 +512,7 @@
                     <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//genesisbc.build/posts/rescuing-a-great-industry-in-an-economic-crisis.html" target="_blank" class="share-button facebook" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://twitter.com/intent/tweet?url=https%3A//genesisbc.build/posts/rescuing-a-great-industry-in-an-economic-crisis.html&text=Rescuing%20a%20Great%20Industry%20in%20an%20Economic%20Crisis" target="_blank" class="share-button twitter" title="Share on X (Twitter)"><span class="twitter-x-icon">𝕏</span></a>
                     <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//genesisbc.build/posts/rescuing-a-great-industry-in-an-economic-crisis.html" target="_blank" class="share-button linkedin" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:?subject=Rescuing%20a%20Great%20Industry%20in%20an%20Economic%20Crisis&body=I%20thought%20you%20might%20find%20this%20interesting%3A%20https%3A//genesisbc.build/posts/rescuing-a-great-industry-in-an-economic-crisis.html" class="share-button email" title="Share via Email"><i class="far fa-envelope"></i></a>
+                    <button class="share-button email" title="Share via Email" onclick="openEmailShareModal()"><i class="far fa-envelope"></i></button>
                 </div>
             </div>
         </article>
@@ -390,6 +528,37 @@
             </div>
         </section>
     </main>
+
+    <!-- Email Share Modal -->
+    <div id="emailShareModal" class="email-share-modal">
+        <div class="email-share-content">
+            <div class="email-share-header">
+                <h3>Share via Email</h3>
+                <button class="close-modal" onclick="closeEmailShareModal()">&times;</button>
+            </div>
+            <p style="margin-bottom: 20px; color: #666;">Copy the content below and paste it into your email:</p>
+            <div class="email-preview" id="emailPreviewContent">
+                <img class="email-preview-image" id="emailPreviewImage" alt="Blog post preview">
+                <div class="email-preview-title" id="emailPreviewTitle">Rescuing a Great Industry in an Economic Crisis</div>
+                <div class="email-preview-description" id="emailPreviewDescription">Discover how W. Edwards Deming's proven management philosophy can transform construction's cost crisis. Learn about the data-driven alternative to cost-plus contracting.</div>
+                <a class="email-preview-url" id="emailPreviewUrl" href="#">https://genesisbc.build/posts/rescuing-a-great-industry-in-an-economic-crisis.html</a>
+            </div>
+            <div class="copy-buttons">
+                <button class="copy-btn" onclick="copyEmailContent('html')">
+                    <i class="far fa-copy"></i>
+                    Copy Rich Content
+                </button>
+                <button class="copy-btn" onclick="copyEmailContent('text')">
+                    <i class="fas fa-align-left"></i>
+                    Copy Text Only
+                </button>
+                <button class="copy-btn" onclick="copyEmailContent('url')">
+                    <i class="fas fa-link"></i>
+                    Copy URL Only
+                </button>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-content">
@@ -413,5 +582,104 @@
 
     <script src="../blog-post-generator.js"></script>
     <script src="../script.js?v=1.0.2"></script>
+    
+    <script>
+        // Email share modal functionality
+        function openEmailShareModal() {
+            // Get current blog post data
+            const title = document.querySelector('.blog-post-title').textContent;
+            const description = document.querySelector('meta[property="og:description"]')?.content || 'Check out this interesting blog post from Genesis Building Company.';
+            const url = window.location.href;
+            const image = document.querySelector('.featured-image')?.src || document.querySelector('meta[property="og:image"]')?.content;
+            
+            // Update modal content
+            document.getElementById('emailPreviewTitle').textContent = title;
+            document.getElementById('emailPreviewDescription').textContent = description;
+            document.getElementById('emailPreviewUrl').textContent = url;
+            document.getElementById('emailPreviewUrl').href = url;
+            
+            if (image) {
+                document.getElementById('emailPreviewImage').src = image;
+                document.getElementById('emailPreviewImage').style.display = 'block';
+            } else {
+                document.getElementById('emailPreviewImage').style.display = 'none';
+            }
+            
+            // Show modal
+            document.getElementById('emailShareModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeEmailShareModal() {
+            document.getElementById('emailShareModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Reset button states
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.classList.remove('copied');
+                btn.innerHTML = btn.innerHTML.replace('Copied!', btn.innerHTML.includes('Rich Content') ? 'Copy Rich Content' : btn.innerHTML.includes('Text Only') ? 'Copy Text Only' : 'Copy URL Only');
+            });
+        }
+        
+        async function copyEmailContent(type) {
+            const title = document.getElementById('emailPreviewTitle').textContent;
+            const description = document.getElementById('emailPreviewDescription').textContent;
+            const url = document.getElementById('emailPreviewUrl').textContent;
+            const imageUrl = document.getElementById('emailPreviewImage').src;
+            
+            let content = '';
+            let buttonText = '';
+            
+            if (type === 'html') {
+                content = `<div style="font-family: Arial, sans-serif; max-width: 600px;">
+                    ${imageUrl && imageUrl !== window.location.origin + '/' ? `<img src="${imageUrl}" alt="${title}" style="width: 100%; max-width: 400px; height: auto; border-radius: 8px; margin-bottom: 16px;">` : ''}
+                    <h2 style="color: #333; margin-bottom: 12px; line-height: 1.3;">${title}</h2>
+                    <p style="color: #666; margin-bottom: 16px; line-height: 1.5;">${description}</p>
+                    <a href="${url}" style="color: #156082; text-decoration: none; font-weight: 500;">${url}</a>
+                </div>`;
+                buttonText = 'Copied Rich Content!';
+            } else if (type === 'text') {
+                content = `${title}\n\n${description}\n\n${url}`;
+                buttonText = 'Copied Text!';
+            } else if (type === 'url') {
+                content = url;
+                buttonText = 'Copied URL!';
+            }
+            
+            try {
+                await navigator.clipboard.writeText(content);
+                
+                // Update button to show success
+                const button = event.target.closest('.copy-btn');
+                button.classList.add('copied');
+                const originalText = button.innerHTML;
+                button.innerHTML = `<i class="fas fa-check"></i> ${buttonText}`;
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalText;
+                }, 2000);
+                
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+                alert('Failed to copy content. Please try selecting and copying manually.');
+            }
+        }
+        
+        // Close modal when clicking outside
+        document.getElementById('emailShareModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEmailShareModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('emailShareModal').style.display === 'block') {
+                closeEmailShareModal();
+            }
+        });
+    </script>
 </body>
 </html> 
