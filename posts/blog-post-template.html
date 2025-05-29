@@ -646,6 +646,7 @@
                 buttonText = 'Copied URL!';
             }
             
+            // Try modern clipboard API first
             try {
                 await navigator.clipboard.writeText(content);
                 
@@ -662,9 +663,95 @@
                 }, 2000);
                 
             } catch (err) {
-                console.error('Failed to copy: ', err);
-                alert('Failed to copy content. Please try selecting and copying manually.');
+                console.log('Clipboard API failed, using fallback method');
+                
+                // Fallback method: create a textarea and use execCommand
+                const textArea = document.createElement('textarea');
+                textArea.value = content;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    if (successful) {
+                        // Update button to show success
+                        const button = event.target.closest('.copy-btn');
+                        button.classList.add('copied');
+                        const originalText = button.innerHTML;
+                        button.innerHTML = `<i class="fas fa-check"></i> ${buttonText}`;
+                        
+                        // Reset after 2 seconds
+                        setTimeout(() => {
+                            button.classList.remove('copied');
+                            button.innerHTML = originalText;
+                        }, 2000);
+                    } else {
+                        throw new Error('execCommand failed');
+                    }
+                } catch (fallbackErr) {
+                    document.body.removeChild(textArea);
+                    
+                    // Final fallback: show content in a text area for manual selection
+                    showManualCopyModal(content, type);
+                }
             }
+        }
+        
+        function showManualCopyModal(content, type) {
+            // Create a manual copy modal
+            const manualModal = document.createElement('div');
+            manualModal.id = 'manualCopyModal';
+            manualModal.style.cssText = `
+                position: fixed;
+                z-index: 1001;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background-color: white;
+                padding: 30px;
+                border-radius: 10px;
+                width: 90%;
+                max-width: 600px;
+                max-height: 80vh;
+                overflow-y: auto;
+            `;
+            
+            const typeLabel = type === 'html' ? 'Rich Content' : type === 'text' ? 'Text' : 'URL';
+            
+            modalContent.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="margin: 0; color: #333;">Manual Copy - ${typeLabel}</h3>
+                    <button onclick="document.body.removeChild(document.getElementById('manualCopyModal'))" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #666; width: 30px; height: 30px;">&times;</button>
+                </div>
+                <p style="color: #666; margin-bottom: 15px;">Please select all the content below and copy it manually (Ctrl+C or Cmd+C):</p>
+                <textarea readonly style="width: 100%; min-height: 200px; padding: 15px; border: 2px solid #e5e7eb; border-radius: 6px; font-family: Arial, sans-serif; font-size: 14px; line-height: 1.4; resize: vertical;" onclick="this.select()">${content}</textarea>
+                <p style="color: #666; font-size: 12px; margin-top: 10px; margin-bottom: 0;">Click in the text area above, then press Ctrl+A (or Cmd+A) to select all, then Ctrl+C (or Cmd+C) to copy.</p>
+            `;
+            
+            manualModal.appendChild(modalContent);
+            document.body.appendChild(manualModal);
+            
+            // Auto-select the content
+            const textarea = modalContent.querySelector('textarea');
+            setTimeout(() => {
+                textarea.focus();
+                textarea.select();
+            }, 100);
         }
         
         // Close modal when clicking outside
