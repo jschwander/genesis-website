@@ -539,9 +539,8 @@
             <p style="margin-bottom: 20px; color: #666;">Copy the content below and paste it into your email:</p>
             <div class="email-preview" id="emailPreviewContent">
                 <img class="email-preview-image" id="emailPreviewImage" alt="Blog post preview">
-                <div class="email-preview-title" id="emailPreviewTitle">The Red Folder Moment: What Ford v Ferrari Exposes About Construction Waste</div>
+                <a class="email-preview-title" id="emailPreviewTitle" href="#" style="text-decoration: none; color: #333;">The Red Folder Moment: What Ford v Ferrari Exposes About Construction Waste</a>
                 <div class="email-preview-description" id="emailPreviewDescription">Explore how the movie Ford v Ferrari reveals critical insights about waste and efficiency in construction. Learn how to identify and eliminate the 'red folder moments' in your projects.</div>
-                <a class="email-preview-url" id="emailPreviewUrl" href="#">https://genesisbc.build/posts/the-red-folder-moment-what-ford-v-ferrari-exposes-about-construction-waste.html</a>
             </div>
             <div class="copy-buttons">
                 <button class="copy-btn" onclick="copyRichPreview()">
@@ -584,14 +583,16 @@
             // Get current blog post data
             const title = document.querySelector('.blog-post-title').textContent;
             const description = document.querySelector('meta[property="og:description"]')?.content || 'Check out this interesting blog post from Genesis Building Company.';
-            const url = window.location.href;
+            const currentUrl = window.location.href;
+            
+            // Ensure we use the genesisbc.build domain
+            const url = currentUrl.replace(/^https?:\/\/[^\/]+/, 'https://genesisbc.build');
             const image = document.querySelector('.featured-image')?.src || document.querySelector('meta[property="og:image"]')?.content;
             
             // Update modal content
             document.getElementById('emailPreviewTitle').textContent = title;
+            document.getElementById('emailPreviewTitle').href = url;
             document.getElementById('emailPreviewDescription').textContent = description;
-            document.getElementById('emailPreviewUrl').textContent = url;
-            document.getElementById('emailPreviewUrl').href = url;
             
             if (image) {
                 document.getElementById('emailPreviewImage').src = image;
