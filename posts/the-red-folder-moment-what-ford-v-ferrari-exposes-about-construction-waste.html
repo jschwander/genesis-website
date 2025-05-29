@@ -544,9 +544,9 @@
                 <a class="email-preview-url" id="emailPreviewUrl" href="#">https://genesisbc.build/posts/the-red-folder-moment-what-ford-v-ferrari-exposes-about-construction-waste.html</a>
             </div>
             <div class="copy-buttons">
-                <button class="copy-btn" onclick="copyEmailContent('html')">
-                    <i class="far fa-copy"></i>
-                    Copy Rich Content
+                <button class="copy-btn" onclick="copyEmailContent('email')">
+                    <i class="far fa-envelope"></i>
+                    Copy for Email
                 </button>
                 <button class="copy-btn" onclick="copyEmailContent('text')">
                     <i class="fas fa-align-left"></i>
@@ -630,14 +630,17 @@
             let content = '';
             let buttonText = '';
             
-            if (type === 'html') {
-                content = `<div style="font-family: Arial, sans-serif; max-width: 600px;">
-                    ${imageUrl && imageUrl !== window.location.origin + '/' ? `<img src="${imageUrl}" alt="${title}" style="width: 100%; max-width: 400px; height: auto; border-radius: 8px; margin-bottom: 16px;">` : ''}
-                    <h2 style="color: #333; margin-bottom: 12px; line-height: 1.3;">${title}</h2>
-                    <p style="color: #666; margin-bottom: 16px; line-height: 1.5;">${description}</p>
-                    <a href="${url}" style="color: #156082; text-decoration: none; font-weight: 500;">${url}</a>
-                </div>`;
-                buttonText = 'Copied Rich Content!';
+            if (type === 'email') {
+                // Create a nicely formatted email-friendly version
+                content = `📖 ${title}
+
+${description}
+
+🔗 Read the full article: ${url}
+
+---
+Shared from Genesis Building Company`;
+                buttonText = 'Copied for Email!';
             } else if (type === 'text') {
                 content = `${title}\n\n${description}\n\n${url}`;
                 buttonText = 'Copied Text!';
@@ -731,7 +734,7 @@
                 overflow-y: auto;
             `;
             
-            const typeLabel = type === 'html' ? 'Rich Content' : type === 'text' ? 'Text' : 'URL';
+            const typeLabel = type === 'html' ? 'Rich Content' : type === 'text' ? 'Text' : type === 'email' ? 'Email Format' : 'URL';
             
             modalContent.innerHTML = `
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
