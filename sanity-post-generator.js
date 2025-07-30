@@ -209,6 +209,17 @@ function generatePostFile(post, template) {
       );
     }
 
+    // Replace email preview placeholders
+    fileContent = fileContent.replace(
+      /<a class="email-preview-title" id="emailPreviewTitle" href="#"[^>]*>Blog Post Title<\/a>/,
+      `<a class="email-preview-title" id="emailPreviewTitle" href="${metaReplacements.url}" style="text-decoration: none; color: #156082;">${metaReplacements.title}</a>`
+    );
+    
+    fileContent = fileContent.replace(
+      /<div class="email-preview-description" id="emailPreviewDescription">Brief description of the blog post content<\/div>/,
+      `<div class="email-preview-description" id="emailPreviewDescription">${metaReplacements.description}</div>`
+    );
+
     // Write the file
     fs.writeFile(filePath, fileContent, 'utf8', (err) => {
       if (err) {
