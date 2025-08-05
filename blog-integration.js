@@ -113,6 +113,7 @@ function renderBlogPosts(posts) {
             </div>
             <h2>${post.title}</h2>
             <p class="blog-excerpt">${postExcerpt}</p>
+            <div class="blog-read-more">Read Full Article</div>
           </div>
         </article>
       </a>

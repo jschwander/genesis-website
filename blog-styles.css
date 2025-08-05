@@ -169,6 +169,21 @@
     flex-grow: 1;
 }
 
+.blog-read-more {
+    display: inline-flex;
+    align-items: center;
+    color: #ed3d00;
+    font-weight: 600;
+    pointer-events: none; /* Prevents interference with card link */
+}
+
+.blog-read-more:after {
+    content: '\f061';
+    font-family: 'Font Awesome 5 Free';
+    margin-left: 8px;
+    font-size: 14px;
+}
+
 /* Loading indicator */
 .loading-indicator {
     grid-column: 1 / -1;
