@@ -92,39 +92,35 @@ function renderBlogPosts(posts) {
   posts.forEach(post => {
     // Get excerpt from dedicated field or generate from body
     const postExcerpt = post.excerpt || generateExcerpt(post.body);
-    const fullExcerpt = post.excerpt || generateExcerpt(post.body, 500); // Get longer version for tooltip
     
     // Create the HTML for the blog card
     const postHtml = `
-      <article class="blog-card">
-        <div class="blog-image">
-          ${post.imageUrl ? 
-            `<img src="${post.imageUrl}?w=500&h=300&fit=crop" alt="${post.title}">` : 
-            '<div class="placeholder-image"></div>'
-          }
-        </div>
-        <div class="blog-card-content">
-          <div class="blog-meta">
-            <span class="blog-date">${post.publishedAt ? formatDate(post.publishedAt) : 'Unpublished'}</span>
-            ${post.categories && post.categories.length > 0 ? 
-              `<span class="blog-category">${post.categories[0]}</span>` : 
-              ''
+      <a href="posts/${post.slug.current}.html" class="blog-card-link">
+        <article class="blog-card">
+          <div class="blog-image">
+            ${post.imageUrl ? 
+              `<img src="${post.imageUrl}?w=500&h=300&fit=crop" alt="${post.title}">` : 
+              '<div class="placeholder-image"></div>'
             }
           </div>
-          <h2>${post.title}</h2>
-          <p class="blog-excerpt" data-full-text="${fullExcerpt.replace(/"/g, '&quot;')}">${postExcerpt}</p>
-          <span class="blog-excerpt-toggle" data-action="expand">Click to read more</span>
-          <a href="posts/${post.slug.current}.html" class="blog-read-more">Read Full Article</a>
-        </div>
-      </article>
+          <div class="blog-card-content">
+            <div class="blog-meta">
+              <span class="blog-date">${post.publishedAt ? formatDate(post.publishedAt) : 'Unpublished'}</span>
+              ${post.categories && post.categories.length > 0 ? 
+                `<span class="blog-category">${post.categories[0]}</span>` : 
+                ''
+              }
+            </div>
+            <h2>${post.title}</h2>
+            <p class="blog-excerpt">${postExcerpt}</p>
+          </div>
+        </article>
+      </a>
     `;
     
     // Add to container
     container.innerHTML += postHtml;
   });
-  
-  // Add click event listeners for excerpt expansion
-  addExcerptToggleListeners();
 }
 
 // Display message when no posts are found
@@ -151,45 +147,6 @@ function displayError() {
       <p>There was an error loading the blog posts. Please try again later.</p>
     </div>
   `;
-}
-
-// Add click event listeners for excerpt expansion
-function addExcerptToggleListeners() {
-  const excerpts = document.querySelectorAll('.blog-excerpt');
-  const toggles = document.querySelectorAll('.blog-excerpt-toggle');
-  
-  excerpts.forEach((excerpt, index) => {
-    const toggle = toggles[index];
-    if (!toggle) return;
-    
-    const originalText = excerpt.textContent;
-    const fullText = excerpt.getAttribute('data-full-text');
-    
-    // Click on excerpt text
-    excerpt.addEventListener('click', () => toggleExcerpt(excerpt, toggle, originalText, fullText));
-    
-    // Click on toggle button
-    toggle.addEventListener('click', () => toggleExcerpt(excerpt, toggle, originalText, fullText));
-  });
-}
-
-// Toggle excerpt expansion
-function toggleExcerpt(excerpt, toggle, originalText, fullText) {
-  const isExpanded = excerpt.classList.contains('expanded');
-  
-  if (isExpanded) {
-    // Collapse
-    excerpt.classList.remove('expanded');
-    excerpt.textContent = originalText;
-    toggle.textContent = 'Click to read more';
-    toggle.setAttribute('data-action', 'expand');
-  } else {
-    // Expand
-    excerpt.classList.add('expanded');
-    excerpt.textContent = fullText;
-    toggle.textContent = 'Show less';
-    toggle.setAttribute('data-action', 'collapse');
-  }
 }
 
 // Initialize when DOM is loaded
