@@ -132,10 +132,11 @@ function generatePostFile(post, template) {
       : 'https://www.genesisbuildingco.com/images/default-blog-image.jpg';
 
     // Replace meta tags with properly escaped values
+    const slug = post.slug && post.slug.current ? post.slug.current : slugify(post.title);
     const metaReplacements = {
       title: escapeHtml(post.title),
       description: description,
-      url: `https://www.genesisbuildingco.com/blog/${post.slug.current}`,
+      url: `https://www.genesisbuildingco.com/blog/${slug}`,
       image: imageUrl,
       publishDate: post.publishedAt || post._updatedAt,
       author: escapeHtml(post.author || 'Genesis Building Company')
