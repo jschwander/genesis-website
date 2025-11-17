@@ -20,12 +20,12 @@
 }
 
 .blog-hero .hero-text h1 {
-    font-size: 42px;
+    font-size: 38px;
     color: #fff;
     margin-bottom: 20px;
     font-weight: 700;
     line-height: 1.2;
-    width: 1000px;
+    white-space: nowrap;
 }
 
 .blog-hero .hero-text p {
