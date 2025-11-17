@@ -639,26 +639,40 @@ This article exposes the two core drivers of construction waste: misaligned comp
         }
         
         function copyRichPreview() {
-            // Get the preview content area
-            const previewContent = document.getElementById('emailPreviewContent');
+            const title = document.getElementById('emailPreviewTitle').textContent;
+            const description = document.getElementById('emailPreviewDescription').textContent;
+            const url = document.getElementById('emailPreviewTitle').href;
+            const imageUrl = document.getElementById('emailPreviewImage').src;
+            
+            // Create a properly formatted HTML email card
+            const htmlContent = `
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+    <tr>
+        <td style="padding: 0;">
+            <a href="${url}" style="display: block; text-decoration: none; color: inherit;" target="_blank">
+                <img src="${imageUrl}" alt="${title}" style="width: 100%; height: auto; display: block; border: none;">
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 24px; background: #ffffff;">
+            <a href="${url}" style="text-decoration: none; color: #156082; display: block; margin-bottom: 12px;" target="_blank">
+                <h2 style="margin: 0; font-size: 20px; font-weight: 600; line-height: 1.4; color: #156082;">${title}</h2>
+            </a>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #666;">${description}</p>
+            <a href="${url}" style="display: inline-block; margin-top: 16px; padding: 10px 20px; background: #156082; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 14px;" target="_blank">Read Article →</a>
+        </td>
+    </tr>
+</table>`;
             
             try {
-                // Create a selection range
-                const range = document.createRange();
-                range.selectNodeContents(previewContent);
+                // Use the Clipboard API to copy HTML
+                const clipboardItem = new ClipboardItem({
+                    'text/html': new Blob([htmlContent], { type: 'text/html' }),
+                    'text/plain': new Blob([`${title}\n\n${description}\n\nRead more: ${url}`], { type: 'text/plain' })
+                });
                 
-                // Clear any existing selection
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
-                
-                // Try to copy the selection (this includes images and formatting)
-                const successful = document.execCommand('copy');
-                
-                // Clear the selection
-                selection.removeAllRanges();
-                
-                if (successful) {
+                navigator.clipboard.write([clipboardItem]).then(() => {
                     // Show success feedback
                     const button = event.target.closest('.copy-btn');
                     button.classList.add('copied');
@@ -670,12 +684,26 @@ This article exposes the two core drivers of construction waste: misaligned comp
                         button.classList.remove('copied');
                         button.innerHTML = originalText;
                     }, 2000);
-                } else {
-                    throw new Error('Copy command failed');
-                }
+                }).catch(err => {
+                    throw err;
+                });
             } catch (err) {
                 console.error('Rich copy failed:', err);
-                alert('Rich copy failed. Please try manually selecting the preview and copying (Ctrl+C/Cmd+C).');
+                // Fallback to old method
+                const previewContent = document.getElementById('emailPreviewContent');
+                const range = document.createRange();
+                range.selectNodeContents(previewContent);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+                document.execCommand('copy');
+                selection.removeAllRanges();
+                
+                const button = event.target.closest('.copy-btn');
+                button.innerHTML = `<i class="fas fa-check"></i> Copied!`;
+                setTimeout(() => {
+                    button.innerHTML = `<i class="far fa-copy"></i> Copy Rich Preview`;
+                }, 2000);
             }
         }
         

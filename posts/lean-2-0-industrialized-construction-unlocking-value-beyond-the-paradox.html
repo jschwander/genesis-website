@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lean 2.0 + Industrialized Construction: Solving the Prefab Paradox - Genesis Building Company</title>
+    <title>Intelligent Automation + Industrialized Construction: Solving the Prefab Paradox - Genesis Building Company</title>
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="article" />
-    <meta property="og:title" content="Lean 2.0 + Industrialized Construction: Solving the Prefab Paradox" />
-    <meta property="og:description" content="Many, if not most in the AEC world agree that traditional “stick built” construction must give way to Industrialized Construction (IC). The problem is that IC costs more without a proven, measurable cost-benefit in time or other benefits. This article posits that fragmentation and misaligned incentives must first be solved – and now can - through a Lean 2.0 alternative." />
+    <meta property="og:title" content="Intelligent Automation + Industrialized Construction: Solving the Prefab Paradox" />
+    <meta property="og:description" content="Many, if not most in the AEC world agree that traditional “stick built” construction must give way to Industrialized Construction (IC). The problem is that IC costs more without a proven, measurable cost-benefit in time or other benefits. This article posits that fragmentation and misaligned incentives must first be solved – and now can - through a Lean 2.0 and Intelligent Automation System alternative." />
     <meta property="og:url" content="https://www.genesisbuildingco.com/blog/lean-2-0-industrialized-construction-unlocking-value-beyond-the-paradox" />
-    <meta property="og:image" content="https://cdn.sanity.io/images/80jerngq/production/603e34ee4e56b732b39edaeb22b51c97acaf53d5-1536x1024.png" />
+    <meta property="og:image" content="https://cdn.sanity.io/images/80jerngq/production/5616acfcf93cfdd389a39e1cb25a3e2af8d893d9-1536x1024.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Genesis Building Company" />
@@ -506,7 +506,7 @@
                         <span>Construction Costs</span>
                     </div>
                 </div>
-                <h1 class="blog-post-title">Lean 2.0 + Industrialized Construction: Solving the Prefab Paradox</h1>
+                <h1 class="blog-post-title">Intelligent Automation + Industrialized Construction: Solving the Prefab Paradox</h1>
             </header>
             
             <div class="featured-image-container">
@@ -558,8 +558,8 @@
             <p style="margin-bottom: 20px; color: #666;">Copy the content below and paste it into your email:</p>
             <div class="email-preview" id="emailPreviewContent">
                 <img class="email-preview-image" id="emailPreviewImage" alt="Blog post preview">
-                <a class="email-preview-title" id="emailPreviewTitle" href="https://www.genesisbuildingco.com/blog/lean-2-0-industrialized-construction-unlocking-value-beyond-the-paradox" style="text-decoration: none; color: #156082;">Lean 2.0 + Industrialized Construction: Solving the Prefab Paradox</a>
-                <div class="email-preview-description" id="emailPreviewDescription">Many, if not most in the AEC world agree that traditional “stick built” construction must give way to Industrialized Construction (IC). The problem is that IC costs more without a proven, measurable cost-benefit in time or other benefits. This article posits that fragmentation and misaligned incentives must first be solved – and now can - through a Lean 2.0 alternative.</div>
+                <a class="email-preview-title" id="emailPreviewTitle" href="https://www.genesisbuildingco.com/blog/lean-2-0-industrialized-construction-unlocking-value-beyond-the-paradox" style="text-decoration: none; color: #156082;">Intelligent Automation + Industrialized Construction: Solving the Prefab Paradox</a>
+                <div class="email-preview-description" id="emailPreviewDescription">Many, if not most in the AEC world agree that traditional “stick built” construction must give way to Industrialized Construction (IC). The problem is that IC costs more without a proven, measurable cost-benefit in time or other benefits. This article posits that fragmentation and misaligned incentives must first be solved – and now can - through a Lean 2.0 and Intelligent Automation System alternative.</div>
             </div>
             <div class="copy-buttons">
                 <button class="copy-btn" onclick="copyRichPreview()">
@@ -637,26 +637,40 @@
         }
         
         function copyRichPreview() {
-            // Get the preview content area
-            const previewContent = document.getElementById('emailPreviewContent');
+            const title = document.getElementById('emailPreviewTitle').textContent;
+            const description = document.getElementById('emailPreviewDescription').textContent;
+            const url = document.getElementById('emailPreviewTitle').href;
+            const imageUrl = document.getElementById('emailPreviewImage').src;
+            
+            // Create a properly formatted HTML email card
+            const htmlContent = `
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+    <tr>
+        <td style="padding: 0;">
+            <a href="${url}" style="display: block; text-decoration: none; color: inherit;" target="_blank">
+                <img src="${imageUrl}" alt="${title}" style="width: 100%; height: auto; display: block; border: none;">
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 24px; background: #ffffff;">
+            <a href="${url}" style="text-decoration: none; color: #156082; display: block; margin-bottom: 12px;" target="_blank">
+                <h2 style="margin: 0; font-size: 20px; font-weight: 600; line-height: 1.4; color: #156082;">${title}</h2>
+            </a>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #666;">${description}</p>
+            <a href="${url}" style="display: inline-block; margin-top: 16px; padding: 10px 20px; background: #156082; color: #ffffff; text-decoration: none; border-radius: 4px; font-weight: 500; font-size: 14px;" target="_blank">Read Article →</a>
+        </td>
+    </tr>
+</table>`;
             
             try {
-                // Create a selection range
-                const range = document.createRange();
-                range.selectNodeContents(previewContent);
+                // Use the Clipboard API to copy HTML
+                const clipboardItem = new ClipboardItem({
+                    'text/html': new Blob([htmlContent], { type: 'text/html' }),
+                    'text/plain': new Blob([`${title}\n\n${description}\n\nRead more: ${url}`], { type: 'text/plain' })
+                });
                 
-                // Clear any existing selection
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
-                
-                // Try to copy the selection (this includes images and formatting)
-                const successful = document.execCommand('copy');
-                
-                // Clear the selection
-                selection.removeAllRanges();
-                
-                if (successful) {
+                navigator.clipboard.write([clipboardItem]).then(() => {
                     // Show success feedback
                     const button = event.target.closest('.copy-btn');
                     button.classList.add('copied');
@@ -668,12 +682,26 @@
                         button.classList.remove('copied');
                         button.innerHTML = originalText;
                     }, 2000);
-                } else {
-                    throw new Error('Copy command failed');
-                }
+                }).catch(err => {
+                    throw err;
+                });
             } catch (err) {
                 console.error('Rich copy failed:', err);
-                alert('Rich copy failed. Please try manually selecting the preview and copying (Ctrl+C/Cmd+C).');
+                // Fallback to old method
+                const previewContent = document.getElementById('emailPreviewContent');
+                const range = document.createRange();
+                range.selectNodeContents(previewContent);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+                document.execCommand('copy');
+                selection.removeAllRanges();
+                
+                const button = event.target.closest('.copy-btn');
+                button.innerHTML = `<i class="fas fa-check"></i> Copied!`;
+                setTimeout(() => {
+                    button.innerHTML = `<i class="far fa-copy"></i> Copy Rich Preview`;
+                }, 2000);
             }
         }
         
