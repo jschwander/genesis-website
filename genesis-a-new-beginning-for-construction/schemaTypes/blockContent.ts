@@ -62,6 +62,33 @@ export default defineType({
     defineArrayMember({
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          description: 'Important for SEO and accessibility.',
+        },
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
+          description: 'Optional caption for the image.',
+        },
+        {
+          name: 'link',
+          type: 'url',
+          title: 'Link URL',
+          description: 'Optional: Make this image clickable by adding a URL.',
+        },
+        {
+          name: 'openInNewTab',
+          type: 'boolean',
+          title: 'Open link in new tab',
+          description: 'Check this to open the link in a new browser tab.',
+          initialValue: true,
+        },
+      ],
     }),
   ],
 })

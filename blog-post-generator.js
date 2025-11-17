@@ -79,9 +79,17 @@ function portableTextToHtml(blocks) {
     if (block._type === 'image' && block.asset) {
       const imageUrl = `https://cdn.sanity.io/images/${SANITY_PROJECT_ID}/${SANITY_DATASET}/${block.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}`;
       const caption = block.caption ? `<figcaption>${block.caption}</figcaption>` : '';
+      const alt = block.alt || '';
+      
+      // Check if image has a link
+      const imgTag = `<img src="${imageUrl}" alt="${alt}" />`;
+      const imageContent = block.link 
+        ? `<a href="${block.link}" ${block.openInNewTab !== false ? 'target="_blank" rel="noopener noreferrer"' : ''}>${imgTag}</a>`
+        : imgTag;
+      
       return `
         <figure>
-          <img src="${imageUrl}" alt="${block.alt || ''}" />
+          ${imageContent}
           ${caption}
         </figure>
       `;
